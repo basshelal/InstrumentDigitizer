@@ -12,14 +12,6 @@ import javax.sound.midi.Synthesizer
 
 class App : Application() {
 
-
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            launch(App::class.java, *args)
-        }
-    }
-
     lateinit var synthesizer: Synthesizer
     lateinit var channel: MidiChannel
 
@@ -107,7 +99,6 @@ class App : Application() {
         }
     }
 
-    @Suppress("EXPERIMENTAL_FEATURE_WARNING")
     inner class MidiInputReceiver(val name: String) : Receiver {
         override fun send(msg: MidiMessage, timeStamp: Long) {
             require(msg is ShortMessage)
@@ -124,5 +115,12 @@ class App : Application() {
         }
 
         override fun close() {}
+    }
+
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            launch(App::class.java, *args)
+        }
     }
 }
