@@ -48,6 +48,8 @@ class App : Application() {
     }
 
     // TODO: 20-Jan-19 Latency is high when playing! These might be fixed by using ASIO
+    // To use and understand ASIO a little better go see the ExampleHost class better
+    // basically we're going to be dealing with very low level stuff
     private fun startMidi() {
         var device: MidiDevice
         val infos = MidiSystem.getMidiDeviceInfo()

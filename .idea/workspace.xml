@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2675ad26-fc8a-4f92-8e4d-84c1eefa3ba2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/JAsioHost.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/App$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/App$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/App.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -24,11 +26,12 @@
     <session id="1013171853">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.8" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -42,9 +45,9 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="14" />
-          <entry key="Groovy" value="7" />
-          <entry key="JAVA" value="67" />
+          <entry key="CLASS" value="15" />
+          <entry key="Groovy" value="8" />
+          <entry key="JAVA" value="80" />
           <entry key="Kotlin" value="10" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="4" />
@@ -59,9 +62,9 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="76" />
-          <entry key="Kotlin" value="2275" />
+          <entry key="Kotlin" value="2624" />
           <entry key="Markdown" value="223" />
-          <entry key="PLAIN_TEXT" value="141" />
+          <entry key="PLAIN_TEXT" value="166" />
         </counts>
       </usages-collector>
     </session>
@@ -80,17 +83,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/App.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+            <state relative-caret-position="209">
+              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding>
-                <element signature="n#!!block;n#start#0;n#!!block;n#Application#0" />
-                <element signature="n#!!block;n#init#0;n#!!block;n#App#0" />
                 <element signature="n#!!block;n#stop#0;n#!!block;n#App#0" />
                 <element signature="n#!!block;n#startSynthesizer#0;n#!!block;n#App#0" />
                 <element signature="n#!!block;n#stopSynthesizer#0;n#!!block;n#App#0" />
                 <element signature="n#!!block;n#startMidi#0;n#!!block;n#App#0" />
                 <element signature="n#!!block;n#stopMidi#0;n#!!block;n#App#0" />
                 <element signature="n#!!block;n#MidiInputReceiver#0;n#!!block;n#App#0" />
+                <element signature="n#!!block;n#Companion#0;n#!!block;n#App#0" />
               </folding>
             </state>
           </provider>
@@ -571,7 +573,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="466" />
-    <option name="width" value="2101" />
+    <option name="width" value="2100" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -588,12 +590,35 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="InstrumentDigitizer" type="58d84e3e:PackageViewProjectNode" />
+              <item name="InstrumentDigitizer" type="eaaa3913:PackageViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="InstrumentDigitizer" type="58d84e3e:PackageViewProjectNode" />
+              <item name="InstrumentDigitizer" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="InstrumentDigitizer_main" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="InstrumentDigitizer" type="58d84e3e:PackageViewProjectNode" />
+              <item name="InstrumentDigitizer" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="InstrumentDigitizer_test" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -630,41 +655,20 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="InstrumentDigitizer" type="58d84e3e:PackageViewProjectNode" />
-              <item name="InstrumentDigitizer" type="eaaa3913:PackageViewModuleGroupNode" />
-            </path>
-            <path>
-              <item name="InstrumentDigitizer" type="58d84e3e:PackageViewProjectNode" />
-              <item name="InstrumentDigitizer" type="eaaa3913:PackageViewModuleGroupNode" />
-              <item name="InstrumentDigitizer_main" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="InstrumentDigitizer" type="58d84e3e:PackageViewProjectNode" />
-              <item name="InstrumentDigitizer" type="eaaa3913:PackageViewModuleGroupNode" />
-              <item name="InstrumentDigitizer_test" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="Instrument&#9;PSI&#9;JAVA://javax.sound.midi.Instrument&#10;Midi&#9;PSI&#9;JAVA://javax.sound.midi.MidiDevice&#10;MidiSy&#9;PSI&#9;JAVA://com.jsyn.midi.MidiSynthesizer&#10;MidiSyn&#9;null&#9;null&#10;MidiSynthesizer&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="Example&#9;PSI&#9;JAVA://com.synthbot.jasiohost.ExampleHost&#10;Asio&#9;PSI&#9;JAVA://com.synthbot.jasiohost.AsioDriver&#10;Instrument&#9;PSI&#9;JAVA://javax.sound.midi.Instrument&#10;Midi&#9;PSI&#9;JAVA://javax.sound.midi.MidiDevice&#10;MidiSy&#9;PSI&#9;JAVA://com.jsyn.midi.MidiSynthesizer&#10;MidiSyn&#9;null&#9;null&#10;MidiSynthesizer&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547953483370" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548027763190" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/jsyn-20171016.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RecentsManager">
@@ -688,7 +692,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.Application">
+  <component name="RunManager" selected="Kotlin.App">
+    <configuration name="ExampleHost" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.synthbot.jasiohost.ExampleHost" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.synthbot.jasiohost.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="App" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="InstrumentDigitizer_main" />
       <option name="VM_PARAMETERS" />
@@ -729,13 +745,15 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Kotlin.App" />
       <item itemvalue="Kotlin.Main" />
-      <item itemvalue="Kotlin.Application" />
       <item itemvalue="Kotlin.AppKt" />
+      <item itemvalue="Application.ExampleHost" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.Application" />
+        <item itemvalue="Kotlin.App" />
+        <item itemvalue="Application.ExampleHost" />
         <item itemvalue="Kotlin.AppKt" />
         <item itemvalue="Kotlin.Main" />
       </list>
@@ -754,7 +772,8 @@
       <workItem from="1546389680553" duration="2954000" />
       <workItem from="1547562028286" duration="183000" />
       <workItem from="1547562284629" duration="253000" />
-      <workItem from="1547919218630" duration="22134000" />
+      <workItem from="1547919218630" duration="22658000" />
+      <workItem from="1548021138181" duration="4308000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Piano keyboard working but with high latency">
       <created>1547951912169</created>
@@ -763,14 +782,21 @@
       <option name="project" value="LOCAL" />
       <updated>1547951912169</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Saving Progress">
+      <created>1547953571487</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1547953571487</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25524000" />
+    <option name="totallyTimeSpent" value="30356000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="466" y="0" width="2101" height="1047" extended-state="0" />
+    <frame x="466" y="0" width="2100" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
@@ -778,7 +804,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.17670093" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.17825662" />
       <window_info anchor="bottom" id="Build" order="0" weight="0.32969433" />
       <window_info anchor="bottom" id="Messages" order="1" weight="0.32969433" />
       <window_info anchor="bottom" id="Message" order="2" />
@@ -789,7 +815,7 @@
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32969433" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32969433" />
       <window_info anchor="bottom" id="Version Control" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Gradle" order="0" />
@@ -802,7 +828,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-      <window_info anchor="right" id="Structure" order="10" side_tool="true" visible="true" weight="0.14145865" />
+      <window_info anchor="right" id="Structure" order="10" side_tool="true" visible="true" weight="0.14152792" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +840,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit, basic response to MIDI keyboard" />
     <MESSAGE value="Basic Piano keyboard working but with high latency" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Piano keyboard working but with high latency" />
+    <MESSAGE value="Saving Progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saving Progress" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -864,13 +891,6 @@
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.71/2e8041d08283cbbb58ad131617486fc6449f6c85/kotlin-stdlib-1.2.71-sources.jar!/kotlin/io/FileReadWrite.kt" />
-    <entry file="jar://$PROJECT_DIR$/jsyn-20171016.jar!/com/jsyn/midi/MidiSynthesizer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="45" lean-forward="true" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar!/com/sun/media/sound/SoftSynthesizer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -885,16 +905,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.txt" />
     <entry file="jar://$PROJECT_DIR$/jsyn-20171016.jar!/com/jsyn/apps/InstrumentTester.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="31" column="47" lean-forward="true" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
-          <folding>
-            <element signature="class#CustomReceiver#0;class#InstrumentTester#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -909,28 +924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-          <folding>
-            <element signature="e#8#62#0" expanded="true" />
-            <element signature="e#8#62#0" expanded="true" />
-            <element signature="e#144#166#0" expanded="true" />
-            <element signature="e#144#166#0" expanded="true" />
-            <element signature="e#182#221#0" expanded="true" />
-            <element signature="e#182#221#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/Main.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -1019,9 +1012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
           <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
-          <folding>
-            <element signature="class#MidiOutReceiver#0;class#MidiOutDevice#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,9 +1026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="664">
           <caret line="252" column="19" selection-start-line="252" selection-start-column="19" selection-end-line="252" selection-end-column="19" />
-          <folding>
-            <element signature="class#AbstractReceiver#0;class#AbstractMidiDevice#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1087,6 +1074,89 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/Main.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/jsyn-20171016.jar!/com/jsyn/midi/MidiSynthesizer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+          <folding>
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#374#375#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+          <folding>
+            <element signature="e#8#62#0" expanded="true" />
+            <element signature="e#8#62#0" expanded="true" />
+            <element signature="e#144#166#0" expanded="true" />
+            <element signature="e#144#166#0" expanded="true" />
+            <element signature="e#182#221#0" expanded="true" />
+            <element signature="e#182#221#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/JAsioHost.jar!/com/synthbot/jasiohost/AsioChannel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="127" column="36" selection-start-line="127" selection-start-column="36" selection-end-line="127" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/JAsioHost.jar!/com/synthbot/jasiohost/AsioDriverState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="43" column="2" selection-start-line="43" selection-start-column="2" selection-end-line="43" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/swing/JFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="122" column="13" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/JAsioHost.jar!/com/synthbot/jasiohost/ExampleHost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1672">
+          <caret line="127" column="83" lean-forward="true" selection-start-line="127" selection-start-column="83" selection-end-line="127" selection-end-column="83" />
+          <folding>
+            <element signature="docComment;class#ExampleHost#0" expanded="true" />
+            <element signature="method#ExampleHost#0;class#ExampleHost#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/JAsioHost.jar!/com/synthbot/jasiohost/AsioDriverListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="86" column="14" selection-start-line="86" selection-start-column="14" selection-end-line="86" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/JAsioHost.jar!/com/synthbot/jasiohost/AsioDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="522" column="2" selection-start-line="522" selection-start-column="2" selection-end-line="522" selection-end-column="2" />
+          <folding>
+            <element signature="e#6744#6745#0" expanded="true" />
+            <element signature="e#6771#6772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TODO.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -1099,17 +1169,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/App.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        <state relative-caret-position="209">
+          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
           <folding>
-            <element signature="n#!!block;n#start#0;n#!!block;n#Application#0" />
-            <element signature="n#!!block;n#init#0;n#!!block;n#App#0" />
             <element signature="n#!!block;n#stop#0;n#!!block;n#App#0" />
             <element signature="n#!!block;n#startSynthesizer#0;n#!!block;n#App#0" />
             <element signature="n#!!block;n#stopSynthesizer#0;n#!!block;n#App#0" />
             <element signature="n#!!block;n#startMidi#0;n#!!block;n#App#0" />
             <element signature="n#!!block;n#stopMidi#0;n#!!block;n#App#0" />
             <element signature="n#!!block;n#MidiInputReceiver#0;n#!!block;n#App#0" />
+            <element signature="n#!!block;n#Companion#0;n#!!block;n#App#0" />
           </folding>
         </state>
       </provider>

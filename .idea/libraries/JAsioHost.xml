@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="JAsioHost">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JAsioHost.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/JAsioHost.jar!/" />
+    </SOURCES>
+  </library>
+</component>
