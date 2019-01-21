@@ -1,5 +1,5 @@
-import javafx.application.Application
-import javafx.stage.Stage
+package uk.whitecrescent.instrumentdigitizer
+
 import javax.sound.midi.MidiChannel
 import javax.sound.midi.MidiDevice
 import javax.sound.midi.MidiMessage
@@ -9,29 +9,21 @@ import javax.sound.midi.Receiver
 import javax.sound.midi.ShortMessage
 import javax.sound.midi.Synthesizer
 
-
-class App : Application() {
+class Synth : Liveable {
 
     lateinit var synthesizer: Synthesizer
     lateinit var channel: MidiChannel
 
-    override fun start(primaryStage: Stage) {
-        primaryStage.width = 100.toDouble()
-        primaryStage.height = 100.toDouble()
-        primaryStage.show()
-    }
-
-    override fun init() {
-        println("Initializing...")
+    override fun create(): Synth {
         startSynthesizer()
         startMidi()
+        return this
     }
 
-    override fun stop() {
-        println("Stopping...")
+    override fun destroy(): Synth {
         stopSynthesizer()
         stopMidi()
-        System.exit(0)
+        return this
     }
 
     private fun startSynthesizer() {
@@ -98,31 +90,6 @@ class App : Application() {
             device = MidiSystem.getMidiDevice(it)
             if (device.isOpen) device.close()
             println(device.deviceInfo.toString() + " is closed")
-        }
-    }
-
-    inner class MidiInputReceiver(val name: String) : Receiver {
-        override fun send(msg: MidiMessage, timeStamp: Long) {
-            require(msg is ShortMessage)
-            println("Channel: ${msg.channel}")
-            println("Command: ${msg.command}")
-            println("Data1: ${msg.data1}") // Note value
-            println("Data2: ${msg.data2}") // Velocity
-            if (msg.command == ShortMessage.NOTE_ON) {
-                synthesizer.channels[0].noteOn(msg.data1, msg.data2)
-            }
-            if (msg.command == ShortMessage.NOTE_OFF) {
-                synthesizer.channels[0].noteOff(msg.data1)
-            }
-        }
-
-        override fun close() {}
-    }
-
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            launch(App::class.java, *args)
         }
     }
 }

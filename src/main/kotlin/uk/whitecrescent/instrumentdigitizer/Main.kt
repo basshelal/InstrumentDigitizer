@@ -1,3 +1,5 @@
+package uk.whitecrescent.instrumentdigitizer
+
 import com.sun.media.sound.WaveFileReader
 import io.reactivex.Observable
 import java.io.File
@@ -13,7 +15,7 @@ class Main {
             WaveFileReader().getAudioInputStream(file).read(buffer)
 
             Observable.fromIterable(buffer.asList()).take(5000).subscribe {
-                //it.print
+                //it.uk.whitecrescent.instrumentdigitizer.getPrint
             }
 
             File("src/main/test.wav").writeBytes(buffer)
