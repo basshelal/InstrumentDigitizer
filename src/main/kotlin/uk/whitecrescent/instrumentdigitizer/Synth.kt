@@ -1,5 +1,11 @@
 package uk.whitecrescent.instrumentdigitizer
 
+import com.jsyn.JSyn
+import com.jsyn.devices.javasound.MidiDeviceTools
+import com.jsyn.instruments.DualOscillatorSynthVoice
+import com.jsyn.midi.MidiSynthesizer
+import com.jsyn.unitgen.LineOut
+import com.jsyn.util.MultiChannelSynthesizer
 import javax.sound.midi.MidiChannel
 import javax.sound.midi.MidiDevice
 import javax.sound.midi.MidiMessage
@@ -90,6 +96,60 @@ class Synth : Liveable {
             device = MidiSystem.getMidiDevice(it)
             if (device.isOpen) device.close()
             println(device.deviceInfo.toString() + " is closed")
+        }
+    }
+}
+
+class UseMidiKeyboard {
+
+    init {
+        val synth = JSyn.createSynthesizer()
+
+        val voiceDescription = DualOscillatorSynthVoice.getVoiceDescription()
+
+        val multiSynth = MultiChannelSynthesizer()
+        multiSynth.setup(synth, 0, 16, 3, voiceDescription)
+        val midiSynthesizer = MidiSynthesizer(multiSynth)
+
+        // Create a LineOut for the entire synthesizer.
+        val lineOut = LineOut()
+        synth!!.add(lineOut)
+        multiSynth.output.connect(0, lineOut.input, 0)
+        multiSynth.output.connect(1, lineOut.input, 1)
+
+        // Start synthesizer using default stereo output at 44100 Hz.
+        synth.start()
+        lineOut.start()
+
+        val keyboard = MidiDeviceTools.findKeyboard()
+        // Just use default synthesizer.
+        if (keyboard != null) {
+            // If you forget to open them you will hear no sound.
+            keyboard.open()
+            // Put the receiver in the transmitter.
+            // This gives fairly low latency playing.
+            println("Play MIDI keyboard: " + keyboard.deviceInfo.description)
+
+            keyboard.transmitter.receiver = object : Receiver {
+                override fun close() {
+                    print("Closed.")
+                }
+
+                override fun send(message: MidiMessage, timeStamp: Long) {
+                    val bytes = message.message
+                    midiSynthesizer.onReceive(bytes, 0, bytes.size)
+                    bytes.print
+                }
+            }
+        } else {
+            println("Could not find a keyboard.")
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            UseMidiKeyboard()
         }
     }
 }
