@@ -18,6 +18,7 @@ class Reader(val filePath: String = A3_VIOLIN_FILE_PATH) {
         Observable.fromIterable(buffer.asList()).take(size.toLong()).subscribe {
             //print(it)
         }
+        stream.close()
     }
 
     fun write() {
@@ -26,6 +27,7 @@ class Reader(val filePath: String = A3_VIOLIN_FILE_PATH) {
         AudioSystem.write(
                 stream, AudioFileFormat.Type.WAVE, File("test.wav")
         )
+        stream.close()
     }
 
 }
