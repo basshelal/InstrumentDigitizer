@@ -3,14 +3,13 @@ package tests
 import com.jsyn.JSyn
 import com.jsyn.Synthesizer
 import com.jsyn.unitgen.LineOut
-import com.jsyn.unitgen.SawtoothOscillator
+import com.jsyn.unitgen.SineOscillator
 import com.jsyn.unitgen.UnitGenerator
 import com.jsyn.unitgen.UnitVoice
 import com.softsynth.shared.time.TimeStamp
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import uk.whitecrescent.instrumentdigitizer.print
-import javax.sound.midi.MidiSystem
+import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 
 
 @DisplayName("Random Tests")
@@ -19,21 +18,6 @@ class RandomTests {
     @DisplayName("Test")
     @Test
     fun test() {
-        MidiSystem.getSynthesizer().defaultSoundbank.apply {
-            //name.print
-            //description.print
-            //vendor.print
-            //version.print
-            //resources.asList().print
-            //instruments.asList().print
-        }
-        MidiSystem.getSynthesizer()::class.print
-        JSyn.createSynthesizer()
-    }
-
-    @DisplayName("Test")
-    @Test
-    fun test1() {
         var synth: Synthesizer
         var ugen: UnitGenerator
         var voice: UnitVoice
@@ -46,7 +30,7 @@ class RandomTests {
         synth.getAudioDeviceManager().setSuggestedOutputLatency(0.123)
 
         // Add a tone generator.
-        ugen = SawtoothOscillator()
+        ugen = SineOscillator()
         synth.add(ugen)
         voice = ugen
         // Add an output mixer.
@@ -100,6 +84,34 @@ class RandomTests {
         // Stop everything.
         synth.stop()
 
+    }
+
+    @DisplayName("Test")
+    @Test
+    fun test1() {
+        val synth = JSyn.createSynthesizer()
+        val lineOut = LineOut()
+        synth.add(lineOut)
+
+        val oscillators = getSineOscillators(20)
+        oscillators.forEach { synth.add(it) }
+        oscillators.forEach {
+            it.output.connect(0, lineOut.input, 0)
+            it.output.connect(0, lineOut.input, 1)
+        }
+        synth.start()
+
+        synth.startUnit(lineOut)
+
+        oscillators.onEach { it.noteOn(220.0, 0.1) }
+
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        synth.stop()
     }
 
 }

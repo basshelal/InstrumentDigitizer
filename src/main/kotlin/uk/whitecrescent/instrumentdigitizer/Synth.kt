@@ -108,7 +108,7 @@ class UseMidiKeyboard {
         val voiceDescription = DualOscillatorSynthVoice.getVoiceDescription()
 
         val multiSynth = MultiChannelSynthesizer()
-        multiSynth.setup(synth, 0, 16, 3, voiceDescription)
+        multiSynth.setup(synth, 0, 16, 16, voiceDescription)
         val midiSynthesizer = MidiSynthesizer(multiSynth)
 
         // Create a LineOut for the entire synthesizer.
@@ -138,7 +138,6 @@ class UseMidiKeyboard {
                 override fun send(message: MidiMessage, timeStamp: Long) {
                     val bytes = message.message
                     midiSynthesizer.onReceive(bytes, 0, bytes.size)
-                    bytes.print
                 }
             }
         } else {
