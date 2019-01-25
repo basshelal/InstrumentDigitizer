@@ -19,7 +19,7 @@ package com.jsyn.scope.swing;
 import com.jsyn.scope.AudioScopeProbe;
 
 /**
- * Wave display associated with a probe.
+ * SineWave display associated with a probe.
  *
  * @author Phil Burk (C) 2010 Mobileer Inc
  */

@@ -1,7 +1,8 @@
 # TODO
 
-* Start synthesizing sounds
-* Algorithm design
+* Perform FFT on Audio File
+* Find from transform on file: Frequency, Amplitude, Phase of each overtone
+* Modulation(which can be seen as having a frequency like LFO)
 
 # Notes
 
@@ -20,6 +21,7 @@
 
 # Done
 
+* ~~Start synthesizing sounds~~
 * ~~Fix latency issues~~
 * ~~Commit to GitHub~~
 * ~~Respond to MIDI actions simply~~

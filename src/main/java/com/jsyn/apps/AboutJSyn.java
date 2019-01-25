@@ -29,7 +29,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Show the version of JSyn and play some sine waves. This program will be run if you double click
+ * Show the version of JSyn and play some sine sineWaves. This program will be run if you double click
  * the JSyn jar file.
  *
  * @author Phil Burk (C) 2011 Mobileer Inc

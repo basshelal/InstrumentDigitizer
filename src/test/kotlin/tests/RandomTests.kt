@@ -7,6 +7,9 @@ import com.jsyn.unitgen.SineOscillator
 import com.jsyn.unitgen.UnitGenerator
 import com.jsyn.unitgen.UnitVoice
 import com.softsynth.shared.time.TimeStamp
+import com.synthbot.jasiohost.AsioChannel
+import com.synthbot.jasiohost.AsioDriver
+import com.synthbot.jasiohost.AsioDriverListener
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
@@ -93,25 +96,95 @@ class RandomTests {
         val lineOut = LineOut()
         synth.add(lineOut)
 
-        val oscillators = getSineOscillators(20)
+        val oscillators = getSineOscillators(10)
         oscillators.forEach { synth.add(it) }
         oscillators.forEach {
             it.output.connect(0, lineOut.input, 0)
             it.output.connect(0, lineOut.input, 1)
         }
+        lineOut.start()
         synth.start()
-
-        synth.startUnit(lineOut)
 
         oscillators.onEach { it.noteOn(220.0, 0.1) }
 
-        try {
-            Thread.sleep(1000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
+        Thread.sleep(2000)
+
+        oscillators.onEach {
+            it.noteOff()
+            it.noteOn(440.0, 0.1)
         }
+
+        Thread.sleep(2000)
+
+        oscillators.onEach {
+            it.noteOff()
+            it.noteOn(880.0, 0.1)
+        }
+
+        Thread.sleep(2000)
 
         synth.stop()
     }
 
+    @DisplayName("Test")
+    @Test
+    fun test2() {
+        val driver = AsioDriver.getDriver(AsioDriver.getDriverNames().first())
+        val channel0 = driver.getChannelOutput(0)
+        val channel1 = driver.getChannelOutput(1)
+
+        val listener = object : AsioDriverListener {
+            override fun resetRequest() {
+                println("Reset Request")
+            }
+
+            override fun latenciesChanged(inputLatency: Int, outputLatency: Int) {
+                println("Latencies Changes")
+            }
+
+            override fun resyncRequest() {
+                println("Resync Request")
+            }
+
+            override fun bufferSwitch(sampleTime: Long, samplePosition: Long, activeChannels: MutableSet<AsioChannel>?) {
+                println("Buffer Switched")
+
+                var i = 0
+                var sampleIndex = 0
+                val sampleRate = driver.sampleRate
+                val output = FloatArray(driver.bufferPreferredSize)
+                while (i < driver.bufferPreferredSize) {
+                    output[i] = Math.sin((2.0 * Math.PI * sampleIndex * 440.0) / sampleRate).toFloat()
+                    i++
+                    sampleIndex++
+                }
+
+                activeChannels?.forEach {
+                    it.write(output)
+                }
+            }
+
+            override fun sampleRateDidChange(sampleRate: Double) {
+                println("Sample Rate Did Change")
+            }
+
+            override fun bufferSizeChanged(bufferSize: Int) {
+                println("Buffer Size Changed")
+            }
+
+        }
+
+        driver.addAsioDriverListener(listener)
+        driver.createBuffers(setOf(channel0, channel1))
+        driver.start()
+
+
+        Thread.sleep(5000)
+
+
+        driver.stop()
+        driver.disposeBuffers()
+        driver.exit()
+        driver.shutdownAndUnloadDriver()
+    }
 }
