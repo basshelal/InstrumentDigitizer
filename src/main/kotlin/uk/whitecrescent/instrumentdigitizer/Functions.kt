@@ -1,7 +1,7 @@
 package uk.whitecrescent.instrumentdigitizer
 
 // TODO: 22-Jan-19 This whole thing lol
-object Algorithm {
+object Functions {
 
     // TODO: 22-Jan-19 Still unsure about the data type of ByteArray
 
@@ -81,4 +81,5 @@ object Algorithm {
 
 }
 
-inline class Data(val data: ByteArray)
+@Suppress("EXPERIMENTAL_FEATURE_WARNING")
+inline class AudioData(val data: ByteArray)

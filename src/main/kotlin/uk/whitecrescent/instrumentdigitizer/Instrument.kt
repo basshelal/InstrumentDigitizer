@@ -1,7 +1,6 @@
 package uk.whitecrescent.instrumentdigitizer
 
 import com.jsyn.unitgen.SineOscillator
-import com.synthbot.jasiohost.AsioDriver
 
 /**
  * Represents an instrument made purely out of multiple sine waves
@@ -18,7 +17,6 @@ class Instrument(val overtones: Int) {
 data class SineWave(val frequency: Double, val amplitude: Double, val phase: Double)
 
 fun getSineOscillators(amount: Int): List<SineOscillator> {
-    AsioDriver.getCurrentDriver()
     return Array(amount, { SineOscillator(0.0, 0.0) }).asList()
 }
 

@@ -12,8 +12,8 @@ import com.synthbot.jasiohost.AsioDriver
 import com.synthbot.jasiohost.AsioDriverListener
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import uk.whitecrescent.instrumentdigitizer.Reader
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
-
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -30,7 +30,7 @@ class RandomTests {
         // Create a context for the synthesizer.
         synth = JSyn.createSynthesizer()
         // Set output latency to 123 msec because this is not an interactive app.
-        synth.getAudioDeviceManager().setSuggestedOutputLatency(0.123)
+        synth.audioDeviceManager.setSuggestedOutputLatency(0.123)
 
         // Add a tone generator.
         ugen = SineOscillator()
@@ -48,7 +48,7 @@ class RandomTests {
         synth.start()
 
         // Get synthesizer time in seconds.
-        val timeNow = synth.getCurrentTime()
+        val timeNow = synth.currentTime
 
         // Advance to a near future time so we have a clean start.
         var timeStamp = TimeStamp(timeNow + 0.5)
@@ -186,5 +186,13 @@ class RandomTests {
         driver.disposeBuffers()
         driver.exit()
         driver.shutdownAndUnloadDriver()
+    }
+
+    @DisplayName("Test")
+    @Test
+    fun test3() {
+        val reader = Reader()
+        reader.writeFromBuffer()
+        reader.close()
     }
 }
