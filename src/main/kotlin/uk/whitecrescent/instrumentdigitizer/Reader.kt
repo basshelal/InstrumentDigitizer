@@ -48,6 +48,22 @@ class Reader(val filePath: String = A3_VIOLIN_FILE_PATH) {
 
         val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
+        val frames = newStream.frameLength
+        val frameSize = newStream.format.frameSize
+        val frameRate = newStream.format.frameRate
+        val sampleRate = newStream.format.sampleRate
+        val sampleSize = newStream.format.sampleSizeInBits
+        println("""
+            Frames: $frames
+            FrameSize: $frameSize
+            FrameRate: $frameRate
+            SampleRate: $sampleRate
+            SampleSize: $sampleSize
+        """.trimIndent())
+
+        val duration = frames / frameRate
+        println("Duration: $duration")
+
         AudioSystem.write(
                 newStream,
                 AudioFileFormat.Type.WAVE,

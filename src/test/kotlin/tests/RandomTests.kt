@@ -10,8 +10,10 @@ import com.softsynth.shared.time.TimeStamp
 import com.synthbot.jasiohost.AsioChannel
 import com.synthbot.jasiohost.AsioDriver
 import com.synthbot.jasiohost.AsioDriverListener
+import org.apache.commons.math3.util.ArithmeticUtils
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.Reader
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 
@@ -193,6 +195,22 @@ class RandomTests {
     fun test3() {
         val reader = Reader()
         reader.writeFromBuffer()
+        reader.close()
+    }
+
+    @DisplayName("Test")
+    @Test
+    fun test4() {
+        val reader = Reader()
+        reader.read()
+        var buffer = reader.buffer
+        val list = ArrayList(buffer.asList())
+        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) {
+            list.add(0)
+        }
+        buffer = ByteArray(list.size) { list[it] }
+        val complexArray = Functions.fourierTransform(buffer)
+        complexArray.forEach { print(it) }
         reader.close()
     }
 }

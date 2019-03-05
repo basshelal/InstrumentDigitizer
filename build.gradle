@@ -40,4 +40,7 @@ dependencies {
     // TornadoFX
     compile 'no.tornado:tornadofx:1.7.18'
 
+    // Apache Commons Math
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
 }
