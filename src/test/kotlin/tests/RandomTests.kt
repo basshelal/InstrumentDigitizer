@@ -14,8 +14,9 @@ import org.apache.commons.math3.util.ArithmeticUtils
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.Functions
-import uk.whitecrescent.instrumentdigitizer.Reader
+import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
+import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -193,15 +194,13 @@ class RandomTests {
     @DisplayName("Test Write Data")
     @Test
     fun testWriteData() {
-        val reader = Reader()
-        reader.writeSineWaveAudio()
-        reader.close()
+        writeSineWaveAudio()
     }
 
     @DisplayName("Test Old Fourier")
     @Test
     fun testOldFourier() {
-        val reader = Reader()
+        val reader = ReaderWriter()
         reader.read()
         var buffer = reader.buffer
         val list = ArrayList(buffer.asList())

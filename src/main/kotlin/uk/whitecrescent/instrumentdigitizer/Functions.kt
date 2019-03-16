@@ -4,7 +4,6 @@ import org.apache.commons.math3.complex.Complex
 import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
-import kotlin.math.sin
 
 // TODO: 22-Jan-19 This whole thing lol
 object Functions {
@@ -85,27 +84,6 @@ object Functions {
      */
     fun sliceByFrequencies(data: ByteArray): List<Pair<Long, Int>> {
         return emptyList()
-    }
-
-    fun synthesizeSingleSineWave(size: Int): ByteArray {
-        val result = ByteArray(size) {
-            sin(5.0).toByte()
-        }
-
-        //sin(2*PI*f*t+ p)
-
-        /*val fs = 512; // Sampling frequency (samples per second)
-        val dt = 1 / fs; // seconds per sample
-        val StopTime = 0.25; // seconds
-        val t = (0:dt:StopTime); // seconds
-        val F = 60; // Sine wave frequency (hertz)
-        val data = sin(2 * PI * F * t);
-        //For one cycle get time period
-        val T = 1 / F;
-        // time step for one time period
-        val tt = 0:dt:T+dt ;
-        val d = sin(2 * PI * F * tt);*/
-        return result
     }
 
 }
