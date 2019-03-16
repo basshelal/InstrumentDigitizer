@@ -20,9 +20,9 @@ import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 @DisplayName("Random Tests")
 class RandomTests {
 
-    @DisplayName("Test")
+    @DisplayName("Test JSyn Synth")
     @Test
-    fun test() {
+    fun testJSynSynth() {
         var synth: Synthesizer
         var ugen: UnitGenerator
         var voice: UnitVoice
@@ -91,9 +91,9 @@ class RandomTests {
 
     }
 
-    @DisplayName("Test")
+    @DisplayName("Test JSyn Synth 2")
     @Test
-    fun test1() {
+    fun testJSynSynth2() {
         val synth = JSyn.createSynthesizer()
         val lineOut = LineOut()
         synth.add(lineOut)
@@ -128,9 +128,9 @@ class RandomTests {
         synth.stop()
     }
 
-    @DisplayName("Test")
+    @DisplayName("Test ASIO")
     @Test
-    fun test2() {
+    fun testASIO() {
         val driver = AsioDriver.getDriver(AsioDriver.getDriverNames().first())
         val channel0 = driver.getChannelOutput(0)
         val channel1 = driver.getChannelOutput(1)
@@ -190,17 +190,17 @@ class RandomTests {
         driver.shutdownAndUnloadDriver()
     }
 
-    @DisplayName("Test")
+    @DisplayName("Test Write Data")
     @Test
-    fun test3() {
+    fun testWriteData() {
         val reader = Reader()
-        reader.writeFromBuffer()
+        reader.writeSineWaveAudio()
         reader.close()
     }
 
-    @DisplayName("Test")
+    @DisplayName("Test Old Fourier")
     @Test
-    fun test4() {
+    fun testOldFourier() {
         val reader = Reader()
         reader.read()
         var buffer = reader.buffer
