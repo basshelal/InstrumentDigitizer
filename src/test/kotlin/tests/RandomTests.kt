@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
@@ -21,6 +22,7 @@ import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.toComplex
+import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
@@ -253,16 +255,11 @@ class RandomTests {
         assertTrue(transformed.size == inversed.size)
 
         (0 until originalComplex.size).forEach {
-
-            val realDiff = (originalComplex[it].real - inversed[it].real).absoluteValue
-            val imaginaryDiff = (originalComplex[it].imaginary - inversed[it].imaginary).absoluteValue
-
-            assertTrue(realDiff <= 1E-7)
-            assertTrue(imaginaryDiff <= 1E-7)
+            assertTrue((originalComplex[it].real - inversed[it].real).absoluteValue <= DESIRED_DIFFERENCE)
+            assertTrue((originalComplex[it].imaginary - inversed[it].imaginary).absoluteValue <= DESIRED_DIFFERENCE)
         }
 
-        transformed.take(256).forEach { println(it) }
-
+        transformed.take(256).toTypedArray().toIntMap().toList().forEach { println(it) }
 
         //result.map { it.real * (1000.0 / result.size) }.forEach { println(it) }
         // TODO: 17-Mar-19 Make sense of the outputs

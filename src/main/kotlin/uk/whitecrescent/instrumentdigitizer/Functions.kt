@@ -115,6 +115,8 @@ fun ByteArray.padded() = Functions.pad(this)
 
 fun ByteArray.toComplex() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
 
+fun ByteArray.paddedComplex() = Functions.pad(this).toComplex()
+
 fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].toDouble() }
 
 fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
@@ -124,3 +126,7 @@ fun DoubleArray.toIntArray() = IntArray(this.size) { this[it].roundToInt() }
 fun ComplexArray.real() = DoubleArray(this.size) { this[it].real }
 
 fun ComplexArray.imaginary() = DoubleArray(this.size) { this[it].imaginary }
+
+fun ComplexArray.toMap() = this.map { it.real to it.imaginary }.toMap()
+
+fun ComplexArray.toIntMap() = this.map { it.real.roundToInt() to it.imaginary.roundToInt() }.toMap()
