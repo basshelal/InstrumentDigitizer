@@ -32,10 +32,10 @@ class RandomTests {
     @DisplayName("Test JSyn Synth")
     @Test
     fun testJSynSynth() {
-        var synth: Synthesizer
-        var ugen: UnitGenerator
-        var voice: UnitVoice
-        var lineOut: LineOut
+        val synth: Synthesizer
+        val ugen: UnitGenerator
+        val voice: UnitVoice
+        val lineOut: LineOut
 
 
         // Create a context for the synthesizer.
@@ -239,9 +239,9 @@ class RandomTests {
         reader.close()
     }
 
-    @DisplayName("Test New Fourier")
+    @DisplayName("Test Fourier Forward and Inverse")
     @Test
-    fun testNewFourier() {
+    fun testFourierForwardAndInverse() {
         val buffer = generateSineWave(220, 1, 1000, 1)
 
         val original = buffer.padded()
