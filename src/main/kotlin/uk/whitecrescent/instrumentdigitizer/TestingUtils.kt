@@ -30,7 +30,7 @@ fun writeRandomAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     AudioSystem.write(
             newStream,
             AudioFileFormat.Type.WAVE,
-            File(OUTPUT_PATH)
+            File(OUTPUT_PATH_WAV)
     )
 }
 
@@ -50,7 +50,7 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     AudioSystem.write(
             newStream,
             AudioFileFormat.Type.WAVE,
-            File(OUTPUT_PATH)
+            File(OUTPUT_PATH_WAV)
     )
 }
 
@@ -96,11 +96,20 @@ fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, 
     return compare(original.real(), converted.real()) to compare(original.imaginary(), converted.imaginary())
 }
 
-fun writeTextToCSV(data: ByteArray, delimiter: String = ",", outPath: String = OUTPUT_PATH_CSV) {
+fun writeTextToFile(data: ByteArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
     File(outPath).apply {
         writeText("")
         data.forEachIndexed { index, byte ->
-            appendText("$index$delimiter$byte\n")
+            appendText("$index$delimiter$byte$lineEnd")
+        }
+    }
+}
+
+fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+    File(outPath).apply {
+        writeText("")
+        data.forEach {
+            appendText("${it.real}$delimiter${it.imaginary}$lineEnd")
         }
     }
 }

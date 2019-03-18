@@ -24,7 +24,7 @@ import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
-import uk.whitecrescent.instrumentdigitizer.writeTextToCSV
+import uk.whitecrescent.instrumentdigitizer.writeTextToFile
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
 import kotlin.math.absoluteValue
@@ -269,7 +269,7 @@ class RandomTests {
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        writeTextToCSV(generateSineWave(440, 1, 1000, 1))
+        writeTextToFile(generateSineWave(440, 1, 1000, 1))
     }
 
 }

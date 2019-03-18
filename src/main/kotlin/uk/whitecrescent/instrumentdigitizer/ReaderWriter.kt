@@ -21,7 +21,7 @@ class ReaderWriter(val filePath: String = A3_VIOLIN_FILE_PATH) {
         return buffer
     }
 
-    fun write(outPath: String = OUTPUT_PATH) {
+    fun write(outPath: String = OUTPUT_PATH_WAV) {
         val audioInputStream = AudioSystem.getAudioInputStream(File(filePath))
         AudioSystem.write(
                 audioInputStream,
