@@ -261,6 +261,8 @@ class RandomTests {
             assertTrue(imaginaryDiff <= 1E-7)
         }
 
+        transformed.take(256).forEach { println(it) }
+
 
         //result.map { it.real * (1000.0 / result.size) }.forEach { println(it) }
         // TODO: 17-Mar-19 Make sense of the outputs

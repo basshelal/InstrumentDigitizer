@@ -6,6 +6,7 @@ import javax.sound.sampled.AudioFileFormat
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import kotlin.math.PI
+import kotlin.math.absoluteValue
 import kotlin.math.sin
 import kotlin.random.Random
 
@@ -69,6 +70,37 @@ fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int = SAMPLE_RATE
         /* 127 for normalizing to the range of Byte: -127 to 127 */
         return@ByteArray (sin(angle) * 127F).toByte()
     }
+}
+
+/*
+     * Used for testing,
+     * Compares between 2 sets of data, the original and the converted and returns the differences,
+     * the differences should ideally contain nothing useful, so either 0s or very low values that are
+     * not useful in finding what the original was
+     */
+fun compare(original: ByteArray, converted: ByteArray): DoubleArray {
+    require(converted.size == original.size) {
+        "Original and Converted must be equal in size!" +
+                " Original Size: ${original.size}, Converted Size: ${converted.size}"
+    }
+    return DoubleArray(converted.size) { (original[it].toDouble() - converted[it].toDouble()).absoluteValue }
+}
+
+fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
+    require(converted.size == original.size) {
+        "Original and Converted must be equal in size!" +
+                " Original Size: ${original.size}, Converted Size: ${converted.size}"
+    }
+    return DoubleArray(converted.size) { (original[it] - converted[it]).absoluteValue }
+}
+
+
+fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, DoubleArray> {
+    require(converted.size == original.size) {
+        "Original and Converted must be equal in size!" +
+                " Original Size: ${original.size}, Converted Size: ${converted.size}"
+    }
+    return compare(original.real(), converted.real()) to compare(original.imaginary(), converted.imaginary())
 }
 
 fun AudioInputStream.printStreamInfo() {

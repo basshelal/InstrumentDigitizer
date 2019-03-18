@@ -9,7 +9,6 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 import org.apache.commons.math3.util.ArithmeticUtils
-import kotlin.math.absoluteValue
 
 object Functions {
 
@@ -81,20 +80,6 @@ object Functions {
     }
 
     /*
-     * Used for testing,
-     * Compares between 2 sets of data, the original and the converted and returns the differences,
-     * the differences should ideally contain nothing useful, so either 0s or very low values that are
-     * not useful in finding what the original was
-     */
-    fun compare(original: ByteArray, converted: ByteArray): DoubleArray {
-        require(converted.size == original.size) {
-            "Original and Converted must be equal in size!" +
-                    " Original Size: ${original.size}, Converted Size: ${converted.size}"
-        }
-        return DoubleArray(converted.size) { (original[it].toDouble() - converted[it].toDouble()).absoluteValue }
-    }
-
-    /*
      * Slices the given data into the detected different frequencies found in it,
      * the returned list is a list of Pairs which contains the frequency mapped to
      * the index of the original array where it first exists
@@ -124,6 +109,10 @@ fun ByteArray.toComplex() =
         ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
 
 typealias ComplexArray = Array<Complex>
+
+fun ComplexArray.real() = DoubleArray(this.size) { this[it].real }
+
+fun ComplexArray.imaginary() = DoubleArray(this.size) { this[it].imaginary }
 
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
 inline class AudioData(val data: ByteArray)
