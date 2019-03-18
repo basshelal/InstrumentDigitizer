@@ -9,6 +9,7 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 import org.apache.commons.math3.util.ArithmeticUtils
+import kotlin.math.roundToInt
 
 object Functions {
 
@@ -92,27 +93,34 @@ object Functions {
      * Pads the passed in ByteArray with zeros so that it can be used in Fast Fourier Transform functions
      * that require the transform be on collections of a size that is a power of 2
      */
-    fun pad(data: ByteArray): ByteArray {
+    fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
         val list = ArrayList(data.asList())
 
         // TODO: 18-Mar-19 Optimize below because with many iterations this becomes slow and CPU heavy
         // find a way to figure out the next power of two and just add that many 0s at the end or something like that
-        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
+        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(padWith)
         return ByteArray(list.size) { list[it] }
     }
 
 }
 
-fun ByteArray.padded() = Functions.pad(this)
-
-fun ByteArray.toComplex() =
-        ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
+// Extensions and Utils
 
 typealias ComplexArray = Array<Complex>
+
+@Suppress("EXPERIMENTAL_FEATURE_WARNING")
+inline class AudioData(val data: ByteArray)
+
+fun ByteArray.padded() = Functions.pad(this)
+
+fun ByteArray.toComplex() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
+
+fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].toDouble() }
+
+fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
+
+fun DoubleArray.toIntArray() = IntArray(this.size) { this[it].roundToInt() }
 
 fun ComplexArray.real() = DoubleArray(this.size) { this[it].real }
 
 fun ComplexArray.imaginary() = DoubleArray(this.size) { this[it].imaginary }
-
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
-inline class AudioData(val data: ByteArray)

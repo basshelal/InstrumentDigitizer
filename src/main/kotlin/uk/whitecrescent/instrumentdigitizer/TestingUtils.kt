@@ -78,13 +78,7 @@ fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int = SAMPLE_RATE
      * the differences should ideally contain nothing useful, so either 0s or very low values that are
      * not useful in finding what the original was
      */
-fun compare(original: ByteArray, converted: ByteArray): DoubleArray {
-    require(converted.size == original.size) {
-        "Original and Converted must be equal in size!" +
-                " Original Size: ${original.size}, Converted Size: ${converted.size}"
-    }
-    return DoubleArray(converted.size) { (original[it].toDouble() - converted[it].toDouble()).absoluteValue }
-}
+fun compare(original: ByteArray, converted: ByteArray) = compare(original.toDoubleArray(), converted.toDoubleArray())
 
 fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
     require(converted.size == original.size) {
@@ -93,7 +87,6 @@ fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
     }
     return DoubleArray(converted.size) { (original[it] - converted[it]).absoluteValue }
 }
-
 
 fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, DoubleArray> {
     require(converted.size == original.size) {
