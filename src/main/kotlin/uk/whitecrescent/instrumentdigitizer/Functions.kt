@@ -14,12 +14,6 @@ import kotlin.math.roundToInt
 object Functions {
 
     /*
-     * We should probably make sure that these operations are done in-place, meaning
-     * we manipulate/modify the original data and not return new data.
-     * We could also have an encapsulation of the data type in a new type like Data below
-     */
-
-    /*
      * Probably the order of how the final algorithm will look like, very unsure
      */
     fun execute(data: ByteArray): ByteArray {
@@ -95,16 +89,25 @@ object Functions {
      */
     fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
         val list = ArrayList(data.asList())
+        val nextPowerOfTwo = nextPowerOfTwo(list.size)
 
-        // TODO: 18-Mar-19 Optimize below because with many iterations this becomes slow and CPU heavy
-        // find a way to figure out the next power of two and just add that many 0s at the end or something like that
-        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(padWith)
-        return ByteArray(list.size) { list[it] }
+        if (nextPowerOfTwo != list.size) {
+            list.ensureCapacity(nextPowerOfTwo)
+            list.addAll(ByteArray(nextPowerOfTwo - list.size) { padWith }.asList())
+        }
+
+        return list.toByteArray()
     }
 
 }
 
 // Extensions and Utils
+
+fun nextPowerOfTwo(number: Int): Int {
+    var result = number
+    while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result++
+    return result
+}
 
 typealias ComplexArray = Array<Complex>
 

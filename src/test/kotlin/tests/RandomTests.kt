@@ -244,7 +244,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220, 10, SAMPLE_RATE, 2)
+        val buffer = generateSineWave(220, 100, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()

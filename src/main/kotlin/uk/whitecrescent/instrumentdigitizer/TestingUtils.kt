@@ -67,17 +67,17 @@ fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int = SAMPLE_RATE
     val period = sampleRate.toDouble() / frequency
     return ByteArray(totalSamples) {
         val angle = (2.0 * PI * it) / period
-        /* 127 for normalizing to the range of Byte: -127 to 127 */
+        /* 127 for normalizing to the range of Byte: -127 to 127 since sin(angle) will return value in range: -1 to 1 */
         return@ByteArray (sin(angle) * 127F).toByte()
     }
 }
 
 /*
-     * Used for testing,
-     * Compares between 2 sets of data, the original and the converted and returns the differences,
-     * the differences should ideally contain nothing useful, so either 0s or very low values that are
-     * not useful in finding what the original was
-     */
+ * Used for testing,
+ * Compares between 2 sets of data, the original and the converted and returns the differences,
+ * the differences should ideally contain nothing useful, so either 0s or very low values that are
+ * not useful in finding what the original was
+ */
 fun compare(original: ByteArray, converted: ByteArray) = compare(original.toDoubleArray(), converted.toDoubleArray())
 
 fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
