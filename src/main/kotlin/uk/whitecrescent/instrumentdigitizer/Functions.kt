@@ -37,6 +37,11 @@ object Functions {
         return FastFourierTransformer(DftNormalization.STANDARD).transform(complexArray, TransformType.FORWARD)
     }
 
+    fun realFourierTransform(data: ByteArray): ByteArray {
+
+        return data
+    }
+
     /*
      * This will be a transform on the Fourier transformed data,
      * We use this to find any modulation in pitch over time, like LFOs

@@ -1,6 +1,5 @@
 package uk.whitecrescent.instrumentdigitizer
 
-import io.reactivex.Observable
 import java.io.File
 import javax.sound.sampled.AudioFileFormat
 import javax.sound.sampled.AudioInputStream
@@ -11,7 +10,7 @@ class ReaderWriter(val filePath: String = A3_VIOLIN_FILE_PATH) {
     lateinit var stream: AudioInputStream
     lateinit var buffer: ByteArray
 
-    fun read() {
+    fun read(): ByteArray {
         val file = File(filePath)
         val size = file.readBytes().size
         buffer = ByteArray(size)
@@ -19,24 +18,22 @@ class ReaderWriter(val filePath: String = A3_VIOLIN_FILE_PATH) {
         stream = audioInputStream
         stream.read(buffer)
 
-        Observable.fromIterable(buffer.asList()).take(size.toLong()).subscribe {
-
-        }
+        return buffer
     }
 
-    fun write(path: String = OUTPUT_PATH) {
-        val audioInputStream = AudioSystem.getAudioInputStream(File(A3_VIOLIN_FILE_PATH))
+    fun write(outPath: String = OUTPUT_PATH) {
+        val audioInputStream = AudioSystem.getAudioInputStream(File(filePath))
         AudioSystem.write(
                 audioInputStream,
                 AudioFileFormat.Type.WAVE,
-                File(path)
+                File(outPath)
         )
     }
 
-    fun writeText(path: String = OUTPUT_PATH_TEXT) {
+    fun writeText(outPath: String = OUTPUT_PATH_TEXT) {
         val text = StringBuilder()
         buffer.forEach { text.append(it) }
-        File(path).writeText(text.toString())
+        File(outPath).writeText(text.toString())
         write()
     }
 

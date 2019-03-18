@@ -15,6 +15,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
+import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 
@@ -197,12 +198,23 @@ class RandomTests {
         writeSineWaveAudio()
     }
 
+    @DisplayName("Test New Fourier")
+    @Test
+    fun testNewFourier() {
+        var buffer = generateSineWave(220, 1, 2200)
+        val list = ArrayList(buffer.asList())
+        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
+        buffer = ByteArray(list.size) { list[it] }
+        val result = Functions.fourierTransform(buffer)
+        result.forEach { println(it) }
+        // TODO: 17-Mar-19 Make sense of the outputs
+    }
+
     @DisplayName("Test Old Fourier")
     @Test
     fun testOldFourier() {
         val reader = ReaderWriter()
-        reader.read()
-        var buffer = reader.buffer
+        var buffer = reader.read()
         val list = ArrayList(buffer.asList())
         while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) {
             list.add(0)

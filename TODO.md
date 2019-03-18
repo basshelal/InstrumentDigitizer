@@ -1,5 +1,6 @@
 # TODO
 
+* Generate short perfect sine wave to perform FFT testing on
 * Perform FFT on Audio File
 * Find from transform on file: Frequency, Amplitude, Phase of each overtone
 * Modulation(which can be seen as having a frequency like LFO)

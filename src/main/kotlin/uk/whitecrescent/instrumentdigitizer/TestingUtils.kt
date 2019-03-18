@@ -24,21 +24,7 @@ fun writeRandomAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
-    val frames = newStream.frameLength
-    val frameSize = newStream.format.frameSize
-    val frameRate = newStream.format.frameRate
-    val sampleRate = newStream.format.sampleRate
-    val sampleSize = newStream.format.sampleSizeInBits
-    println("""
-            Frames: $frames
-            FrameSize: $frameSize
-            FrameRate: $frameRate
-            SampleRate: $sampleRate
-            SampleSize: $sampleSize
-        """.trimIndent())
-
-    val duration = frames / frameRate
-    println("Duration: $duration")
+    newStream.printStreamInfo()
 
     AudioSystem.write(
             newStream,
@@ -54,15 +40,33 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val stream = AudioSystem.getAudioInputStream(file)
     stream.read(buffer)
 
-    buffer = generateSineWave(220, 20, 44100)
+    buffer = generateSineWave(220, 10, 44100)
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
-    val frames = newStream.frameLength
-    val frameSize = newStream.format.frameSize
-    val frameRate = newStream.format.frameRate
-    val sampleRate = newStream.format.sampleRate
-    val sampleSize = newStream.format.sampleSizeInBits
+    newStream.printStreamInfo()
+
+    AudioSystem.write(
+            newStream,
+            AudioFileFormat.Type.WAVE,
+            File(OUTPUT_PATH)
+    )
+}
+
+fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int): ByteArray {
+    val totalSamples = seconds * sampleRate // this disregards channels, so multiply by 2 for stereo
+    return ByteArray(totalSamples) {
+        val angle = (2.0 * PI * it) / (sampleRate.toDouble() / frequency)
+        return@ByteArray (sin(angle) * 128).toByte()
+    }
+}
+
+fun AudioInputStream.printStreamInfo() {
+    val frames = this.frameLength
+    val frameSize = this.format.frameSize
+    val frameRate = this.format.frameRate
+    val sampleRate = this.format.sampleRate
+    val sampleSize = this.format.sampleSizeInBits
     println("""
             Frames: $frames
             FrameSize: $frameSize
@@ -73,18 +77,4 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
 
     val duration = frames / frameRate
     println("Duration: $duration")
-
-    AudioSystem.write(
-            newStream,
-            AudioFileFormat.Type.WAVE,
-            File(OUTPUT_PATH)
-    )
-}
-
-fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int): ByteArray {
-    val totalSamples = seconds * sampleRate
-    return ByteArray(totalSamples) {
-        val angle = (2.0 * PI * it) / (sampleRate.toDouble() / frequency)
-        return@ByteArray (sin(angle) * 128).toByte()
-    }
 }
