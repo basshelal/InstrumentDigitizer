@@ -96,6 +96,15 @@ fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, 
     return compare(original.real(), converted.real()) to compare(original.imaginary(), converted.imaginary())
 }
 
+fun writeTextToCSV(data: ByteArray, delimiter: String = ",", outPath: String = OUTPUT_PATH_CSV) {
+    File(outPath).apply {
+        writeText("")
+        data.forEachIndexed { index, byte ->
+            appendText("$index$delimiter$byte\n")
+        }
+    }
+}
+
 fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength
     val frameSize = this.format.frameSize

@@ -24,6 +24,7 @@ import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
+import uk.whitecrescent.instrumentdigitizer.writeTextToCSV
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
 import kotlin.math.absoluteValue
@@ -244,7 +245,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220, 100, SAMPLE_RATE, 2)
+        val buffer = generateSineWave(220, 10, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -263,6 +264,12 @@ class RandomTests {
 
         //result.map { it.real * (1000.0 / result.size) }.forEach { println(it) }
         // TODO: 17-Mar-19 Make sense of the outputs
+    }
+
+    @DisplayName("Test Write Sine to CSV")
+    @Test
+    fun testWriteSineToCSV() {
+        writeTextToCSV(generateSineWave(440, 1, 1000, 1))
     }
 
 }
