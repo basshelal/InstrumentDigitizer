@@ -4,6 +4,7 @@ import org.apache.commons.math3.complex.Complex
 import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
+import org.apache.commons.math3.util.ArithmeticUtils
 
 object Functions {
 
@@ -30,8 +31,11 @@ object Functions {
      * should probably return a list of SineWaves
      */
     fun fourierTransform(data: ByteArray): ComplexArray {
-        val complexArray = ComplexArray(data.size) { Complex(data[it].toDouble(), 0.0) }
-        return FastFourierTransformer(DftNormalization.STANDARD).transform(complexArray, TransformType.FORWARD)
+        return FastFourierTransformer(DftNormalization.STANDARD).transform(data.toComplex(), TransformType.FORWARD)
+    }
+
+    fun inverseFourierTransform(data: ComplexArray): ComplexArray {
+        return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.INVERSE)
     }
 
     fun realFourierTransform(data: ByteArray): ByteArray {
@@ -88,7 +92,22 @@ object Functions {
         return emptyList()
     }
 
+    /*
+     * Pads the passed in ByteArray with zeros so that it can be used in Fast Fourier Transform functions
+     * that require the transform be on collections of a size that is a power of 2
+     */
+    fun pad(data: ByteArray): ByteArray {
+        val list = ArrayList(data.asList())
+        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
+        return ByteArray(list.size) { list[it] }
+    }
+
 }
+
+fun ByteArray.padded() = Functions.pad(this)
+
+fun ByteArray.toComplex() =
+        ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
 
 typealias ComplexArray = Array<Complex>
 

@@ -10,8 +10,8 @@ import com.softsynth.shared.time.TimeStamp
 import com.synthbot.jasiohost.AsioChannel
 import com.synthbot.jasiohost.AsioDriver
 import com.synthbot.jasiohost.AsioDriverListener
-import org.apache.commons.math3.util.ArithmeticUtils
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.Functions
@@ -19,9 +19,12 @@ import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
+import uk.whitecrescent.instrumentdigitizer.padded
+import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
+import kotlin.math.absoluteValue
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -230,13 +233,8 @@ class RandomTests {
     @Test
     fun testOldFourier() {
         val reader = ReaderWriter()
-        var buffer = reader.read()
-        val list = ArrayList(buffer.asList())
-        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) {
-            list.add(0)
-        }
-        buffer = ByteArray(list.size) { list[it] }
-        val complexArray = Functions.fourierTransform(buffer)
+        val buffer = reader.read()
+        val complexArray = Functions.fourierTransform(buffer.padded())
         complexArray.forEach { print(it) }
         reader.close()
     }
@@ -244,15 +242,27 @@ class RandomTests {
     @DisplayName("Test New Fourier")
     @Test
     fun testNewFourier() {
-        var buffer = generateSineWave(220, 1, 1000, 1)
-        val list = ArrayList(buffer.asList())
-        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
-        buffer = ByteArray(list.size) { list[it] }
-        val result = Functions.fourierTransform(buffer)
+        val buffer = generateSineWave(220, 1, 1000, 1)
+
+        val original = buffer.padded()
+        val originalComplex = original.toComplex()
+        val transformed = Functions.fourierTransform(original)
+        val inversed = Functions.inverseFourierTransform(transformed)
+
+        assertTrue(originalComplex.size == transformed.size)
+        assertTrue(transformed.size == inversed.size)
+
+        (0 until originalComplex.size).forEach {
+
+            val realDiff = (originalComplex[it].real - inversed[it].real).absoluteValue
+            val imaginaryDiff = (originalComplex[it].imaginary - inversed[it].imaginary).absoluteValue
+
+            assertTrue(realDiff <= 1E-10)
+            assertTrue(imaginaryDiff <= 1E-10)
+        }
 
 
-
-        result.map { it.real * (1000.0 / result.size) }.sorted().forEach { println(it) }
+        //result.map { it.real * (1000.0 / result.size) }.forEach { println(it) }
         // TODO: 17-Mar-19 Make sense of the outputs
     }
 
