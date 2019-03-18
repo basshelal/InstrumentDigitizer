@@ -11,13 +11,17 @@ import com.synthbot.jasiohost.AsioChannel
 import com.synthbot.jasiohost.AsioDriver
 import com.synthbot.jasiohost.AsioDriverListener
 import org.apache.commons.math3.util.ArithmeticUtils
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
+import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
+import javax.sound.sampled.AudioFormat
+import javax.sound.sampled.AudioSystem
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -198,16 +202,28 @@ class RandomTests {
         writeSineWaveAudio()
     }
 
-    @DisplayName("Test New Fourier")
+    @DisplayName("Test Generate Sine Wave")
     @Test
-    fun testNewFourier() {
-        var buffer = generateSineWave(220, 1, 2200)
-        val list = ArrayList(buffer.asList())
-        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
-        buffer = ByteArray(list.size) { list[it] }
-        val result = Functions.fourierTransform(buffer)
-        result.forEach { println(it) }
-        // TODO: 17-Mar-19 Make sense of the outputs
+    fun testGenerateSineWave() {
+        val wave = generateSineWave(220, 1, 1000, 1)
+        wave.forEach { println(it) }
+
+        assertEquals(1000, wave.size)
+    }
+
+    @DisplayName("Test Play Sine Wave")
+    @Test
+    fun testPlaySineWave() {
+        val buffer = generateSineWave(440, 2, SAMPLE_RATE, 1)
+        val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
+        val line = AudioSystem.getSourceDataLine(format)
+        line.apply {
+            open(format)
+            start()
+            write(buffer, 0, buffer.size)
+            drain()
+            close()
+        }
     }
 
     @DisplayName("Test Old Fourier")
@@ -224,4 +240,20 @@ class RandomTests {
         complexArray.forEach { print(it) }
         reader.close()
     }
+
+    @DisplayName("Test New Fourier")
+    @Test
+    fun testNewFourier() {
+        var buffer = generateSineWave(220, 1, 1000, 1)
+        val list = ArrayList(buffer.asList())
+        while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
+        buffer = ByteArray(list.size) { list[it] }
+        val result = Functions.fourierTransform(buffer)
+
+
+
+        result.map { it.real * (1000.0 / result.size) }.sorted().forEach { println(it) }
+        // TODO: 17-Mar-19 Make sense of the outputs
+    }
+
 }

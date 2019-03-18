@@ -40,7 +40,7 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val stream = AudioSystem.getAudioInputStream(file)
     stream.read(buffer)
 
-    buffer = generateSineWave(220, 10, 44100)
+    buffer = generateSineWave(220, 10, 44100, 2)
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
@@ -53,11 +53,21 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     )
 }
 
-fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int): ByteArray {
-    val totalSamples = seconds * sampleRate // this disregards channels, so multiply by 2 for stereo
+/**
+ * Generates a Sine wave, the general algorithm is taken from [Rosetta Stone](https://rosettacode.org/wiki/Sine_wave#Kotlin)
+ * @param frequency frequency in Hz
+ * @param seconds seconds of Sine Wave
+ * @param sampleRate sample rate in Hz (cycles per second)
+ * @param channels channels of the sine wave
+ * @return A [ByteArray] representing a Sine Wave
+ */
+fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+    val totalSamples = seconds * sampleRate * channels
+    val period = sampleRate.toDouble() / frequency
     return ByteArray(totalSamples) {
-        val angle = (2.0 * PI * it) / (sampleRate.toDouble() / frequency)
-        return@ByteArray (sin(angle) * 128).toByte()
+        val angle = (2.0 * PI * it) / period
+        /* 127 for normalizing to the range of Byte: -127 to 127 */
+        return@ByteArray (sin(angle) * 127F).toByte()
     }
 }
 

@@ -5,10 +5,7 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 
-// TODO: 22-Jan-19 This whole thing lol
 object Functions {
-
-    // TODO: 22-Jan-19 Still unsure about the data type of ByteArray
 
     /*
      * We should probably make sure that these operations are done in-place, meaning
