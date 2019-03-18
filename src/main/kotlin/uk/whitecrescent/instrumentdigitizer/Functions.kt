@@ -1,3 +1,7 @@
+@file:Suppress("UNUSED_PARAMETER", "UNUSED")
+
+// TODO: 18-Mar-19 Remove above supress statement ^
+
 package uk.whitecrescent.instrumentdigitizer
 
 import org.apache.commons.math3.complex.Complex
@@ -5,6 +9,7 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 import org.apache.commons.math3.util.ArithmeticUtils
+import kotlin.math.absoluteValue
 
 object Functions {
 
@@ -26,12 +31,14 @@ object Functions {
         }
     }
 
+    fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplex())
+
     /*
      * Just the basic Fourier Transform to transform from Time Domain to Frequency domain
      * should probably return a list of SineWaves
      */
-    fun fourierTransform(data: ByteArray): ComplexArray {
-        return FastFourierTransformer(DftNormalization.STANDARD).transform(data.toComplex(), TransformType.FORWARD)
+    fun fourierTransform(data: ComplexArray): ComplexArray {
+        return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.FORWARD)
     }
 
     fun inverseFourierTransform(data: ComplexArray): ComplexArray {
@@ -79,8 +86,12 @@ object Functions {
      * the differences should ideally contain nothing useful, so either 0s or very low values that are
      * not useful in finding what the original was
      */
-    fun compare(original: ByteArray, converted: ByteArray): ByteArray {
-        return original
+    fun compare(original: ByteArray, converted: ByteArray): DoubleArray {
+        require(converted.size == original.size) {
+            "Original and Converted must be equal in size!" +
+                    " Original Size: ${original.size}, Converted Size: ${converted.size}"
+        }
+        return DoubleArray(converted.size) { (original[it].toDouble() - converted[it].toDouble()).absoluteValue }
     }
 
     /*
@@ -98,6 +109,9 @@ object Functions {
      */
     fun pad(data: ByteArray): ByteArray {
         val list = ArrayList(data.asList())
+
+        // TODO: 18-Mar-19 Optimize below because with many iterations this becomes slow and CPU heavy
+        // find a way to figure out the next power of two and just add that many 0s at the end or something like that
         while (!ArithmeticUtils.isPowerOfTwo(list.size.toLong())) list.add(0)
         return ByteArray(list.size) { list[it] }
     }

@@ -242,7 +242,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220, 1, 1000, 1)
+        val buffer = generateSineWave(220, 10, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -257,8 +257,8 @@ class RandomTests {
             val realDiff = (originalComplex[it].real - inversed[it].real).absoluteValue
             val imaginaryDiff = (originalComplex[it].imaginary - inversed[it].imaginary).absoluteValue
 
-            assertTrue(realDiff <= 1E-10)
-            assertTrue(imaginaryDiff <= 1E-10)
+            assertTrue(realDiff <= 1E-7)
+            assertTrue(imaginaryDiff <= 1E-7)
         }
 
 
