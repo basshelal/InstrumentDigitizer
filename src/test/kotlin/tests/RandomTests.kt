@@ -16,6 +16,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
+import uk.whitecrescent.instrumentdigitizer.RESOURCES_DIR
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
@@ -260,16 +261,31 @@ class RandomTests {
             assertTrue((originalComplex[it].imaginary - inversed[it].imaginary).absoluteValue <= DESIRED_DIFFERENCE)
         }
 
-        transformed.take(256).toTypedArray().toIntMap().toList().forEach { println(it) }
+        //transformed.take(256).toTypedArray().toIntMap().toList().forEach { println(it) }
+
+        val hashSetK = hashSetOf(*transformed.asList().toTypedArray().toIntMap().map { it.key }.toTypedArray())
+        val hashSetV = hashSetOf(*transformed.asList().toTypedArray().toIntMap().map { it.value }.toTypedArray())
+
+        println(hashSetK.size)
+        println(hashSetV.size)
+        println(transformed.size)
 
         //result.map { it.real * (1000.0 / result.size) }.forEach { println(it) }
-        // TODO: 17-Mar-19 Make sense of the outputs
+        // TODO: 17-Mar-19 Make sense of the outputs!!!
     }
 
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        writeTextToFile(generateSineWave(440, 1, 1000, 1))
+        val buffer = generateSineWave(440, 1, 1000, 1)
+
+        val original = buffer.padded()
+        val originalComplex = original.toComplex()
+        val transformed = Functions.fourierTransform(original)
+        val inversed = Functions.inverseFourierTransform(transformed)
+
+        writeTextToFile(buffer, outPath = RESOURCES_DIR + "SineWave.out")
+        writeTextToFile(transformed, outPath = RESOURCES_DIR + "Transformed.out")
     }
 
 }
