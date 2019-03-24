@@ -9,19 +9,20 @@ typealias ComplexArray = Array<Complex>
 
 typealias ComplexMap = Map<Int, Complex>
 
+
+inline fun ByteArray.fullExecution() = Functions.fullExecution(this)
+
 inline fun ByteArray.padded() = Functions.pad(this)
 
 inline fun ByteArray.truncated() = Functions.truncate(this)
 
-inline fun ByteArray.toComplex() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
-
-inline fun ByteArray.paddedComplex() = Functions.pad(this).toComplex()
+inline fun ByteArray.toComplexArray() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
 
 inline fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].toDouble() }
 
 inline fun ByteArray.fourierTransformed() = Functions.fourierTransform(this)
 
-inline fun ByteArray.unicorn() = Functions.unicorn(this)
+inline fun ByteArray.ttrr() = Functions.ttrr(this)
 
 
 inline fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
@@ -68,6 +69,7 @@ inline fun ComplexArray.mapIndexed() = mapIndexed { index, complex -> index to c
 inline fun ComplexArray.reduced() = rounded()
         .mapIndexed().filterValues { it.real != 0.0 || it.imaginary != 0.0 }
 
+
 /**
  * Sorts this [ComplexMap] by Index, ie the keys in this Map
  */
@@ -105,9 +107,19 @@ inline val ComplexMap.maxImaginary get() = maxBy { it.value.imaginary }
  */
 inline val ComplexMap.minImaginary get() = minBy { it.value.imaginary }
 
+/**
+ * Gets the first [amount] of entries in this [ComplexMap] after being [sortedByRealDescending]
+ */
 inline fun ComplexMap.getPartials(amount: Int = this.size) = sortedByRealDescending().toList().take(amount).toMap()
 
-inline fun ComplexMap.reduceInsignificantPartials() = getPartials()
-        .filterValues { (it.real / maxReal!!.value.real) > 0.1 }
+/**
+ * Removes any partials that have a ratio less than the [threshold] when divided by the max real value, usually these
+ * are partials that represent noise or insignificant sounds
+ */
+inline fun ComplexMap.reducePartials(threshold: Double = 0.1) = getPartials()
+        .filterValues { (it.real / maxReal!!.value.real) > threshold }
 
+/**
+ * Splits this [ComplexMap] in half returning only the first half
+ */
 inline fun ComplexMap.splitInHalf() = toList().take(size / 2).toMap()

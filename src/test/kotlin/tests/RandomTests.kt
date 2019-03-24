@@ -18,6 +18,7 @@ import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
+import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
@@ -26,12 +27,11 @@ import uk.whitecrescent.instrumentdigitizer.maxReal
 import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
-import uk.whitecrescent.instrumentdigitizer.reduceInsignificantPartials
-import uk.whitecrescent.instrumentdigitizer.sortedByRealDescending
+import uk.whitecrescent.instrumentdigitizer.reducePartials
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
-import uk.whitecrescent.instrumentdigitizer.toComplex
+import uk.whitecrescent.instrumentdigitizer.toComplexArray
 import uk.whitecrescent.instrumentdigitizer.toIntMap
-import uk.whitecrescent.instrumentdigitizer.unicorn
+import uk.whitecrescent.instrumentdigitizer.ttrr
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
@@ -271,7 +271,7 @@ class RandomTests {
         val buffer = generateSineWave(220.0, 1.0, 0.0, 10, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
-        val originalComplex = original.toComplex()
+        val originalComplex = original.toComplexArray()
         val transformed = Functions.fourierTransform(original)
         val inversed = Functions.inverseFourierTransform(transformed)
 
@@ -301,7 +301,7 @@ class RandomTests {
         val buffer = generateSineWave(440.0, 1.0, 0.0, 1, 1024, 1)
 
         val original = buffer.padded()
-        val originalComplex = original.toComplex()
+        val originalComplex = original.toComplexArray()
         val transformed = Functions.fourierTransform(original)
         val inversed = Functions.inverseFourierTransform(transformed)
 
@@ -318,18 +318,18 @@ class RandomTests {
     fun testFullExecution() {
         val sineWave = generateSineWave(440.0, 1.0, 0.5, 1, 1024, 1)
 
-        val unicorn = sineWave.unicorn()
+        val ttrr = sineWave.ttrr()
 
-        unicorn.forEach {
+        ttrr.forEach {
             println(it)
         }
 
         println()
 
-        val maxReal = unicorn.maxReal
-        val minReal = unicorn.minReal
-        val maxImaginary = unicorn.maxImaginary
-        val minImaginary = unicorn.minImaginary
+        val maxReal = ttrr.maxReal
+        val minReal = ttrr.minReal
+        val maxImaginary = ttrr.maxImaginary
+        val minImaginary = ttrr.minImaginary
 
         println("Max Real is ${maxReal?.value} at index ${maxReal?.key}")
         println("Min Real is ${minReal?.value} at index ${minReal?.key}")
@@ -338,11 +338,9 @@ class RandomTests {
 
         println()
 
-        val list = unicorn.sortedByRealDescending().toList()
-
-        unicorn.forEach { index, complex ->
-            val left = unicorn[index]
-            val right = unicorn[1024 - index]
+        ttrr.forEach { index, complex ->
+            val left = ttrr[index]
+            val right = ttrr[1024 - index]
 
             assertEquals(left, right)
 
@@ -351,14 +349,14 @@ class RandomTests {
 
         println()
 
-        unicorn.splitInHalf().reduceInsignificantPartials().forEach {
+        ttrr.splitInHalf().reducePartials().forEach {
             println(it)
         }
 
         println()
 
         generateTwoSineWaves(440, 220, 0.5, 0.5, 1, 1024, 1)
-                .unicorn().splitInHalf().reduceInsignificantPartials()
+                .fullExecution()
                 .forEach {
                     println(it)
                 }

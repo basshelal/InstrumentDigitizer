@@ -1,6 +1,5 @@
 package uk.whitecrescent.instrumentdigitizer
 
-import org.apache.commons.math3.complex.Complex
 import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
@@ -20,7 +19,7 @@ object Functions {
         }
     }
 
-    fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplex())
+    fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplexArray())
 
     /*
      * Just the basic Fourier Transform to transform from Time Domain to Frequency domain
@@ -32,11 +31,6 @@ object Functions {
 
     fun inverseFourierTransform(data: ComplexArray): ComplexArray {
         return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.INVERSE)
-    }
-
-    fun realFourierTransform(data: ByteArray): ByteArray {
-
-        return data
     }
 
     /*
@@ -114,8 +108,20 @@ object Functions {
         return list.toByteArray()
     }
 
-    fun unicorn(data: ByteArray): Map<Int, Complex> {
+    // ttrr for Truncated, Transformed, Rounded, Reduced
+    fun ttrr(data: ByteArray): ComplexMap {
         return data.truncated().fourierTransformed().rounded().reduced()
+    }
+
+    // The full execution that will return the minimum required data to grab the frequency of a sine Wave
+    fun fullExecution(data: ByteArray): ComplexMap {
+        return data
+                .truncated()            // Truncate to allow FFT
+                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .splitInHalf()          // Get first half since data is identical in both
+                .reducePartials()       // Remove unnecessary partials
     }
 
     private fun nextPowerOfTwo(number: Int): Int {
