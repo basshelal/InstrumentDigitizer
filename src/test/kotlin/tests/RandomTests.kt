@@ -16,7 +16,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
-import uk.whitecrescent.instrumentdigitizer.RESOURCES_DIR
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
@@ -25,7 +24,6 @@ import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
-import uk.whitecrescent.instrumentdigitizer.writeTextToFile
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
 import kotlin.math.absoluteValue
@@ -277,15 +275,19 @@ class RandomTests {
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        val buffer = generateSineWave(440, 1, 1000, 1)
+        val buffer = generateSineWave(440, 1, 1024, 1)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
         val transformed = Functions.fourierTransform(original)
         val inversed = Functions.inverseFourierTransform(transformed)
 
-        writeTextToFile(buffer, outPath = RESOURCES_DIR + "SineWave.out")
-        writeTextToFile(transformed, outPath = RESOURCES_DIR + "Transformed.out")
+        /*writeTextToFile(buffer, outPath = RESOURCES_DIR + "SineWave.out")
+        writeTextToFile(transformed, outPath = RESOURCES_DIR + "Transformed.out")*/
+
+        println(transformed.map { it.real }.max())
+        println(transformed.map { it.imaginary }.max())
+
     }
 
 }

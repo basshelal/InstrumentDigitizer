@@ -91,10 +91,30 @@ object Functions {
         val list = ArrayList(data.asList())
         val nextPowerOfTwo = nextPowerOfTwo(list.size)
 
-        if (nextPowerOfTwo != list.size) {
+        if (list.size != nextPowerOfTwo) {
             list.ensureCapacity(nextPowerOfTwo)
             list.addAll(ByteArray(nextPowerOfTwo - list.size) { padWith }.asList())
         }
+
+        require(list.size == nextPowerOfTwo)
+
+        return list.toByteArray()
+    }
+
+    /*
+     * Truncates the passed in ByteArray so that it can be used in Fast Fourier Transform functions
+     * that require the transform be on collections of a size that is a power of 2
+     */
+    fun truncate(data: ByteArray): ByteArray {
+        val list = ArrayList(data.asList())
+        val previousPowerOfTwo = previousPowerOfTwo(list.size)
+
+        if (list.size != previousPowerOfTwo) {
+            val toRemove = list.subList(previousPowerOfTwo, list.size)
+            list.removeAll(toRemove)
+        }
+
+        require(list.size == previousPowerOfTwo)
 
         return list.toByteArray()
     }
@@ -109,12 +129,20 @@ fun nextPowerOfTwo(number: Int): Int {
     return result
 }
 
+fun previousPowerOfTwo(number: Int): Int {
+    var result = number
+    while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result--
+    return result
+}
+
 typealias ComplexArray = Array<Complex>
 
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
 inline class AudioData(val data: ByteArray)
 
 fun ByteArray.padded() = Functions.pad(this)
+
+fun ByteArray.truncated() = Functions.truncate(this)
 
 fun ByteArray.toComplex() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
 
