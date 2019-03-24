@@ -436,13 +436,15 @@ class RandomTests {
     @DisplayName("Test Basic Sine Wave Full Execution")
     @Test
     fun testBasicSineWaveFullExecution() {
-        val freq = 4280
+        val freq = 470
 
         val sineWave = sineWave(freq, 0.5, 0.5)
 
         val data = generateSineWave(sineWave, 1, SAMPLE_RATE, 1)
 
         val ratio = SAMPLE_RATE.toDouble() / freq.toDouble()
+
+        val inverseRatio = freq.toDouble() / SAMPLE_RATE.toDouble()
 
         val size = Functions.previousPowerOfTwo(data.size)
 
@@ -457,9 +459,13 @@ class RandomTests {
 
                     println()
                     println("Ratios")
-                    println(size / it.key)
+                    println(size.toDouble() / it.key.toDouble())
                     println(ratio)
                     println()
+
+                    println("Frequency is: is ${inverseRatio * SAMPLE_RATE.toDouble()} ")
+
+                    println((it.key.toDouble() / size.toDouble()) * SAMPLE_RATE.toDouble())
 
                 }
 
