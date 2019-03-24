@@ -120,7 +120,8 @@ object Functions {
     }
 
     fun unicorn(data: ByteArray): Map<Int, Complex> {
-        return data.truncated().fourierTransformed().rounded().mapIndexed { index, complex -> index to complex }.toMap()
+        return data.truncated().fourierTransformed().rounded().reduced()
+        // .mapIndexed { index, complex -> index to complex }.toMap()
     }
 
 }
@@ -177,10 +178,10 @@ fun ComplexArray.rounded() =
 
 fun ComplexArray.reduced() = rounded()
         .mapIndexed { index, complex -> index to complex }.toMap()
-        .filterValues { it.real > 0.0 && it.imaginary > 0.0 }
+        .filterValues { it.real != 0.0 || it.imaginary != 0.0 }
 
 fun Map<Int, Complex>.sortedByIndex() = this.toList().sortedBy { it.first }.toMap()
 
-fun Map<Int, Complex>.sortedByReal() = this.toList().sortedBy { it.second.real }.toMap()
+fun Map<Int, Complex>.sortedByMaxReal() = this.toList().sortedByDescending { it.second.real }.toMap()
 
-fun Map<Int, Complex>.sortedByImaginary() = this.toList().sortedBy { it.second.imaginary }.toMap()
+fun Map<Int, Complex>.sortedByMaxImaginary() = this.toList().sortedByDescending { it.second.imaginary }.asReversed().toMap()

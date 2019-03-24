@@ -21,6 +21,7 @@ import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.padded
+import uk.whitecrescent.instrumentdigitizer.sortedByMaxReal
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.unicorn
@@ -295,13 +296,15 @@ class RandomTests {
     @DisplayName("Test Full Execution")
     @Test
     fun testFullExecution() {
-        val sineWave = generateSineWave(440, 1, -PI / 2, 1024, 1)
+        val sineWave = generateSineWave(220, 1, PI / 2, 1024, 1)
 
         val unicorn = sineWave.unicorn()
 
         unicorn.forEach {
             println(it)
         }
+
+        println()
 
         val maxReal = unicorn.maxBy { it.value.real }
         val minReal = unicorn.minBy { it.value.real }
@@ -312,6 +315,14 @@ class RandomTests {
         println("Min Real is ${minReal?.value} at index ${minReal?.key}")
         println("Max Imag is ${maxImaginary?.value} at index ${maxImaginary?.key}")
         println("Min Imag is ${minImaginary?.value} at index ${minImaginary?.key}")
+
+        // TODO: 24-Mar-19 Get the top few Max reals to find the most prevalent harmonics
+
+        println()
+
+        unicorn.sortedByMaxReal().toList().take(8).toMap().forEach {
+            println(it)
+        }
 
     }
 
