@@ -19,6 +19,7 @@ import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
+import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
 import uk.whitecrescent.instrumentdigitizer.maxReal
@@ -218,7 +219,7 @@ class RandomTests {
     @DisplayName("Test Generate Sine Wave")
     @Test
     fun testGenerateSineWave() {
-        val wave = generateSineWave(220, 1, 0.0, 1000, 1)
+        val wave = generateSineWave(220, 0.0, 1, 1000, 1)
         wave.forEach { println(it) }
 
         assertEquals(1000, wave.size)
@@ -227,7 +228,22 @@ class RandomTests {
     @DisplayName("Test Play Sine Wave")
     @Test
     fun testPlaySineWave() {
-        val buffer = generateSineWave(440, 2, 0.5, SAMPLE_RATE, 1)
+        val buffer = generateSineWave(440, 0.5, 2, SAMPLE_RATE, 1)
+        val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
+        val line = AudioSystem.getSourceDataLine(format)
+        line.apply {
+            open(format)
+            start()
+            write(buffer, 0, buffer.size)
+            drain()
+            close()
+        }
+    }
+
+    @DisplayName("Test Play 2 Sine Waves")
+    @Test
+    fun testPlay2SineWaves() {
+        val buffer = generateTwoSineWaves(440, 220, 0.0, 0.5, 2, SAMPLE_RATE, 1)
         val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
         val line = AudioSystem.getSourceDataLine(format)
         line.apply {
@@ -252,7 +268,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220, 10, 0.0, SAMPLE_RATE, 2)
+        val buffer = generateSineWave(220, 0.0, 10, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -282,7 +298,7 @@ class RandomTests {
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        val buffer = generateSineWave(440, 1, 0.0, 1024, 1)
+        val buffer = generateSineWave(440, 0.0, 1, 1024, 1)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -300,7 +316,7 @@ class RandomTests {
     @DisplayName("Test Full Execution")
     @Test
     fun testFullExecution() {
-        val sineWave = generateSineWave(440, 1, 0.5, 1024, 1)
+        val sineWave = generateSineWave(440, 0.5, 1, 1024, 1)
 
         val unicorn = sineWave.unicorn()
 
@@ -330,12 +346,25 @@ class RandomTests {
 
             assertEquals(left, right)
 
-            //println("Left @$index: $left == Right @${1024 - index}: $right")
+            println("Left @$index: $left == Right @${1024 - index}: $right")
         }
+
+        println()
 
         unicorn.splitInHalf().reduceInsignificantPartials().forEach {
             println(it)
         }
+
+        println()
+        println()
+        println()
+        println()
+
+        generateTwoSineWaves(440, 220, 0.5, 0.5, 1, 1024, 1)
+                .unicorn().splitInHalf().reduceInsignificantPartials()
+                .forEach {
+                    println(it)
+                }
 
         // TODO: 24-Mar-19 Why are there 2 maxReals? 440 and 584 (584 == 1024 - 440)
         // in fact why does each real number have 2 instances of itself?

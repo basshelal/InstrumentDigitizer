@@ -1,6 +1,6 @@
 # TODO
 
-* Generate short perfect sine wave to perform FFT testing on
+* Generate Complex sounds by adding sine waves to test on
 * Perform FFT on Audio File
 * Find from transform on file: Frequency, Amplitude, Phase of each overtone
 * Modulation(which can be seen as having a frequency like LFO)
@@ -22,6 +22,7 @@
 
 # Done
 
+* ~~Generate short perfect sine wave to perform FFT testing on~~
 * ~~Start synthesizing sounds~~
 * ~~Fix latency issues~~
 * ~~Commit to GitHub~~

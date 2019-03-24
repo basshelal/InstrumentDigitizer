@@ -41,7 +41,7 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val stream = AudioSystem.getAudioInputStream(file)
     stream.read(buffer)
 
-    buffer = generateSineWave(220, 10, 0.0, 44100, 2)
+    buffer = generateSineWave(220, 0.0, 10, 44100, 2)
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
@@ -64,10 +64,10 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
  * @param channels channels of the sine wave
  * @return A [ByteArray] representing a Sine Wave
  */
-fun generateSineWave(frequency: Int, seconds: Int, phase: Double = 0.0,
+fun generateSineWave(frequency: Int, phase: Double = 0.0, seconds: Int,
                      sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
 
-    val maxAmplitude = 127F
+    val maxAmplitude = 127.0
     val totalSamples = seconds * sampleRate * channels
     val period = sampleRate.toDouble() / frequency
     val phaseShift = phase * PI
@@ -76,6 +76,35 @@ fun generateSineWave(frequency: Int, seconds: Int, phase: Double = 0.0,
         val angle = (2.0 * PI * it) / period
         /*Amp * sin(2 * PI * f * t + phase)*/
         return@ByteArray (maxAmplitude * sin(angle + phaseShift)).toByte()
+    }
+}
+
+fun generateSineWave(sineWave: SineWave, seconds: Int,
+                     sampleRate: Int = SAMPLE_RATE, channels: Int = 2) =
+        generateSineWave(sineWave.frequency.toInt(), sineWave.phase, seconds, sampleRate, channels)
+// TODO: 24-Mar-19 Missing Amplitude almost everywhere
+
+fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
+                         phase1: Double = 0.0, phase2: Double = 0.0,
+                         seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+
+    // TODO: 24-Mar-19 This isn't very right but it's ok, missing amplitude, how much Amp in each wave
+
+    val maxAmplitude = 127.0 / 2
+    val totalSamples = seconds * sampleRate * channels
+
+    val period1 = sampleRate.toDouble() / frequency1
+    val period2 = sampleRate.toDouble() / frequency2
+
+    val phaseShift1 = phase1 * PI
+    val phaseShift2 = phase2 * PI
+
+    return ByteArray(totalSamples) {
+        val angle1 = (2.0 * PI * it) / period1
+        val angle2 = (2.0 * PI * it) / period2
+        /*Amp * sin(2 * PI * f * t + phase)*/
+        val addedWaves = sin(angle1 + phaseShift1) + sin(angle2 + phaseShift2)
+        return@ByteArray (maxAmplitude * addedWaves).toByte()
     }
 }
 
@@ -120,6 +149,8 @@ fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String
         }
     }
 }
+
+fun newFile(name: String) = File(RESOURCES_DIR + name)
 
 fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength

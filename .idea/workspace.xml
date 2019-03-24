@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2675ad26-fc8a-4f92-8e4d-84c1eefa3ba2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/TestingUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/TestingUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -26,8 +30,8 @@
         <entry file="file://$PROJECT_DIR$/TODO.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="38">
-                <caret line="2" column="60" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+              <first_editor relative-caret-position="19">
+                <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
               </first_editor>
               <second_editor />
             </state>
@@ -35,33 +39,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/ReaderWriter.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
-              <folding>
-                <element signature="n#!!block;n#read#0;n#!!block;n#ReaderWriter#0" />
-                <element signature="n#!!block;n#write#0;n#!!block;n#ReaderWriter#0" />
-                <element signature="n#!!block;n#writeText#0;n#!!block;n#ReaderWriter#0" />
-              </folding>
+            <state relative-caret-position="285">
+              <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="201" column="74" selection-start-line="201" selection-start-column="74" selection-end-line="201" selection-end-column="74" />
+            <state relative-caret-position="38">
+              <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
               <folding>
                 <element signature="n#!!doc;n#execute#0;n#!!block;n#Functions#0" />
                 <element signature="n#!!block;n#execute#0;n#!!block;n#Functions#0" />
@@ -84,9 +74,18 @@
                 <element signature="n#!!doc;n#truncate#0;n#!!block;n#Functions#0" />
                 <element signature="n#!!block;n#truncate#0;n#!!block;n#Functions#0" />
                 <element signature="n#!!block;n#unicorn#0;n#!!block;n#Functions#0" />
-                <element signature="n#!!block;n#nextPowerOfTwo#0" />
-                <element signature="n#!!block;n#previousPowerOfTwo#0" />
+                <element signature="n#!!block;n#nextPowerOfTwo#0;n#!!block;n#Functions#0" />
+                <element signature="n#!!block;n#previousPowerOfTwo#0;n#!!block;n#Functions#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="566">
+              <caret line="42" column="66" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -94,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="336" column="9" selection-start-line="336" selection-start-column="9" selection-end-line="336" selection-end-column="9" />
+            <state relative-caret-position="497">
+              <caret line="335" column="83" lean-forward="true" selection-start-line="335" selection-start-column="83" selection-end-line="335" selection-end-column="83" />
               <folding>
                 <element signature="n#!!block;n#testJSynSynth#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testJSynSynth2#0;n#!!block;n#RandomTests#0" />
@@ -103,6 +102,7 @@
                 <element signature="n#!!block;n#testWriteData#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testGenerateSineWave#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testPlaySineWave#0;n#!!block;n#RandomTests#0" />
+                <element signature="n#!!block;n#testPlaySineWave#1;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testOldFourier#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testFourierForwardAndInverse#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testWriteSineToCSV#0;n#!!block;n#RandomTests#0" />
@@ -114,13 +114,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/TestingUtils.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="67" column="82" selection-start-line="67" selection-start-column="82" selection-end-line="67" selection-end-column="82" />
+            <state relative-caret-position="646">
+              <caret line="154" column="39" selection-start-line="154" selection-start-column="39" selection-end-line="154" selection-end-column="39" />
               <folding>
                 <element signature="n#!!block;n#writeRandomAudio#0" />
                 <element signature="n#!!block;n#writeSineWaveAudio#0" />
                 <element signature="n#!!doc;n#generateSineWave#0" />
                 <element signature="n#!!block;n#generateSineWave#0" />
+                <element signature="n#!!block;n#generateSineWave#1" />
                 <element signature="n#!!doc;n#compare#0" />
                 <element signature="n#!!block;n#compare#1" />
                 <element signature="n#!!block;n#compare#2" />
@@ -174,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/Synth.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/Liveable.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Main.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/App.kt" />
         <option value="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/ScopeTriggerPanel.java" />
@@ -185,13 +185,14 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Algorithm.kt" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Reader.kt" />
-        <option value="$PROJECT_DIR$/TODO.md" />
         <option value="$PROJECT_DIR$/src/main/resources/out.csv" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/ReaderWriter.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/TestingUtils.kt" />
         <option value="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" />
+        <option value="$PROJECT_DIR$/TODO.md" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt" />
       </list>
     </option>
   </component>
@@ -321,7 +322,7 @@
     <property name="SearchEverywhereHistoryKey" value="JAsi&#9;FILE&#9;file://D:/Data/IdeaProjects/InstrumentDigitizer/JAsioHost.jar&#10;Sequencer&#9;PSI&#9;JAVA://javax.sound.midi.Sequencer&#10;Line&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/sound/sampled/Line.java&#10;SampleProvider&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/resources.jar!/META-INF/services/javax.sound.sampled.spi.MixerProvider&#10;Instrument&#9;PSI&#9;JAVA://com.jsyn.util.Instrument&#10;Synthesizer&#9;PSI&#9;JAVA://com.jsyn.Synthesizer&#10;Example&#9;PSI&#9;JAVA://com.synthbot.jasiohost.ExampleHost&#10;Asio&#9;PSI&#9;JAVA://com.synthbot.jasiohost.AsioDriver&#10;Midi&#9;PSI&#9;JAVA://javax.sound.midi.MidiDevice&#10;MidiSy&#9;PSI&#9;JAVA://com.jsyn.midi.MidiSynthesizer&#10;MidiSyn&#9;null&#9;null&#10;MidiSynthesizer&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553402277960" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553405121010" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/jportaudio.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -357,22 +358,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.RandomTests.testFullExecution">
-    <configuration name="RandomTests.testFourierForwardAndInverse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="InstrumentDigitizer_test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
-      <option name="METHOD_NAME" value="testFourierForwardAndInverse" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RandomTests.testFullExecution" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InstrumentDigitizer_test" />
       <extension name="coverage">
@@ -400,6 +385,22 @@
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
       <option name="METHOD_NAME" value="testGenerateSineWave" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RandomTests.testPlay2SineWaves" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InstrumentDigitizer_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
+      <option name="METHOD_NAME" value="testPlay2SineWaves" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -439,18 +440,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.RandomTests.testPlaySineWave" />
-      <item itemvalue="JUnit.RandomTests.testFourierForwardAndInverse" />
       <item itemvalue="JUnit.RandomTests.testWriteSineToCSV" />
       <item itemvalue="JUnit.RandomTests.testFullExecution" />
       <item itemvalue="JUnit.RandomTests.testGenerateSineWave" />
+      <item itemvalue="JUnit.RandomTests.testPlay2SineWaves" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RandomTests.testFullExecution" />
+        <item itemvalue="JUnit.RandomTests.testPlay2SineWaves" />
         <item itemvalue="JUnit.RandomTests.testPlaySineWave" />
         <item itemvalue="JUnit.RandomTests.testGenerateSineWave" />
         <item itemvalue="JUnit.RandomTests.testWriteSineToCSV" />
-        <item itemvalue="JUnit.RandomTests.testFourierForwardAndInverse" />
       </list>
     </recent_temporary>
   </component>
@@ -488,7 +489,7 @@
       <workItem from="1552897180656" duration="17418000" />
       <workItem from="1553110678913" duration="7539000" />
       <workItem from="1553178932532" duration="2340000" />
-      <workItem from="1553387242765" duration="10749000" />
+      <workItem from="1553387242765" duration="13600000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Piano keyboard working but with high latency">
       <created>1547951912169</created>
@@ -714,43 +715,50 @@
       <option name="project" value="LOCAL" />
       <updated>1553400847112</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Saving Progress">
+      <created>1553402307837</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1553402307837</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 09m 22s.xml">
+    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 05h 07m 26s.xml">
       <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 09m 42s.xml">
+    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 05h 07m 49s.xml">
       <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 09m 52s.xml">
+    <history-entry file="RandomTests_testPlay2SineWaves - 2019.03.24 at 05h 08m 25s.xml">
+      <configuration name="RandomTests.testPlay2SineWaves" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RandomTests_testPlay2SineWaves - 2019.03.24 at 05h 08m 36s.xml">
+      <configuration name="RandomTests.testPlay2SineWaves" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RandomTests_testPlay2SineWaves - 2019.03.24 at 05h 09m 35s.xml">
+      <configuration name="RandomTests.testPlay2SineWaves" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 05h 10m 36s.xml">
       <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 10m 19s.xml">
-      <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testPlaySineWave - 2019.03.24 at 05h 17m 04s.xml">
+      <configuration name="RandomTests.testPlaySineWave" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 11m 20s.xml">
-      <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testPlay2SineWaves - 2019.03.24 at 05h 17m 20s.xml">
+      <configuration name="RandomTests.testPlay2SineWaves" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 11m 43s.xml">
-      <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testPlay2SineWaves - 2019.03.24 at 05h 17m 27s.xml">
+      <configuration name="RandomTests.testPlay2SineWaves" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 12m 07s.xml">
-      <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 12m 32s.xml">
-      <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 13m 41s.xml">
-      <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 04h 35m 07s.xml">
+    <history-entry file="RandomTests_testFullExecution - 2019.03.24 at 05h 17m 37s.xml">
       <configuration name="RandomTests.testFullExecution" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176325000" />
+    <option name="totallyTimeSpent" value="179176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="405" y="0" width="2162" height="1047" extended-state="0" />
@@ -761,12 +769,12 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.17680608" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.17680608" />
       <window_info anchor="bottom" id="Build" order="0" weight="0.32969433" />
       <window_info anchor="bottom" id="Messages" order="1" weight="0.29225737" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.32824427" />
-      <window_info active="true" anchor="bottom" x="1" y="31" width="703" height="1008" id="Run" order="4" type="WINDOWED" visible="true" weight="0.32969433" />
+      <window_info anchor="bottom" x="1" y="31" width="703" height="1008" id="Run" order="4" type="WINDOWED" visible="true" weight="0.32969433" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -825,29 +833,6 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Synth.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="104" column="9" lean-forward="true" selection-start-line="104" selection-start-column="9" selection-end-line="104" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!block;n#Synth#0" />
-            <element signature="n#!!block;n#create#0;n#!!block;n#Synth#0" />
-            <element signature="n#!!block;n#destroy#0;n#!!block;n#Synth#0" />
-            <element signature="n#!!block;n#startSynthesizer#0;n#!!block;n#Synth#0" />
-            <element signature="n#!!block;n#stopSynthesizer#0;n#!!block;n#Synth#0" />
-            <element signature="n#!!block;n#startMidi#0;n#!!block;n#Synth#0" />
-            <element signature="n#!!block;n#stopMidi#0;n#!!block;n#Synth#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jportaudio.jar!/com/portaudio/PortAudio.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1083">
-          <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-math3/3.6.1/8fab23986ea8886af34818daf32a718e81dc98ba/commons-math3-3.6.1-sources.jar!/org/apache/commons/math3/transform/TransformType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1174,18 +1159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/ReaderWriter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!block;n#read#0;n#!!block;n#ReaderWriter#0" />
-            <element signature="n#!!block;n#write#0;n#!!block;n#ReaderWriter#0" />
-            <element signature="n#!!block;n#writeText#0;n#!!block;n#ReaderWriter#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/SineWave.out">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -1200,23 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TODO.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="38">
-            <caret line="2" column="60" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/Map.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1227,15 +1183,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="84" lean-forward="true" selection-start-line="16" selection-start-column="84" selection-end-line="16" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TODO.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="19">
+            <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/ReaderWriter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <folding>
+            <element signature="n#!!block;n#read#0;n#!!block;n#ReaderWriter#0" />
+            <element signature="n#!!block;n#write#0;n#!!block;n#ReaderWriter#0" />
+            <element signature="n#!!block;n#writeText#0;n#!!block;n#ReaderWriter#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/TestingUtils.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="67" column="82" selection-start-line="67" selection-start-column="82" selection-end-line="67" selection-end-column="82" />
+        <state relative-caret-position="646">
+          <caret line="154" column="39" selection-start-line="154" selection-start-column="39" selection-end-line="154" selection-end-column="39" />
           <folding>
             <element signature="n#!!block;n#writeRandomAudio#0" />
             <element signature="n#!!block;n#writeSineWaveAudio#0" />
             <element signature="n#!!doc;n#generateSineWave#0" />
             <element signature="n#!!block;n#generateSineWave#0" />
+            <element signature="n#!!block;n#generateSineWave#1" />
             <element signature="n#!!doc;n#compare#0" />
             <element signature="n#!!block;n#compare#1" />
             <element signature="n#!!block;n#compare#2" />
@@ -1248,8 +1241,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="336" column="9" selection-start-line="336" selection-start-column="9" selection-end-line="336" selection-end-column="9" />
+        <state relative-caret-position="497">
+          <caret line="335" column="83" lean-forward="true" selection-start-line="335" selection-start-column="83" selection-end-line="335" selection-end-column="83" />
           <folding>
             <element signature="n#!!block;n#testJSynSynth#0;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testJSynSynth2#0;n#!!block;n#RandomTests#0" />
@@ -1257,6 +1250,7 @@
             <element signature="n#!!block;n#testWriteData#0;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testGenerateSineWave#0;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testPlaySineWave#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testPlaySineWave#1;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testOldFourier#0;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testFourierForwardAndInverse#0;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testWriteSineToCSV#0;n#!!block;n#RandomTests#0" />
@@ -1266,8 +1260,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="201" column="74" selection-start-line="201" selection-start-column="74" selection-end-line="201" selection-end-column="74" />
+        <state relative-caret-position="38">
+          <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
           <folding>
             <element signature="n#!!doc;n#execute#0;n#!!block;n#Functions#0" />
             <element signature="n#!!block;n#execute#0;n#!!block;n#Functions#0" />
@@ -1290,9 +1284,16 @@
             <element signature="n#!!doc;n#truncate#0;n#!!block;n#Functions#0" />
             <element signature="n#!!block;n#truncate#0;n#!!block;n#Functions#0" />
             <element signature="n#!!block;n#unicorn#0;n#!!block;n#Functions#0" />
-            <element signature="n#!!block;n#nextPowerOfTwo#0" />
-            <element signature="n#!!block;n#previousPowerOfTwo#0" />
+            <element signature="n#!!block;n#nextPowerOfTwo#0;n#!!block;n#Functions#0" />
+            <element signature="n#!!block;n#previousPowerOfTwo#0;n#!!block;n#Functions#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="42" column="66" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
         </state>
       </provider>
     </entry>

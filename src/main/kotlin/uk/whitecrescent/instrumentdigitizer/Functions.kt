@@ -1,7 +1,3 @@
-@file:Suppress("UNUSED_PARAMETER", "UNUSED")
-
-// TODO: 18-Mar-19 Remove above supress statement ^
-
 package uk.whitecrescent.instrumentdigitizer
 
 import org.apache.commons.math3.complex.Complex
@@ -9,7 +5,6 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 import org.apache.commons.math3.util.ArithmeticUtils
-import kotlin.math.roundToInt
 
 object Functions {
 
@@ -124,79 +119,16 @@ object Functions {
         // .mapIndexed { index, complex -> index to complex }.toMap()
     }
 
+    private fun nextPowerOfTwo(number: Int): Int {
+        var result = number
+        while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result++
+        return result
+    }
+
+    private fun previousPowerOfTwo(number: Int): Int {
+        var result = number
+        while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result--
+        return result
+    }
+
 }
-
-// Extensions and Utils
-
-fun nextPowerOfTwo(number: Int): Int {
-    var result = number
-    while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result++
-    return result
-}
-
-fun previousPowerOfTwo(number: Int): Int {
-    var result = number
-    while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result--
-    return result
-}
-
-typealias ComplexArray = Array<Complex>
-
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
-inline class AudioData(val data: ByteArray)
-
-fun ByteArray.padded() = Functions.pad(this)
-
-fun ByteArray.truncated() = Functions.truncate(this)
-
-fun ByteArray.toComplex() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
-
-fun ByteArray.paddedComplex() = Functions.pad(this).toComplex()
-
-fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].toDouble() }
-
-fun ByteArray.fourierTransformed() = Functions.fourierTransform(this)
-
-fun ByteArray.unicorn() = Functions.unicorn(this)
-
-
-fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
-
-fun DoubleArray.toIntArray() = IntArray(this.size) { this[it].roundToInt() }
-
-
-fun ComplexArray.real() = DoubleArray(this.size) { this[it].real }
-
-fun ComplexArray.imaginary() = DoubleArray(this.size) { this[it].imaginary }
-
-fun ComplexArray.toMap() = this.map { it.real to it.imaginary }.toMap()
-
-fun ComplexArray.toIntMap() = this.map { it.real.roundToInt() to it.imaginary.roundToInt() }.toMap()
-
-fun ComplexArray.rounded() =
-        this.map { Complex(it.real.roundToInt().toDouble(), it.imaginary.roundToInt().toDouble()) }.toTypedArray()
-
-fun ComplexArray.reduced() = rounded()
-        .mapIndexed { index, complex -> index to complex }.toMap()
-        .filterValues { it.real != 0.0 || it.imaginary != 0.0 }
-
-fun Map<Int, Complex>.sortedByIndex() = this.toList().sortedBy { it.first }.toMap()
-
-fun Map<Int, Complex>.sortedByMaxReal() = this.toList().sortedByDescending { it.second.real }.toMap()
-
-fun Map<Int, Complex>.sortedByMaxImaginary() = this.toList().sortedByDescending { it.second.imaginary }.asReversed().toMap()
-
-fun Map<Int, Complex>.maxReal() = maxBy { it.value.real }
-
-fun Map<Int, Complex>.minReal() = minBy { it.value.real }
-
-fun Map<Int, Complex>.maxImaginary() = maxBy { it.value.imaginary }
-
-fun Map<Int, Complex>.minImaginary() = minBy { it.value.imaginary }
-
-fun Map<Int, Complex>.getPartials(amount: Int = this.size) = this.sortedByMaxReal().toList().take(amount).toMap()
-
-fun Map<Int, Complex>.reduceInsignificantPartials() = getPartials()
-        .filterValues { (it.real / maxReal()!!.value.real) > 0.1 }
-
-fun Map<Int, Complex>.splitInHalf() = this.toList().take(size / 2).toMap()

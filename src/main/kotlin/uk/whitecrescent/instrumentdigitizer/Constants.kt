@@ -13,5 +13,7 @@ const val TRANSFORMED_OUTPUT_PATH_OUT = RESOURCES_DIR + "transformed.out"
 
 const val SAMPLE_RATE = 44100
 
+const val MAX_AMPLITUDE = 127.0
+
 const val MINIMUM_DIFFERENCE = 1E-3
 const val DESIRED_DIFFERENCE = 1E-7
