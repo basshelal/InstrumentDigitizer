@@ -35,6 +35,7 @@ import uk.whitecrescent.instrumentdigitizer.toComplexArray
 import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.ttrr
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
+import uk.whitecrescent.instrumentdigitizer.writeToWaveFile
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
 import kotlin.math.absoluteValue
@@ -313,6 +314,15 @@ class RandomTests {
         println(transformed.map { it.real }.max())
         println(transformed.map { it.imaginary }.max())
 
+    }
+
+    @DisplayName("Test Write To Wave File")
+    @Test
+    fun testWriteToWaveFile() {
+        val sineWave = sineWave(440, 1.0, 0.5)
+        val buffer = generateSineWave(sineWave, 10, SAMPLE_RATE, 1)
+        writeToWaveFile(buffer, "MyFile")
+        buffer.play()
     }
 
     @DisplayName("Test Full Execution")

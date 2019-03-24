@@ -45,7 +45,7 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
-    newStream.printStreamInfo()
+    stream.printStreamInfo()
 
     AudioSystem.write(
             newStream,
@@ -132,6 +132,21 @@ fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, 
     return compare(original.real(), converted.real()) to compare(original.imaginary(), converted.imaginary())
 }
 
+fun writeToWaveFile(data: ByteArray, fileName: String) {
+    val file = newFile("$fileName.wav")
+    file.createNewFile()
+
+    val newStream = waveAudioInputStream(data)
+
+    newStream.printStreamInfo()
+
+    AudioSystem.write(
+            newStream,
+            AudioFileFormat.Type.WAVE,
+            file
+    )
+}
+
 fun writeTextToFile(data: ByteArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
     File(outPath).apply {
         writeText("")
@@ -152,6 +167,9 @@ fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String
 
 fun newFile(name: String) = File(RESOURCES_DIR + name)
 
+fun waveAudioInputStream(buffer: ByteArray) =
+        AudioInputStream(ByteArrayInputStream(buffer), WAVE_DEFAULT_FORMAT, buffer.size.toLong())
+
 fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength
     val frameSize = this.format.frameSize
@@ -164,6 +182,7 @@ fun AudioInputStream.printStreamInfo() {
             FrameRate: $frameRate
             SampleRate: $sampleRate
             SampleSize: $sampleSize
+            Format: $format
         """.trimIndent())
 
     val duration = frames / frameRate

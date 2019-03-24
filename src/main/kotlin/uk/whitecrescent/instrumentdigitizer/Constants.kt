@@ -1,5 +1,7 @@
 package uk.whitecrescent.instrumentdigitizer
 
+import javax.sound.sampled.AudioFormat
+
 const val RESOURCES_DIR = "src/main/resources/"
 
 const val A3_VIOLIN_FILE_PATH = RESOURCES_DIR + "violin_a3.wav"
@@ -17,3 +19,5 @@ const val MAX_AMPLITUDE = 127.0
 
 const val MINIMUM_DIFFERENCE = 1E-3
 const val DESIRED_DIFFERENCE = 1E-7
+
+val WAVE_DEFAULT_FORMAT = AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100F, 16, 1, 2, 44100F, false)

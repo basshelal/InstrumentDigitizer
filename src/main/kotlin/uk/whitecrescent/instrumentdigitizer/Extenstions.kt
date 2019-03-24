@@ -139,3 +139,16 @@ inline fun SineWave.play(seconds: Int = 2) {
         close()
     }
 }
+
+inline fun ByteArray.play() {
+    val buffer = this
+    val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
+    val line = AudioSystem.getSourceDataLine(format)
+    line.apply {
+        open(format)
+        start()
+        write(buffer, 0, buffer.size)
+        drain()
+        close()
+    }
+}
