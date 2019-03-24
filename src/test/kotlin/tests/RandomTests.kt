@@ -27,7 +27,7 @@ import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.reduceInsignificantPartials
-import uk.whitecrescent.instrumentdigitizer.sortedByMaxReal
+import uk.whitecrescent.instrumentdigitizer.sortedByRealDescending
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
@@ -326,10 +326,10 @@ class RandomTests {
 
         println()
 
-        val maxReal = unicorn.maxReal()
-        val minReal = unicorn.minReal()
-        val maxImaginary = unicorn.maxImaginary()
-        val minImaginary = unicorn.minImaginary()
+        val maxReal = unicorn.maxReal
+        val minReal = unicorn.minReal
+        val maxImaginary = unicorn.maxImaginary
+        val minImaginary = unicorn.minImaginary
 
         println("Max Real is ${maxReal?.value} at index ${maxReal?.key}")
         println("Min Real is ${minReal?.value} at index ${minReal?.key}")
@@ -338,7 +338,7 @@ class RandomTests {
 
         println()
 
-        val list = unicorn.sortedByMaxReal().toList()
+        val list = unicorn.sortedByRealDescending().toList()
 
         unicorn.forEach { index, complex ->
             val left = unicorn[index]
