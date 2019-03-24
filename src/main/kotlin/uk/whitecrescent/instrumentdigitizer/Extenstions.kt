@@ -3,6 +3,8 @@
 package uk.whitecrescent.instrumentdigitizer
 
 import org.apache.commons.math3.complex.Complex
+import javax.sound.sampled.AudioFormat
+import javax.sound.sampled.AudioSystem
 import kotlin.math.roundToInt
 
 typealias ComplexArray = Array<Complex>
@@ -123,3 +125,17 @@ inline fun ComplexMap.reducePartials(threshold: Double = 0.1) = getPartials()
  * Splits this [ComplexMap] in half returning only the first half
  */
 inline fun ComplexMap.splitInHalf() = toList().take(size / 2).toMap()
+
+
+inline fun SineWave.play(seconds: Int = 2) {
+    val buffer = generateSineWave(this, seconds)
+    val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
+    val line = AudioSystem.getSourceDataLine(format)
+    line.apply {
+        open(format)
+        start()
+        write(buffer, 0, buffer.size)
+        drain()
+        close()
+    }
+}

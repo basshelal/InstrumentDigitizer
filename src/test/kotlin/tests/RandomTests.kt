@@ -27,7 +27,9 @@ import uk.whitecrescent.instrumentdigitizer.maxReal
 import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
+import uk.whitecrescent.instrumentdigitizer.play
 import uk.whitecrescent.instrumentdigitizer.reducePartials
+import uk.whitecrescent.instrumentdigitizer.sineWave
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
 import uk.whitecrescent.instrumentdigitizer.toComplexArray
 import uk.whitecrescent.instrumentdigitizer.toIntMap
@@ -375,6 +377,18 @@ class RandomTests {
         // our new start point
         // D, E, F, X, I, J, T, R (X is our desired start point)
         // X, I, J, T, R, D, E, F (after phase shift transform)
+    }
+
+    @DisplayName("Test Large Full Execution")
+    @Test
+    fun testLargeFullExecution() {
+        val sineWave = sineWave(440, 1.0, 0.5)
+        val buffer = generateSineWave(sineWave, 1, 65536)
+        // ^ doesnt work properly when sample rate is not power of 2 and when seconds is not 1
+
+        buffer.fullExecution().forEach { println(it) }
+
+        sineWave.play()
     }
 
 }
