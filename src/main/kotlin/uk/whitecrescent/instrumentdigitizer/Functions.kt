@@ -9,6 +9,7 @@ import kotlin.math.floor
 import kotlin.math.log2
 import kotlin.math.pow
 
+// TODO: 24-Mar-19 Create In-Place copies of the functions for speed
 object Functions {
 
     /*
@@ -98,19 +99,8 @@ object Functions {
      * Truncates the passed in ByteArray so that it can be used in Fast Fourier Transform functions
      * that require the transform be on collections of a size that is a power of 2
      */
-    fun truncate(data: ByteArray): ByteArray {
-        val list = ArrayList<Byte>()
-        val previousPowerOfTwo = previousPowerOfTwo(data.size)
-
-        list.ensureCapacity(previousPowerOfTwo)
-        (0 until previousPowerOfTwo).forEach {
-            list.add(data[it])
-        }
-
-        require(list.size == previousPowerOfTwo) { "Required size $previousPowerOfTwo, actual size ${list.size}" }
-
-        return list.toByteArray()
-    }
+    fun truncate(data: ByteArray) =
+            ByteArray(previousPowerOfTwo(data.size)) { data[it] }
 
     // ttrr for Truncated, Transformed, Rounded, Reduced
     fun ttrr(data: ByteArray): ComplexMap {
@@ -128,7 +118,7 @@ object Functions {
                 .reducePartials()       // Remove unnecessary partials
     }
 
-    private fun nextPowerOfTwo(number: Int): Int {
+    fun nextPowerOfTwo(number: Int): Int {
         val lg = log2(number.toDouble())
 
         val ceiled = ceil(lg).toInt()
@@ -139,7 +129,7 @@ object Functions {
         return result.toInt()
     }
 
-    private fun previousPowerOfTwo(number: Int): Int {
+    fun previousPowerOfTwo(number: Int): Int {
         val lg = log2(number.toDouble())
 
         val floored = floor(lg).toInt()

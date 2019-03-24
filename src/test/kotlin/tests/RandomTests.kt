@@ -19,6 +19,7 @@ import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
+import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
@@ -31,10 +32,13 @@ import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.play
 import uk.whitecrescent.instrumentdigitizer.readFromWaveFile
 import uk.whitecrescent.instrumentdigitizer.reducePartials
+import uk.whitecrescent.instrumentdigitizer.reduced
+import uk.whitecrescent.instrumentdigitizer.rounded
 import uk.whitecrescent.instrumentdigitizer.sineWave
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
 import uk.whitecrescent.instrumentdigitizer.toComplexArray
 import uk.whitecrescent.instrumentdigitizer.toIntMap
+import uk.whitecrescent.instrumentdigitizer.truncated
 import uk.whitecrescent.instrumentdigitizer.ttrr
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import uk.whitecrescent.instrumentdigitizer.writeToWaveFile
@@ -432,11 +436,31 @@ class RandomTests {
     @DisplayName("Test Basic Sine Wave Full Execution")
     @Test
     fun testBasicSineWaveFullExecution() {
-        val sineWave = sineWave(440, 0.5, 0.5)
+        val freq = 4280
 
-        generateSineWave(sineWave, 1, SAMPLE_RATE, 1)
-                .fullExecution().forEach {
+        val sineWave = sineWave(freq, 0.5, 0.5)
+
+        val data = generateSineWave(sineWave, 1, SAMPLE_RATE, 1)
+
+        val ratio = SAMPLE_RATE.toDouble() / freq.toDouble()
+
+        val size = Functions.previousPowerOfTwo(data.size)
+
+        data.truncated()                // Truncate to allow FFT
+                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .splitInHalf()          // Get first half since data is identical in both
+                .reducePartials()       // Remove unnecessary partials
+                .forEach {
                     println(it)
+
+                    println()
+                    println("Ratios")
+                    println(size / it.key)
+                    println(ratio)
+                    println()
+
                 }
 
         sineWave.play()
