@@ -56,21 +56,26 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
 
 /**
  * Generates a Sine wave, the general algorithm is taken from [Rosetta Stone](https://rosettacode.org/wiki/Sine_wave#Kotlin)
+ *
  * @param frequency frequency in Hz
  * @param seconds seconds of Sine Wave
+ * @param phase a Double between -1.0 and 1.0 to add phase to this Sine Wave, in Radians
  * @param sampleRate sample rate in Hz (cycles per second)
  * @param channels channels of the sine wave
  * @return A [ByteArray] representing a Sine Wave
  */
 fun generateSineWave(frequency: Int, seconds: Int, phase: Double = 0.0,
                      sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+
+    val maxAmplitude = 127F
     val totalSamples = seconds * sampleRate * channels
     val period = sampleRate.toDouble() / frequency
+    val phaseShift = phase * PI
+
     return ByteArray(totalSamples) {
         val angle = (2.0 * PI * it) / period
-        /* 127 for normalizing to the range of Byte: -127 to 127 since sin(angle) will return value in range: -1 to 1 */
         /*Amp * sin(2 * PI * f * t + phase)*/
-        return@ByteArray (127F * sin(angle + phase)).toByte()
+        return@ByteArray (maxAmplitude * sin(angle + phaseShift)).toByte()
     }
 }
 

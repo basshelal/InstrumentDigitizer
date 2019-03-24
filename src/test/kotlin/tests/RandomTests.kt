@@ -28,7 +28,6 @@ import uk.whitecrescent.instrumentdigitizer.unicorn
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
-import kotlin.math.PI
 import kotlin.math.absoluteValue
 
 @DisplayName("Random Tests")
@@ -222,7 +221,7 @@ class RandomTests {
     @DisplayName("Test Play Sine Wave")
     @Test
     fun testPlaySineWave() {
-        val buffer = generateSineWave(440, 2, 0.0, SAMPLE_RATE, 1)
+        val buffer = generateSineWave(440, 2, 0.5, SAMPLE_RATE, 1)
         val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
         val line = AudioSystem.getSourceDataLine(format)
         line.apply {
@@ -272,7 +271,6 @@ class RandomTests {
         println(transformed.size)
 
         //result.map { it.real * (1000.0 / result.size) }.forEach { println(it) }
-        // TODO: 17-Mar-19 Make sense of the outputs!!!
     }
 
     @DisplayName("Test Write Sine to CSV")
@@ -296,7 +294,7 @@ class RandomTests {
     @DisplayName("Test Full Execution")
     @Test
     fun testFullExecution() {
-        val sineWave = generateSineWave(220, 1, PI / 2, 1024, 1)
+        val sineWave = generateSineWave(440, 1, 0.5, 1024, 1)
 
         val unicorn = sineWave.unicorn()
 
@@ -316,13 +314,29 @@ class RandomTests {
         println("Max Imag is ${maxImaginary?.value} at index ${maxImaginary?.key}")
         println("Min Imag is ${minImaginary?.value} at index ${minImaginary?.key}")
 
-        // TODO: 24-Mar-19 Get the top few Max reals to find the most prevalent harmonics
-
         println()
 
-        unicorn.sortedByMaxReal().toList().take(8).toMap().forEach {
-            println(it)
+        val list = unicorn.sortedByMaxReal().toList()
+
+        unicorn.forEach { index, complex ->
+            val left = unicorn[index]
+            val right = unicorn[1024 - index]
+
+            assertEquals(left, right)
+
+            println("Left @$index: $left == Right @${1024 - index}: $right")
         }
+
+
+        /*list.take(12).toMap().forEach {
+            println(it)
+        }*/
+
+        // TODO: 24-Mar-19 Why are there 2 maxReals? 440 and 584 (584 == 1024 - 440)
+        // in fact why does each real number have 2 instances of itself?
+
+        // we can ignore any values after the second half of the indexes, since there will always be an identical on
+        // the first half
 
     }
 
