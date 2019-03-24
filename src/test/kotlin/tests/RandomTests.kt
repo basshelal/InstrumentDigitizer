@@ -27,6 +27,7 @@ import uk.whitecrescent.instrumentdigitizer.unicorn
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
+import kotlin.math.PI
 import kotlin.math.absoluteValue
 
 @DisplayName("Random Tests")
@@ -211,7 +212,7 @@ class RandomTests {
     @DisplayName("Test Generate Sine Wave")
     @Test
     fun testGenerateSineWave() {
-        val wave = generateSineWave(220, 1, 1000, 1)
+        val wave = generateSineWave(220, 1, 0.0, 1000, 1)
         wave.forEach { println(it) }
 
         assertEquals(1000, wave.size)
@@ -220,7 +221,7 @@ class RandomTests {
     @DisplayName("Test Play Sine Wave")
     @Test
     fun testPlaySineWave() {
-        val buffer = generateSineWave(440, 2, SAMPLE_RATE, 1)
+        val buffer = generateSineWave(440, 2, 0.0, SAMPLE_RATE, 1)
         val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
         val line = AudioSystem.getSourceDataLine(format)
         line.apply {
@@ -245,7 +246,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220, 10, SAMPLE_RATE, 2)
+        val buffer = generateSineWave(220, 10, 0.0, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -276,7 +277,7 @@ class RandomTests {
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        val buffer = generateSineWave(440, 1, 1024, 1)
+        val buffer = generateSineWave(440, 1, 0.0, 1024, 1)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -294,11 +295,24 @@ class RandomTests {
     @DisplayName("Test Full Execution")
     @Test
     fun testFullExecution() {
-        val sineWave = generateSineWave(440, 1, 1024, 1)
+        val sineWave = generateSineWave(440, 1, -PI / 2, 1024, 1)
 
-        sineWave.unicorn().forEach {
+        val unicorn = sineWave.unicorn()
+
+        unicorn.forEach {
             println(it)
         }
+
+        val maxReal = unicorn.maxBy { it.value.real }
+        val minReal = unicorn.minBy { it.value.real }
+        val maxImaginary = unicorn.maxBy { it.value.imaginary }
+        val minImaginary = unicorn.minBy { it.value.imaginary }
+
+        println("Max Real is ${maxReal?.value} at index ${maxReal?.key}")
+        println("Min Real is ${minReal?.value} at index ${minReal?.key}")
+        println("Max Imag is ${maxImaginary?.value} at index ${maxImaginary?.key}")
+        println("Min Imag is ${minImaginary?.value} at index ${minImaginary?.key}")
+
     }
 
 }

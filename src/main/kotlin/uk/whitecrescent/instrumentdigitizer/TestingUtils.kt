@@ -41,7 +41,7 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val stream = AudioSystem.getAudioInputStream(file)
     stream.read(buffer)
 
-    buffer = generateSineWave(220, 10, 44100, 2)
+    buffer = generateSineWave(220, 10, 0.0, 44100, 2)
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
@@ -62,13 +62,15 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
  * @param channels channels of the sine wave
  * @return A [ByteArray] representing a Sine Wave
  */
-fun generateSineWave(frequency: Int, seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+fun generateSineWave(frequency: Int, seconds: Int, phase: Double = 0.0,
+                     sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
     val totalSamples = seconds * sampleRate * channels
     val period = sampleRate.toDouble() / frequency
     return ByteArray(totalSamples) {
         val angle = (2.0 * PI * it) / period
         /* 127 for normalizing to the range of Byte: -127 to 127 since sin(angle) will return value in range: -1 to 1 */
-        return@ByteArray (sin(angle) * 127F).toByte()
+        /*Amp * sin(2 * PI * f * t + phase)*/
+        return@ByteArray (127F * sin(angle + phase)).toByte()
     }
 }
 
