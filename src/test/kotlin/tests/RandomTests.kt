@@ -23,6 +23,7 @@ import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
+import uk.whitecrescent.instrumentdigitizer.unicorn
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
@@ -288,6 +289,16 @@ class RandomTests {
         println(transformed.map { it.real }.max())
         println(transformed.map { it.imaginary }.max())
 
+    }
+
+    @DisplayName("Test Full Execution")
+    @Test
+    fun testFullExecution() {
+        val sineWave = generateSineWave(440, 1, 1024, 1)
+
+        sineWave.unicorn().forEach {
+            println(it)
+        }
     }
 
 }

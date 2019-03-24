@@ -96,7 +96,7 @@ object Functions {
             list.addAll(ByteArray(nextPowerOfTwo - list.size) { padWith }.asList())
         }
 
-        require(list.size == nextPowerOfTwo)
+        require(list.size == nextPowerOfTwo) { "Required size $nextPowerOfTwo, actual size ${list.size}" }
 
         return list.toByteArray()
     }
@@ -106,17 +106,21 @@ object Functions {
      * that require the transform be on collections of a size that is a power of 2
      */
     fun truncate(data: ByteArray): ByteArray {
-        val list = ArrayList(data.asList())
-        val previousPowerOfTwo = previousPowerOfTwo(list.size)
+        val list = ArrayList<Byte>()
+        val previousPowerOfTwo = previousPowerOfTwo(data.size)
 
-        if (list.size != previousPowerOfTwo) {
-            val toRemove = list.subList(previousPowerOfTwo, list.size)
-            list.removeAll(toRemove)
+        list.ensureCapacity(previousPowerOfTwo)
+        (0 until previousPowerOfTwo).forEach {
+            list.add(data[it])
         }
 
-        require(list.size == previousPowerOfTwo)
+        require(list.size == previousPowerOfTwo) { "Required size $previousPowerOfTwo, actual size ${list.size}" }
 
         return list.toByteArray()
+    }
+
+    fun unicorn(data: ByteArray): Map<Int, Complex> {
+        return data.truncated().fourierTransformed().rounded().mapIndexed { index, complex -> index to complex }.toMap()
     }
 
 }
@@ -150,9 +154,15 @@ fun ByteArray.paddedComplex() = Functions.pad(this).toComplex()
 
 fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].toDouble() }
 
+fun ByteArray.fourierTransformed() = Functions.fourierTransform(this)
+
+fun ByteArray.unicorn() = Functions.unicorn(this)
+
+
 fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
 
 fun DoubleArray.toIntArray() = IntArray(this.size) { this[it].roundToInt() }
+
 
 fun ComplexArray.real() = DoubleArray(this.size) { this[it].real }
 
@@ -161,3 +171,16 @@ fun ComplexArray.imaginary() = DoubleArray(this.size) { this[it].imaginary }
 fun ComplexArray.toMap() = this.map { it.real to it.imaginary }.toMap()
 
 fun ComplexArray.toIntMap() = this.map { it.real.roundToInt() to it.imaginary.roundToInt() }.toMap()
+
+fun ComplexArray.rounded() =
+        this.map { Complex(it.real.roundToInt().toDouble(), it.imaginary.roundToInt().toDouble()) }.toTypedArray()
+
+fun ComplexArray.reduced() = rounded()
+        .mapIndexed { index, complex -> index to complex }.toMap()
+        .filterValues { it.real > 0.0 && it.imaginary > 0.0 }
+
+fun Map<Int, Complex>.sortedByIndex() = this.toList().sortedBy { it.first }.toMap()
+
+fun Map<Int, Complex>.sortedByReal() = this.toList().sortedBy { it.second.real }.toMap()
+
+fun Map<Int, Complex>.sortedByImaginary() = this.toList().sortedBy { it.second.imaginary }.toMap()
