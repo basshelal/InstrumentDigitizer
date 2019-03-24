@@ -20,8 +20,14 @@ import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
+import uk.whitecrescent.instrumentdigitizer.maxImaginary
+import uk.whitecrescent.instrumentdigitizer.maxReal
+import uk.whitecrescent.instrumentdigitizer.minImaginary
+import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
+import uk.whitecrescent.instrumentdigitizer.reduceInsignificantPartials
 import uk.whitecrescent.instrumentdigitizer.sortedByMaxReal
+import uk.whitecrescent.instrumentdigitizer.splitInHalf
 import uk.whitecrescent.instrumentdigitizer.toComplex
 import uk.whitecrescent.instrumentdigitizer.toIntMap
 import uk.whitecrescent.instrumentdigitizer.unicorn
@@ -304,10 +310,10 @@ class RandomTests {
 
         println()
 
-        val maxReal = unicorn.maxBy { it.value.real }
-        val minReal = unicorn.minBy { it.value.real }
-        val maxImaginary = unicorn.maxBy { it.value.imaginary }
-        val minImaginary = unicorn.minBy { it.value.imaginary }
+        val maxReal = unicorn.maxReal()
+        val minReal = unicorn.minReal()
+        val maxImaginary = unicorn.maxImaginary()
+        val minImaginary = unicorn.minImaginary()
 
         println("Max Real is ${maxReal?.value} at index ${maxReal?.key}")
         println("Min Real is ${minReal?.value} at index ${minReal?.key}")
@@ -324,13 +330,12 @@ class RandomTests {
 
             assertEquals(left, right)
 
-            println("Left @$index: $left == Right @${1024 - index}: $right")
+            //println("Left @$index: $left == Right @${1024 - index}: $right")
         }
 
-
-        /*list.take(12).toMap().forEach {
+        unicorn.splitInHalf().reduceInsignificantPartials().forEach {
             println(it)
-        }*/
+        }
 
         // TODO: 24-Mar-19 Why are there 2 maxReals? 440 and 584 (584 == 1024 - 440)
         // in fact why does each real number have 2 instances of itself?

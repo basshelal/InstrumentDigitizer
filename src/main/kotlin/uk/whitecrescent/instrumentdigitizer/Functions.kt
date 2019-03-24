@@ -185,3 +185,18 @@ fun Map<Int, Complex>.sortedByIndex() = this.toList().sortedBy { it.first }.toMa
 fun Map<Int, Complex>.sortedByMaxReal() = this.toList().sortedByDescending { it.second.real }.toMap()
 
 fun Map<Int, Complex>.sortedByMaxImaginary() = this.toList().sortedByDescending { it.second.imaginary }.asReversed().toMap()
+
+fun Map<Int, Complex>.maxReal() = maxBy { it.value.real }
+
+fun Map<Int, Complex>.minReal() = minBy { it.value.real }
+
+fun Map<Int, Complex>.maxImaginary() = maxBy { it.value.imaginary }
+
+fun Map<Int, Complex>.minImaginary() = minBy { it.value.imaginary }
+
+fun Map<Int, Complex>.getPartials(amount: Int = this.size) = this.sortedByMaxReal().toList().take(amount).toMap()
+
+fun Map<Int, Complex>.reduceInsignificantPartials() = getPartials()
+        .filterValues { (it.real / maxReal()!!.value.real) > 0.1 }
+
+fun Map<Int, Complex>.splitInHalf() = this.toList().take(size / 2).toMap()
