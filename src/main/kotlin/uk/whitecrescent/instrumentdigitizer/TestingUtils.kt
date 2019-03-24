@@ -41,7 +41,7 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val stream = AudioSystem.getAudioInputStream(file)
     stream.read(buffer)
 
-    buffer = generateSineWave(220, 0.0, 10, 44100, 2)
+    buffer = generateSineWave(SineWave(220.0, 1.0, 0.5), 10, 44100, 2)
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
@@ -58,16 +58,17 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
  * Generates a Sine wave, the general algorithm is taken from [Rosetta Stone](https://rosettacode.org/wiki/Sine_wave#Kotlin)
  *
  * @param frequency frequency in Hz
+ * @param amplitude a Double between 0.0 and 1.0 to multiply by the [MAX_AMPLITUDE]
  * @param seconds seconds of Sine Wave
  * @param phase a Double between -1.0 and 1.0 to add phase to this Sine Wave, in Radians
  * @param sampleRate sample rate in Hz (cycles per second)
  * @param channels channels of the sine wave
  * @return A [ByteArray] representing a Sine Wave
  */
-fun generateSineWave(frequency: Int, phase: Double = 0.0, seconds: Int,
-                     sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
+                     seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
 
-    val maxAmplitude = 127.0
+    val maxAmplitude = amplitude * MAX_AMPLITUDE
     val totalSamples = seconds * sampleRate * channels
     val period = sampleRate.toDouble() / frequency
     val phaseShift = phase * PI
@@ -80,9 +81,8 @@ fun generateSineWave(frequency: Int, phase: Double = 0.0, seconds: Int,
 }
 
 fun generateSineWave(sineWave: SineWave, seconds: Int,
-                     sampleRate: Int = SAMPLE_RATE, channels: Int = 2) =
-        generateSineWave(sineWave.frequency.toInt(), sineWave.phase, seconds, sampleRate, channels)
-// TODO: 24-Mar-19 Missing Amplitude almost everywhere
+                     sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
+        generateSineWave(sineWave.frequency, sineWave.amplitude, sineWave.phase, seconds, sampleRate, channels)
 
 fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
                          phase1: Double = 0.0, phase2: Double = 0.0,

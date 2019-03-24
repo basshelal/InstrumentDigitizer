@@ -219,7 +219,7 @@ class RandomTests {
     @DisplayName("Test Generate Sine Wave")
     @Test
     fun testGenerateSineWave() {
-        val wave = generateSineWave(220, 0.0, 1, 1000, 1)
+        val wave = generateSineWave(220.0, 1.0, 0.0, 1, 1000, 1)
         wave.forEach { println(it) }
 
         assertEquals(1000, wave.size)
@@ -228,7 +228,7 @@ class RandomTests {
     @DisplayName("Test Play Sine Wave")
     @Test
     fun testPlaySineWave() {
-        val buffer = generateSineWave(440, 0.5, 2, SAMPLE_RATE, 1)
+        val buffer = generateSineWave(440.0, 1.0, 0.5, 2, SAMPLE_RATE, 1)
         val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
         val line = AudioSystem.getSourceDataLine(format)
         line.apply {
@@ -268,7 +268,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220, 0.0, 10, SAMPLE_RATE, 2)
+        val buffer = generateSineWave(220.0, 1.0, 0.0, 10, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -298,7 +298,7 @@ class RandomTests {
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        val buffer = generateSineWave(440, 0.0, 1, 1024, 1)
+        val buffer = generateSineWave(440.0, 1.0, 0.0, 1, 1024, 1)
 
         val original = buffer.padded()
         val originalComplex = original.toComplex()
@@ -316,7 +316,7 @@ class RandomTests {
     @DisplayName("Test Full Execution")
     @Test
     fun testFullExecution() {
-        val sineWave = generateSineWave(440, 0.5, 1, 1024, 1)
+        val sineWave = generateSineWave(440.0, 1.0, 0.5, 1, 1024, 1)
 
         val unicorn = sineWave.unicorn()
 
@@ -356,9 +356,6 @@ class RandomTests {
         }
 
         println()
-        println()
-        println()
-        println()
 
         generateTwoSineWaves(440, 220, 0.5, 0.5, 1, 1024, 1)
                 .unicorn().splitInHalf().reduceInsignificantPartials()
@@ -372,6 +369,14 @@ class RandomTests {
         // we can ignore any values after the second half of the indexes, since there will always be an identical on
         // the first half
 
+
+        // TODO: 24-Mar-19 Idea! Make an algorithm that shifts a sine wave to make it have perfect results like above
+        // any old sine wave will return weird results because of the phase shift, but if we make an algorithm that
+        // can determine how much to shift the phase to get the perfect results we would make our lives a lot easier.
+        // The shifting would find the position to start from, if we reach the end we use the values that were before
+        // our new start point
+        // D, E, F, X, I, J, T, R (X is our desired start point)
+        // X, I, J, T, R, D, E, F (after phase shift transform)
     }
 
 }

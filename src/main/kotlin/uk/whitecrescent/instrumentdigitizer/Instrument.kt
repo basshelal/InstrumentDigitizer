@@ -16,6 +16,9 @@ class Instrument(val overtones: Int) {
  */
 data class SineWave(val frequency: Double, val amplitude: Double, val phase: Double)
 
+fun sineWave(frequency: Number, amplitude: Double = 1.0, phase: Double = 0.0) =
+        SineWave(frequency.toDouble(), amplitude, phase)
+
 fun getSineOscillators(amount: Int): List<SineOscillator> {
     return Array(amount, { SineOscillator(0.0, 0.0) }).asList()
 }

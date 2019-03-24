@@ -116,7 +116,6 @@ object Functions {
 
     fun unicorn(data: ByteArray): Map<Int, Complex> {
         return data.truncated().fourierTransformed().rounded().reduced()
-        // .mapIndexed { index, complex -> index to complex }.toMap()
     }
 
     private fun nextPowerOfTwo(number: Int): Int {
