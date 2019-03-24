@@ -18,6 +18,7 @@ import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
+import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
@@ -405,6 +406,27 @@ class RandomTests {
         buffer.fullExecution().forEach { println(it) }
 
         sineWave.play()
+    }
+
+    @DisplayName("Test Add Sine Waves")
+    @Test
+    fun testAddSineWaves() {
+        val list = listOf(
+                sineWave(220, 0.1, 0.5),
+                sineWave(440, 0.1, 0.5),
+                sineWave(880, 0.1, 0.5),
+                sineWave(1320, 0.1, 0.5),
+                sineWave(660, 0.1, 0.5),
+                sineWave(110, 0.1, 0.5)
+        )
+        val buffer = addSineWaves(list, 5)
+
+        buffer.play()
+
+        buffer.fullExecution().forEach {
+            println(it)
+        }
+
     }
 
 }

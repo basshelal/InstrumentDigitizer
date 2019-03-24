@@ -134,14 +134,11 @@ fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, 
 
 fun writeToWaveFile(data: ByteArray, fileName: String) {
     val file = newFile("$fileName.wav")
-    file.createNewFile()
 
-    val newStream = waveAudioInputStream(data)
-
-    newStream.printStreamInfo()
+    val stream = easyFormatAudioInputStream(data)
 
     AudioSystem.write(
-            newStream,
+            stream,
             AudioFileFormat.Type.WAVE,
             file
     )
@@ -175,10 +172,17 @@ fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String
     }
 }
 
-fun newFile(name: String) = File(RESOURCES_DIR + name)
+fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewFile() }
 
-fun waveAudioInputStream(buffer: ByteArray) =
+fun easyFormatAudioInputStream(buffer: ByteArray) =
         AudioInputStream(ByteArrayInputStream(buffer), EASY_FORMAT, buffer.size.toLong())
+
+fun addSineWaves(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
+    val arrays = sineWaves.map { generateSineWave(it, seconds, sampleRate) }
+    return ByteArray(arrays.first().size) { i ->
+        arrays.map { it[i] }.sum().toByte()
+    }
+}
 
 fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength

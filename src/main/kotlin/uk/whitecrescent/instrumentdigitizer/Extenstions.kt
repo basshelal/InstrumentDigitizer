@@ -4,6 +4,8 @@ package uk.whitecrescent.instrumentdigitizer
 
 import org.apache.commons.math3.complex.Complex
 import javax.sound.sampled.AudioSystem
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
 
 typealias ComplexArray = Array<Complex>
@@ -25,6 +27,16 @@ inline fun ByteArray.fourierTransformed() = Functions.fourierTransform(this)
 
 inline fun ByteArray.ttrr() = Functions.ttrr(this)
 
+inline infix fun ByteArray.add(other: ByteArray): ByteArray {
+    val largerSize = max(this.size, other.size)
+    val smallerSize = min(this.size, other.size)
+    val biggerArray = if (this.size == largerSize) this else other
+
+    return ByteArray(largerSize) {
+        if (it < smallerSize) (this[it] + other[it]).toByte()
+        else (0 + biggerArray[it]).toByte()
+    }
+}
 
 inline fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
 
