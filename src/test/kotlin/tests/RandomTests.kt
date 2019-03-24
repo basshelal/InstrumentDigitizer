@@ -28,6 +28,7 @@ import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.play
+import uk.whitecrescent.instrumentdigitizer.readFromWaveFile
 import uk.whitecrescent.instrumentdigitizer.reducePartials
 import uk.whitecrescent.instrumentdigitizer.sineWave
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
@@ -322,7 +323,12 @@ class RandomTests {
         val sineWave = sineWave(440, 1.0, 0.5)
         val buffer = generateSineWave(sineWave, 10, SAMPLE_RATE, 1)
         writeToWaveFile(buffer, "MyFile")
-        buffer.play()
+        val readBuffer = readFromWaveFile("MyFile")
+
+        assertEquals(buffer.size, readBuffer.size)
+        (0 until buffer.size).forEachIndexed { index, it ->
+            assertEquals(buffer[it], readBuffer[it])
+        }
     }
 
     @DisplayName("Test Full Execution")

@@ -21,3 +21,4 @@ const val MINIMUM_DIFFERENCE = 1E-3
 const val DESIRED_DIFFERENCE = 1E-7
 
 val WAVE_DEFAULT_FORMAT = AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100F, 16, 1, 2, 44100F, false)
+val EASY_FORMAT = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
