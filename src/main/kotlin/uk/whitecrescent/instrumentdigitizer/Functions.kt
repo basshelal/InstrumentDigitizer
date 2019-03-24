@@ -4,6 +4,10 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 import org.apache.commons.math3.util.ArithmeticUtils
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.log2
+import kotlin.math.pow
 
 object Functions {
 
@@ -125,15 +129,25 @@ object Functions {
     }
 
     private fun nextPowerOfTwo(number: Int): Int {
-        var result = number
-        while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result++
-        return result
+        val lg = log2(number.toDouble())
+
+        val ceiled = ceil(lg).toInt()
+
+        val result = 2.0.pow(ceiled)
+
+        assert(ArithmeticUtils.isPowerOfTwo(result.toLong()))
+        return result.toInt()
     }
 
     private fun previousPowerOfTwo(number: Int): Int {
-        var result = number
-        while (!ArithmeticUtils.isPowerOfTwo(result.toLong())) result--
-        return result
+        val lg = log2(number.toDouble())
+
+        val floored = floor(lg).toInt()
+
+        val result = 2.0.pow(floored)
+
+        assert(ArithmeticUtils.isPowerOfTwo(result.toLong()))
+        return result.toInt()
     }
 
 }

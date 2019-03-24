@@ -429,4 +429,17 @@ class RandomTests {
 
     }
 
+    @DisplayName("Test Basic Sine Wave Full Execution")
+    @Test
+    fun testBasicSineWaveFullExecution() {
+        val sineWave = sineWave(440, 0.5, 0.5)
+
+        generateSineWave(sineWave, 1, SAMPLE_RATE, 1)
+                .fullExecution().forEach {
+                    println(it)
+                }
+
+        sineWave.play()
+    }
+
 }
