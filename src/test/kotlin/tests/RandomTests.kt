@@ -19,6 +19,7 @@ import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
+import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
@@ -502,6 +503,45 @@ class RandomTests {
                         }
                     }
         }
+    }
+
+    @DisplayName("Test Multiple Sine Waves Full Execution")
+    @Test
+    fun testMultipleSineWavesFullExecution() {
+
+        val sineWave1 = sineWave(220, 0.1, 0.5)
+        val sineWave2 = sineWave(440, 0.1, 0.5)
+        val sineWave3 = sineWave(660, 0.1, 0.5)
+        val sineWave4 = sineWave(880, 0.1, 0.5)
+        val sineWave5 = sineWave(1220, 0.1, 0.5)
+        val sineWave6 = sineWave(1360, 0.1, 0.5)
+
+        val sineWaves = listOf(sineWave1, sineWave2, sineWave3, sineWave4, sineWave5, sineWave6)
+
+        val data = addSineWavesEvenly(sineWaves, 2)
+
+        val size = Functions.previousPowerOfTwo(data.size)
+
+        data.truncated()                // Truncate to allow FFT
+                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .splitInHalf()          // Get first half since data is identical in both
+                .reducePartials()       // Remove unnecessary partials
+                .forEach {
+                    val calculatedFreq = (it.key.toDouble() / size.toDouble()) * SAMPLE_RATE.toDouble()
+
+                    println(it)
+
+                    println()
+
+                    println("Calculated frequency :\t $calculatedFreq")
+
+                    println()
+
+                }
+
+        data.play()
     }
 
 }

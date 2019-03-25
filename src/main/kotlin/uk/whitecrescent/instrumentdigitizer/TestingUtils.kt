@@ -184,6 +184,17 @@ fun addSineWaves(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMP
     }
 }
 
+fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
+    val amplitude = 1.0 / sineWaves.size.toDouble()
+    val arrays = sineWaves.map {
+        it.amplitude = amplitude
+        generateSineWave(it, seconds, sampleRate)
+    }
+    return ByteArray(arrays.first().size) { i ->
+        arrays.map { it[i] }.sum().toByte()
+    }
+}
+
 fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength
     val frameSize = this.format.frameSize
