@@ -76,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="59" lean-forward="true" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+            <state relative-caret-position="528">
+              <caret line="141" column="48" lean-forward="true" selection-start-line="141" selection-start-column="48" selection-end-line="141" selection-end-column="48" />
               <folding>
                 <element signature="n#!!block;n#add#0" />
                 <element signature="n#!!doc;n#real#0" />
@@ -97,7 +97,6 @@
                 <element signature="n#!!doc;n#getPartials#0" />
                 <element signature="n#!!doc;n#reducePartials#0" />
                 <element signature="n#!!doc;n#splitInHalf#0" />
-                <element signature="n#!!block;n#play#0" />
                 <element signature="n#!!block;n#play#1" />
               </folding>
             </state>
@@ -107,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="465" column="82" selection-start-line="465" selection-start-column="82" selection-end-line="465" selection-end-column="82" />
+            <state relative-caret-position="471">
+              <caret line="481" column="18" selection-start-line="481" selection-start-column="18" selection-end-line="481" selection-end-column="18" />
               <folding>
                 <element signature="n#!!block;n#testJSynSynth#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testJSynSynth2#0;n#!!block;n#RandomTests#0" />
@@ -352,7 +351,7 @@
     <property name="SearchEverywhereHistoryKey" value="JAsi&#9;FILE&#9;file://D:/Data/IdeaProjects/InstrumentDigitizer/JAsioHost.jar&#10;Sequencer&#9;PSI&#9;JAVA://javax.sound.midi.Sequencer&#10;Line&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/sound/sampled/Line.java&#10;SampleProvider&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/resources.jar!/META-INF/services/javax.sound.sampled.spi.MixerProvider&#10;Instrument&#9;PSI&#9;JAVA://com.jsyn.util.Instrument&#10;Synthesizer&#9;PSI&#9;JAVA://com.jsyn.Synthesizer&#10;Example&#9;PSI&#9;JAVA://com.synthbot.jasiohost.ExampleHost&#10;Asio&#9;PSI&#9;JAVA://com.synthbot.jasiohost.AsioDriver&#10;Midi&#9;PSI&#9;JAVA://javax.sound.midi.MidiDevice&#10;MidiSy&#9;PSI&#9;JAVA://com.jsyn.midi.MidiSynthesizer&#10;MidiSyn&#9;null&#9;null&#10;MidiSynthesizer&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553468989645" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553478936318" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/jportaudio.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -387,7 +386,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RandomTests.testBasicSineWaveFullExecution">
+  <component name="RunManager" selected="JUnit.RandomTests.testFindPerfectPhaseShift">
     <configuration name="RandomTests.testAddSineWaves" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InstrumentDigitizer_test" />
       <extension name="coverage">
@@ -420,6 +419,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RandomTests.testFindPerfectPhaseShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InstrumentDigitizer_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
+      <option name="METHOD_NAME" value="testFindPerfectPhaseShift" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RandomTests.testLargeFullExecution" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InstrumentDigitizer_test" />
       <extension name="coverage">
@@ -436,7 +451,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RandomTests.testWriteData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RandomTests.testPlaySineWave" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InstrumentDigitizer_test" />
       <extension name="coverage">
         <pattern>
@@ -446,23 +461,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
-      <option name="METHOD_NAME" value="testWriteData" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RandomTests.testWriteToWaveFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="InstrumentDigitizer_test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
-      <option name="METHOD_NAME" value="testWriteToWaveFile" />
+      <option name="METHOD_NAME" value="testPlaySineWave" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -470,18 +469,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.RandomTests.testLargeFullExecution" />
-      <item itemvalue="JUnit.RandomTests.testWriteToWaveFile" />
-      <item itemvalue="JUnit.RandomTests.testWriteData" />
       <item itemvalue="JUnit.RandomTests.testAddSineWaves" />
       <item itemvalue="JUnit.RandomTests.testBasicSineWaveFullExecution" />
+      <item itemvalue="JUnit.RandomTests.testFindPerfectPhaseShift" />
+      <item itemvalue="JUnit.RandomTests.testPlaySineWave" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RandomTests.testFindPerfectPhaseShift" />
         <item itemvalue="JUnit.RandomTests.testBasicSineWaveFullExecution" />
-        <item itemvalue="JUnit.RandomTests.testLargeFullExecution" />
         <item itemvalue="JUnit.RandomTests.testAddSineWaves" />
-        <item itemvalue="JUnit.RandomTests.testWriteToWaveFile" />
-        <item itemvalue="JUnit.RandomTests.testWriteData" />
+        <item itemvalue="JUnit.RandomTests.testPlaySineWave" />
+        <item itemvalue="JUnit.RandomTests.testLargeFullExecution" />
       </list>
     </recent_temporary>
   </component>
@@ -521,7 +520,7 @@
       <workItem from="1553178932532" duration="2340000" />
       <workItem from="1553387242765" duration="19276000" />
       <workItem from="1553419227815" duration="8283000" />
-      <workItem from="1553456461538" duration="9165000" />
+      <workItem from="1553456461538" duration="13156000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Piano keyboard working but with high latency">
       <created>1547951912169</created>
@@ -831,43 +830,50 @@
       <option name="project" value="LOCAL" />
       <updated>1553467156621</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="New observations and tests with Ratios">
+      <created>1553469015151</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1553469015151</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 22h 35m 47s.xml">
+    <history-entry file="RandomTests_testAddSineWaves - 2019.03.25 at 01h 27m 12s.xml">
+      <configuration name="RandomTests.testAddSineWaves" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RandomTests_testAddSineWaves - 2019.03.25 at 01h 27m 33s.xml">
+      <configuration name="RandomTests.testAddSineWaves" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RandomTests_testFindPerfectPhaseShift - 2019.03.25 at 01h 27m 36s.xml">
+      <configuration name="RandomTests.testFindPerfectPhaseShift" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.25 at 01h 37m 56s.xml">
       <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 22h 36m 00s.xml">
+    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.25 at 01h 38m 07s.xml">
       <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 22h 36m 11s.xml">
+    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.25 at 01h 38m 29s.xml">
       <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 02m 37s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testFindPerfectPhaseShift - 2019.03.25 at 01h 49m 11s.xml">
+      <configuration name="RandomTests.testFindPerfectPhaseShift" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 04m 19s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testFindPerfectPhaseShift - 2019.03.25 at 01h 49m 56s.xml">
+      <configuration name="RandomTests.testFindPerfectPhaseShift" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 04m 40s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testFindPerfectPhaseShift - 2019.03.25 at 01h 51m 00s.xml">
+      <configuration name="RandomTests.testFindPerfectPhaseShift" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 05m 01s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 05m 16s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 06m 35s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RandomTests_testBasicSineWaveFullExecution - 2019.03.24 at 23h 07m 21s.xml">
-      <configuration name="RandomTests.testBasicSineWaveFullExecution" configurationId="JUnit" />
+    <history-entry file="RandomTests_testFindPerfectPhaseShift - 2019.03.25 at 01h 52m 37s.xml">
+      <configuration name="RandomTests.testFindPerfectPhaseShift" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202300000" />
+    <option name="totallyTimeSpent" value="206291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="405" y="0" width="2162" height="1047" extended-state="0" />
@@ -880,10 +886,10 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.1796578" />
       <window_info anchor="bottom" id="Build" order="0" weight="0.32969433" />
-      <window_info anchor="bottom" id="Messages" order="1" weight="0.29225737" />
+      <window_info anchor="bottom" id="Messages" order="1" visible="true" weight="0.29225737" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.32824427" />
-      <window_info anchor="bottom" x="1" y="31" width="703" height="1008" id="Run" order="4" type="WINDOWED" visible="true" weight="0.32969433" />
+      <window_info active="true" anchor="bottom" x="1" y="31" width="703" height="1008" id="Run" order="4" type="WINDOWED" visible="true" weight="0.32969433" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -913,7 +919,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added JSyn Source to project" />
     <MESSAGE value="Working JAsio Example and basic framework for additive synthesis done" />
     <MESSAGE value="Can now modify a ByteArray buffer and write a Wave file using the data from the buffer" />
     <MESSAGE value="More Refactors" />
@@ -938,7 +943,8 @@
     <MESSAGE value="Adding Sine Waves" />
     <MESSAGE value="Fixed and Optimized Power Of Two Functions, now 5 trillion times faster, I am SPEED" />
     <MESSAGE value="Optimizations and new observations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimizations and new observations" />
+    <MESSAGE value="New observations and tests with Ratios" />
+    <option name="LAST_COMMIT_MESSAGE" value="New observations and tests with Ratios" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1273,13 +1279,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="99" lean-forward="true" selection-start-line="25" selection-start-column="99" selection-end-line="25" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.11/d46e00faac79f8ec6bb956154ecde4282871a6bf/kotlin-stdlib-1.3.11-sources.jar!/kotlin/util/MathJVM.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -1353,6 +1352,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="46" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="99" lean-forward="true" selection-start-line="25" selection-start-column="99" selection-end-line="25" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="718">
@@ -1384,8 +1397,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="59" lean-forward="true" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+        <state relative-caret-position="528">
+          <caret line="141" column="48" lean-forward="true" selection-start-line="141" selection-start-column="48" selection-end-line="141" selection-end-column="48" />
           <folding>
             <element signature="n#!!block;n#add#0" />
             <element signature="n#!!doc;n#real#0" />
@@ -1405,23 +1418,15 @@
             <element signature="n#!!doc;n#getPartials#0" />
             <element signature="n#!!doc;n#reducePartials#0" />
             <element signature="n#!!doc;n#splitInHalf#0" />
-            <element signature="n#!!block;n#play#0" />
             <element signature="n#!!block;n#play#1" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="46" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="465" column="82" selection-start-line="465" selection-start-column="82" selection-end-line="465" selection-end-column="82" />
+        <state relative-caret-position="471">
+          <caret line="481" column="18" selection-start-line="481" selection-start-column="18" selection-end-line="481" selection-end-column="18" />
           <folding>
             <element signature="n#!!block;n#testJSynSynth#0;n#!!block;n#RandomTests#0" />
             <element signature="n#!!block;n#testJSynSynth2#0;n#!!block;n#RandomTests#0" />

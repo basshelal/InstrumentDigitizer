@@ -436,7 +436,7 @@ class RandomTests {
     @DisplayName("Test Basic Sine Wave Full Execution")
     @Test
     fun testBasicSineWaveFullExecution() {
-        val freq = 470
+        val freq = 440
 
         val sineWave = sineWave(freq, 0.5, 0.5)
 
@@ -470,6 +470,28 @@ class RandomTests {
                 }
 
         sineWave.play()
+    }
+
+    @DisplayName("Find Perfect Phase Shift")
+    @Test
+    fun testFindPerfectPhaseShift() {
+        val freq = 440
+
+        val sineWave = sineWave(freq, 0.5, 0.0)
+
+        (0 until 100).forEach {
+            val phase = it.toDouble() / 1000.0
+            sineWave.phase = phase
+
+            generateSineWave(sineWave, 1)
+                    .fullExecution().forEach {
+                        if (it.value.imaginary == 0.0) {
+                            println("Success at phase $phase")
+                            println(it)
+                            println()
+                        }
+                    }
+        }
     }
 
 }
