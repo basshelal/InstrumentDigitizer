@@ -44,6 +44,7 @@ import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import uk.whitecrescent.instrumentdigitizer.writeToWaveFile
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
+import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 @DisplayName("Random Tests")
@@ -455,17 +456,26 @@ class RandomTests {
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
+                    val calculatedRatio = size.toDouble() / it.key.toDouble()
+                    val calculatedFreq = (it.key.toDouble() / size.toDouble()) * SAMPLE_RATE.toDouble()
+
                     println(it)
 
                     println()
-                    println("Ratios")
-                    println(size.toDouble() / it.key.toDouble())
-                    println(ratio)
+
+                    println("Calculated ratio:\t $calculatedRatio")
+                    println("Actual ratio:\t\t $ratio")
+
+                    println("Ratio Error:\t\t ${abs(ratio - calculatedRatio)}")
+
                     println()
 
-                    println("Frequency is: is ${inverseRatio * SAMPLE_RATE.toDouble()} ")
+                    println("Calculated frequency :\t $calculatedFreq")
+                    println("Actual frequency :\t\t ${inverseRatio * SAMPLE_RATE.toDouble()} ")
 
-                    println((it.key.toDouble() / size.toDouble()) * SAMPLE_RATE.toDouble())
+                    println("Frequency Error:\t\t ${abs((inverseRatio * SAMPLE_RATE.toDouble()) - calculatedFreq)}")
+
+                    println()
 
                 }
 
