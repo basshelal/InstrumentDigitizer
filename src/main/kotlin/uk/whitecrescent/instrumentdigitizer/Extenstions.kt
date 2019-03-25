@@ -15,6 +15,12 @@ typealias ComplexMap = Map<Int, Complex>
 
 inline fun ByteArray.fullExecution() = Functions.fullExecution(this)
 
+inline fun ByteArray.getFrequencies() = fullExecution()
+        .map { (it.key.toDouble() / Functions.previousPowerOfTwo(size).toDouble()) * SAMPLE_RATE.toDouble() }
+        .sorted()
+
+inline fun ByteArray.getFrequenciesReduced() = getFrequencies().map { it.toInt() }.distinct()
+
 inline fun ByteArray.padded() = Functions.pad(this)
 
 inline fun ByteArray.truncated() = Functions.truncate(this)
@@ -139,29 +145,20 @@ inline fun ComplexMap.splitInHalf() = toList().take(size / 2).toMap()
 
 
 inline fun SineWave.play(seconds: Int = 2) {
-    val buffer = generateSineWave(this, seconds)
-    val format = EASY_FORMAT
-    val line = AudioSystem.getSourceDataLine(format)
-    line.apply {
-        open(format)
-        start()
-        write(buffer, 0, buffer.size)
-        drain()
-        close()
-    }
+    generateSineWave(this, seconds).play()
 }
 
 inline fun ByteArray.play() {
-    val buffer = this
     val format = EASY_FORMAT
-    val line = AudioSystem.getSourceDataLine(format)
-    line.apply {
-        open(format)
-        start()
-        write(buffer, 0, buffer.size)
-        drain()
-        close()
-    }
+    AudioSystem.getSourceDataLine(format)
+            .apply {
+                open(format)
+                start()
+                write(this@play, 0, this@play.size)
+                //drain()
+                //flush()
+                close()
+            }
 }
 
 inline fun Instrument.play(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Int = 2) {
@@ -186,3 +183,5 @@ inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
     require(this.isNotEmpty()) { "List cannot be empty" }
     return sortedByFrequency().map { it.frequency / this[0].frequency }
 }
+
+inline fun Iterable<Any?>.printEach() = this.forEach { println(it) }
