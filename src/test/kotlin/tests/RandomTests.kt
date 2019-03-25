@@ -237,7 +237,7 @@ class RandomTests {
     @DisplayName("Test Generate Sine Wave")
     @Test
     fun testGenerateSineWave() {
-        val wave = generateSineWave(220.0, 1.0, 0.0, 1, 1000, 1)
+        val wave = generateSineWave(220.0, 1.0, 0.0, 1.0, 1000, 1)
         wave.forEach { println(it) }
 
         assertEquals(1000, wave.size)
@@ -246,7 +246,7 @@ class RandomTests {
     @DisplayName("Test Play Sine Wave")
     @Test
     fun testPlaySineWave() {
-        val buffer = generateSineWave(440.0, 1.0, 0.5, 2, SAMPLE_RATE, 1)
+        val buffer = generateSineWave(440.0, 1.0, 0.5, 2.0, SAMPLE_RATE, 1)
         val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
         val line = AudioSystem.getSourceDataLine(format)
         line.apply {
@@ -261,7 +261,7 @@ class RandomTests {
     @DisplayName("Test Play 2 Sine Waves")
     @Test
     fun testPlay2SineWaves() {
-        val buffer = generateTwoSineWaves(440, 220, 0.0, 0.5, 2, SAMPLE_RATE, 1)
+        val buffer = generateTwoSineWaves(440, 220, 0.0, 0.5, 2.0, SAMPLE_RATE, 1)
         val format = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
         val line = AudioSystem.getSourceDataLine(format)
         line.apply {
@@ -286,7 +286,7 @@ class RandomTests {
     @DisplayName("Test Fourier Forward and Inverse")
     @Test
     fun testFourierForwardAndInverse() {
-        val buffer = generateSineWave(220.0, 1.0, 0.0, 10, SAMPLE_RATE, 2)
+        val buffer = generateSineWave(220.0, 1.0, 0.0, 10.0, SAMPLE_RATE, 2)
 
         val original = buffer.padded()
         val originalComplex = original.toComplexArray()
@@ -316,7 +316,7 @@ class RandomTests {
     @DisplayName("Test Write Sine to CSV")
     @Test
     fun testWriteSineToCSV() {
-        val buffer = generateSineWave(440.0, 1.0, 0.0, 1, 1024, 1)
+        val buffer = generateSineWave(440.0, 1.0, 0.0, 1.0, 1024, 1)
 
         val original = buffer.padded()
         val originalComplex = original.toComplexArray()
@@ -335,7 +335,7 @@ class RandomTests {
     @Test
     fun testWriteToWaveFile() {
         val sineWave = sineWave(440, 1.0, 0.5)
-        val buffer = generateSineWave(sineWave, 10, SAMPLE_RATE, 1)
+        val buffer = generateSineWave(sineWave, 10.0, SAMPLE_RATE, 1)
         writeToWaveFile(buffer, "MyFile")
         val readBuffer = readFromWaveFile("MyFile")
 
@@ -348,7 +348,7 @@ class RandomTests {
     @DisplayName("Test Full Execution")
     @Test
     fun testFullExecution() {
-        val sineWave = generateSineWave(440.0, 1.0, 0.5, 1, 1024, 1)
+        val sineWave = generateSineWave(440.0, 1.0, 0.5, 1.0, 1024, 1)
 
         val ttrr = sineWave.ttrr()
 
@@ -387,7 +387,7 @@ class RandomTests {
 
         println()
 
-        generateTwoSineWaves(440, 220, 0.5, 0.5, 1, 1024, 1)
+        generateTwoSineWaves(440, 220, 0.5, 0.5, 1.0, 1024, 1)
                 .fullExecution()
                 .forEach {
                     println(it)
@@ -413,7 +413,7 @@ class RandomTests {
     @Test
     fun testLargeFullExecution() {
         val sineWave = sineWave(440, 1.0, 0.5)
-        val buffer = generateSineWave(sineWave, 1, 65536)
+        val buffer = generateSineWave(sineWave, 1.0, 65536)
         // ^ doesnt work properly when sample rate is not power of 2 and when seconds is not 1
 
         buffer.fullExecution().forEach { println(it) }
@@ -432,7 +432,7 @@ class RandomTests {
                 sineWave(660, 0.1, 0.5),
                 sineWave(110, 0.1, 0.5)
         )
-        val buffer = addSineWaves(list, 5)
+        val buffer = addSineWaves(list, 5.0)
 
         buffer.play()
 
@@ -449,7 +449,7 @@ class RandomTests {
 
         val sineWave = sineWave(freq, 0.5, 0.5)
 
-        val data = generateSineWave(sineWave, 1, SAMPLE_RATE, 1)
+        val data = generateSineWave(sineWave, 1.0, SAMPLE_RATE, 1)
 
         val ratio = SAMPLE_RATE.toDouble() / freq.toDouble()
 
@@ -503,7 +503,7 @@ class RandomTests {
             val phase = it.toDouble() / 1000.0
             sineWave.phase = phase
 
-            generateSineWave(sineWave, 1)
+            generateSineWave(sineWave, 1.0)
                     .fullExecution().forEach {
                         if (it.value.imaginary == 0.0) {
                             println("Success at phase $phase")
@@ -527,7 +527,7 @@ class RandomTests {
 
         val sineWaves = listOf(sineWave1, sineWave2, sineWave3, sineWave4, sineWave5, sineWave6)
 
-        val data = addSineWavesEvenly(sineWaves, 2)
+        val data = addSineWavesEvenly(sineWaves, 2.0)
 
         data.getFrequenciesReduced().printEach()
 
@@ -538,13 +538,13 @@ class RandomTests {
     @Test
     fun testSampleInstrument() {
         BASIC_INSTRUMENT.apply {
-            play(Key(Note.A, Octave.FOUR))
-            play(Key(Note.As, Octave.FOUR))
-            play(Key(Note.C, Octave.FIVE))
-            play(Key(Note.D, Octave.FIVE))
-            play(Key(Note.C, Octave.FIVE))
-            play(Key(Note.As, Octave.FOUR))
-            play(Key(Note.A, Octave.FOUR))
+            play(Key(Note.A, Octave.FOUR), 1.0, 0.65)
+            play(Key(Note.As, Octave.FOUR), 1.0, 0.65)
+            play(Key(Note.C, Octave.FIVE), 1.0, 0.65)
+            play(Key(Note.D, Octave.FIVE), 1.0, 0.65)
+            play(Key(Note.C, Octave.FIVE), 1.0, 0.65)
+            play(Key(Note.As, Octave.FOUR), 1.0, 0.65)
+            play(Key(Note.A, Octave.FOUR), 1.0, 0.65)
         }
     }
 

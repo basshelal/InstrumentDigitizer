@@ -144,7 +144,7 @@ inline fun ComplexMap.reducePartials(threshold: Double = 0.1) = getPartials()
 inline fun ComplexMap.splitInHalf() = toList().take(size / 2).toMap()
 
 
-inline fun SineWave.play(seconds: Int = 2) {
+inline fun SineWave.play(seconds: Double = 2.0) {
     generateSineWave(this, seconds).play()
 }
 
@@ -157,15 +157,14 @@ inline fun ByteArray.play() {
                 write(this@play, 0, this@play.size)
                 //drain()
                 //flush()
-                close()
-            }
+            }.close()
 }
 
-inline fun Instrument.play(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Int = 2) {
+inline fun Instrument.play(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Double = 2.0) {
     addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds).play()
 }
 
-inline fun Instrument.play(key: Key, amplitude: Double = 1.0, seconds: Int = 1) {
+inline fun Instrument.play(key: Key, amplitude: Double = 1.0, seconds: Double = 1.0) {
     play(key.frequency, amplitude, seconds)
 }
 
@@ -176,7 +175,7 @@ inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Double, fundame
 
 inline fun List<SineWave>.sortedByFrequency() = sortedBy { it.frequency }
 
-inline fun List<SineWave>.addAllSineWaves(seconds: Int = 1, sampleRate: Int = SAMPLE_RATE) =
+inline fun List<SineWave>.addAllSineWaves(seconds: Double = 1.0, sampleRate: Int = SAMPLE_RATE) =
         addSineWaves(this, seconds, sampleRate)
 
 inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {

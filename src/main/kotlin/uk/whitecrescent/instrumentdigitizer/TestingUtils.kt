@@ -43,7 +43,7 @@ inline fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val stream = AudioSystem.getAudioInputStream(file)
     stream.read(buffer)
 
-    buffer = generateSineWave(SineWave(220.0, 1.0, 0.5), 10, 44100, 2)
+    buffer = generateSineWave(SineWave(220.0, 1.0, 0.5), 10.0, 44100, 2)
 
     val newStream = AudioInputStream(ByteArrayInputStream(buffer), stream.format, stream.frameLength)
 
@@ -68,10 +68,10 @@ inline fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
  * @return A [ByteArray] representing a Sine Wave
  */
 inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
-                            seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
+                            seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
 
     val maxAmplitude = amplitude * MAX_AMPLITUDE
-    val totalSamples = seconds * sampleRate * channels
+    val totalSamples = (seconds * sampleRate.toDouble() * channels.toDouble()).toInt()
     val period = sampleRate.toDouble() / frequency
     val phaseShift = phase * PI
 
@@ -82,18 +82,18 @@ inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: D
     }
 }
 
-inline fun generateSineWave(sineWave: SineWave, seconds: Int,
+inline fun generateSineWave(sineWave: SineWave, seconds: Double,
                             sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
         generateSineWave(sineWave.frequency, sineWave.amplitude, sineWave.phase, seconds, sampleRate, channels)
 
 inline fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
                                 phase1: Double = 0.0, phase2: Double = 0.0,
-                                seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+                                seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
 
     // TODO: 24-Mar-19 This isn't very right but it's ok, missing amplitude, how much Amp in each wave
 
     val maxAmplitude = 127.0 / 2
-    val totalSamples = seconds * sampleRate * channels
+    val totalSamples = (seconds * sampleRate.toDouble() * channels.toDouble()).toInt()
 
     val period1 = sampleRate.toDouble() / frequency1
     val period2 = sampleRate.toDouble() / frequency2
@@ -179,14 +179,14 @@ inline fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewF
 inline fun easyFormatAudioInputStream(buffer: ByteArray) =
         AudioInputStream(ByteArrayInputStream(buffer), EASY_FORMAT, buffer.size.toLong())
 
-inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
+inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Double, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val arrays = sineWaves.map { generateSineWave(it, seconds, sampleRate) }
     return ByteArray(arrays.first().size) { i ->
         arrays.map { it[i] }.sum().toByte()
     }
 }
 
-inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
+inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Double, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val amplitude = 1.0 / sineWaves.size.toDouble()
     val arrays = sineWaves.map {
         it.amplitude = amplitude
