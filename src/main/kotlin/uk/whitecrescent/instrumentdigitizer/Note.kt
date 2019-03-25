@@ -4,9 +4,6 @@ import kotlin.math.log2
 import kotlin.math.pow
 
 enum class Note {
-    A,
-    As,
-    B,
     C,
     Cs,
     D,
@@ -16,6 +13,9 @@ enum class Note {
     Fs,
     G,
     Gs,
+    A,
+    As,
+    B
 }
 
 enum class Octave {
@@ -24,10 +24,8 @@ enum class Octave {
 
 data class Key(val note: Note, val octave: Octave) {
 
-    // TODO: 25-Mar-19 Much of this is not correct and untested!
-
     val number: Int
-        get() = (octave.ordinal * 9) + (note.ordinal + 1)
+        get() = getNumber(this)
 
     val frequency: Double
         get() {
@@ -38,9 +36,7 @@ data class Key(val note: Note, val octave: Octave) {
 
     companion object {
         fun fromNumber(number: Int): Key {
-            val octave = ((number.toDouble() / 9.0) - 1).toInt()
-            val key = (number.rem(12.0) - 1).toInt()
-            return Key(Note.values()[key], Octave.values()[octave])
+            return getKey(number)
         }
 
         fun fromFrequency(frequency: Double): Key {

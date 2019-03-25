@@ -14,15 +14,12 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.Key
-import uk.whitecrescent.instrumentdigitizer.Note
-import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
-import uk.whitecrescent.instrumentdigitizer.SAMPLE_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
-import uk.whitecrescent.instrumentdigitizer.addAllSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
@@ -44,7 +41,6 @@ import uk.whitecrescent.instrumentdigitizer.sineWave
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
 import uk.whitecrescent.instrumentdigitizer.toComplexArray
 import uk.whitecrescent.instrumentdigitizer.toIntMap
-import uk.whitecrescent.instrumentdigitizer.toSineWaves
 import uk.whitecrescent.instrumentdigitizer.truncated
 import uk.whitecrescent.instrumentdigitizer.ttrr
 import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
@@ -553,37 +549,12 @@ class RandomTests {
     @DisplayName("Test Sample Instrument")
     @Test
     fun testSampleInstrument() {
-        SAMPLE_INSTRUMENT.apply {
-
-            overtoneRatios
-                    .toSineWaves(440.0)
-                    .addAllSineWaves()
-                    .fullExecution()
-                    .forEach {
-                        val calculatedFreq = (it.key.toDouble() / Functions.previousPowerOfTwo(SAMPLE_RATE).toDouble()) * SAMPLE_RATE.toDouble()
-
-                        println("Calculated frequency :\t $calculatedFreq")
-
-                        println()
-                    }
-
-            play(Key(Note.A, Octave.FOUR))
-            play(Key(Note.As, Octave.FOUR))
-            play(Key(Note.C, Octave.FOUR))
-            play(Key(Note.D, Octave.FOUR))
-            play(Key(Note.C, Octave.FOUR))
-            play(Key(Note.As, Octave.FOUR))
-            play(Key(Note.A, Octave.FOUR))
+        BASIC_INSTRUMENT.apply {
+            play(Key.fromNumber(49))
+            println(Key.fromNumber(49).frequency)
+            sineWave(440).play(1)
+            println(Key.fromFrequency(440.0))
         }
-    }
-
-    @DisplayName("Test Keys")
-    @Test
-    fun testKeys() {
-        val key = Key(Note.A, Octave.FOUR)
-
-        println(Key.fromNumber(49).frequency)
-        println(key)
     }
 
 }

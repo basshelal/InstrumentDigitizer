@@ -141,3 +141,14 @@ val MIDI_TO_KEY_MAP = mapOf(
         107 to Key(As, EIGHT),
         108 to Key(B, EIGHT)
 )
+
+fun getKey(number: Int): Key {
+    require(number in (1..108))
+    return MIDI_TO_KEY_MAP[number]!!
+}
+
+fun getNumber(key: Key): Int {
+    val results = MIDI_TO_KEY_MAP.filter { it.value == key }.keys
+    require(results.size == 1)
+    return results.first()
+}
