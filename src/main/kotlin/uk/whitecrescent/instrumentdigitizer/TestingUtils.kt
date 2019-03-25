@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package uk.whitecrescent.instrumentdigitizer
 
 import java.io.ByteArrayInputStream
@@ -10,7 +12,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.sin
 import kotlin.random.Random
 
-fun writeRandomAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
+inline fun writeRandomAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val file = File(filePath)
     val size = file.readBytes().size
     val buffer = ByteArray(size)
@@ -34,7 +36,7 @@ fun writeRandomAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     )
 }
 
-fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
+inline fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     val file = File(filePath)
     val size = file.readBytes().size
     var buffer = ByteArray(size)
@@ -65,8 +67,8 @@ fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
  * @param channels channels of the sine wave
  * @return A [ByteArray] representing a Sine Wave
  */
-fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
-                     seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
+inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
+                            seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
 
     val maxAmplitude = amplitude * MAX_AMPLITUDE
     val totalSamples = seconds * sampleRate * channels
@@ -80,13 +82,13 @@ fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double =
     }
 }
 
-fun generateSineWave(sineWave: SineWave, seconds: Int,
-                     sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
+inline fun generateSineWave(sineWave: SineWave, seconds: Int,
+                            sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
         generateSineWave(sineWave.frequency, sineWave.amplitude, sineWave.phase, seconds, sampleRate, channels)
 
-fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
-                         phase1: Double = 0.0, phase2: Double = 0.0,
-                         seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
+inline fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
+                                phase1: Double = 0.0, phase2: Double = 0.0,
+                                seconds: Int, sampleRate: Int = SAMPLE_RATE, channels: Int = 2): ByteArray {
 
     // TODO: 24-Mar-19 This isn't very right but it's ok, missing amplitude, how much Amp in each wave
 
@@ -114,9 +116,9 @@ fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
  * the differences should ideally contain nothing useful, so either 0s or very low values that are
  * not useful in finding what the original was
  */
-fun compare(original: ByteArray, converted: ByteArray) = compare(original.toDoubleArray(), converted.toDoubleArray())
+inline fun compare(original: ByteArray, converted: ByteArray) = compare(original.toDoubleArray(), converted.toDoubleArray())
 
-fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
+inline fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
     require(converted.size == original.size) {
         "Original and Converted must be equal in size!" +
                 " Original Size: ${original.size}, Converted Size: ${converted.size}"
@@ -124,7 +126,7 @@ fun compare(original: DoubleArray, converted: DoubleArray): DoubleArray {
     return DoubleArray(converted.size) { (original[it] - converted[it]).absoluteValue }
 }
 
-fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, DoubleArray> {
+inline fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, DoubleArray> {
     require(converted.size == original.size) {
         "Original and Converted must be equal in size!" +
                 " Original Size: ${original.size}, Converted Size: ${converted.size}"
@@ -132,7 +134,7 @@ fun compare(original: ComplexArray, converted: ComplexArray): Pair<DoubleArray, 
     return compare(original.real(), converted.real()) to compare(original.imaginary(), converted.imaginary())
 }
 
-fun writeToWaveFile(data: ByteArray, fileName: String) {
+inline fun writeToWaveFile(data: ByteArray, fileName: String) {
     val file = newFile("$fileName.wav")
 
     val stream = easyFormatAudioInputStream(data)
@@ -144,7 +146,7 @@ fun writeToWaveFile(data: ByteArray, fileName: String) {
     )
 }
 
-fun readFromWaveFile(fileName: String): ByteArray {
+inline fun readFromWaveFile(fileName: String): ByteArray {
     val file = newFile("$fileName.wav")
     val stream = AudioSystem.getAudioInputStream(EASY_FORMAT, AudioSystem.getAudioInputStream(file))
     val buffer = ByteArray(stream.frameLength.toInt())
@@ -154,7 +156,7 @@ fun readFromWaveFile(fileName: String): ByteArray {
     return buffer
 }
 
-fun writeTextToFile(data: ByteArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+inline fun writeTextToFile(data: ByteArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
     File(outPath).apply {
         writeText("")
         data.forEachIndexed { index, byte ->
@@ -163,7 +165,7 @@ fun writeTextToFile(data: ByteArray, delimiter: String = ",", lineEnd: String = 
     }
 }
 
-fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+inline fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
     File(outPath).apply {
         writeText("")
         data.forEach {
@@ -172,19 +174,19 @@ fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String
     }
 }
 
-fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewFile() }
+inline fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewFile() }
 
-fun easyFormatAudioInputStream(buffer: ByteArray) =
+inline fun easyFormatAudioInputStream(buffer: ByteArray) =
         AudioInputStream(ByteArrayInputStream(buffer), EASY_FORMAT, buffer.size.toLong())
 
-fun addSineWaves(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
+inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val arrays = sineWaves.map { generateSineWave(it, seconds, sampleRate) }
     return ByteArray(arrays.first().size) { i ->
         arrays.map { it[i] }.sum().toByte()
     }
 }
 
-fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
+inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val amplitude = 1.0 / sineWaves.size.toDouble()
     val arrays = sineWaves.map {
         it.amplitude = amplitude
@@ -195,7 +197,7 @@ fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Int, sampleRate: Int 
     }
 }
 
-fun AudioInputStream.printStreamInfo() {
+inline fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength
     val frameSize = this.format.frameSize
     val frameRate = this.format.frameRate

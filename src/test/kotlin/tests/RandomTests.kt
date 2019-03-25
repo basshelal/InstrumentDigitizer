@@ -18,6 +18,8 @@ import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.Key
+import uk.whitecrescent.instrumentdigitizer.Note
+import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
@@ -536,10 +538,13 @@ class RandomTests {
     @Test
     fun testSampleInstrument() {
         BASIC_INSTRUMENT.apply {
-            play(Key.fromNumber(49))
-            println(Key.fromNumber(49).frequency)
-            sineWave(440).play(1)
-            println(Key.fromFrequency(440.0))
+            play(Key(Note.A, Octave.FOUR))
+            play(Key(Note.As, Octave.FOUR))
+            play(Key(Note.C, Octave.FIVE))
+            play(Key(Note.D, Octave.FIVE))
+            play(Key(Note.C, Octave.FIVE))
+            play(Key(Note.As, Octave.FOUR))
+            play(Key(Note.A, Octave.FOUR))
         }
     }
 
