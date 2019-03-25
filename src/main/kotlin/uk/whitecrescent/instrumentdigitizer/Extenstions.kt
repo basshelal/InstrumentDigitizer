@@ -179,6 +179,9 @@ inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Double, fundame
 
 inline fun List<SineWave>.sortedByFrequency() = sortedBy { it.frequency }
 
+inline fun List<SineWave>.addAllSineWaves(seconds: Int = 1, sampleRate: Int = SAMPLE_RATE) =
+        addSineWaves(this, seconds, sampleRate)
+
 inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
     require(this.isNotEmpty()) { "List cannot be empty" }
     return sortedByFrequency().map { it.frequency / this[0].frequency }
