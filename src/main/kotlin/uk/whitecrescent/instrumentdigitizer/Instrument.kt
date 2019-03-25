@@ -5,9 +5,14 @@ import com.jsyn.unitgen.SineOscillator
 /**
  * Represents an instrument made purely out of multiple sine waves
  */
-class Instrument(val overtones: Int) {
-    val waves: List<SineWave> = emptyList()
-}
+class Instrument(val overtoneRatios: List<OvertoneRatio>)
+
+/*
+ * frequencyRatio gives us what to multiply by the fundamental frequency to get this frequency
+ * amplitudeRatio gives us what to multiply by the fundamental amplitude to get this amplitude
+ * phase is just phase, no relations/ratios yet
+ */
+data class OvertoneRatio(val frequencyRatio: Double, val amplitudeRatio: Double, val phase: Double = 0.0)
 
 
 /**

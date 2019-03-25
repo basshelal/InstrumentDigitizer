@@ -16,7 +16,11 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
+import uk.whitecrescent.instrumentdigitizer.Key
+import uk.whitecrescent.instrumentdigitizer.Note
+import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
+import uk.whitecrescent.instrumentdigitizer.SAMPLE_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
@@ -542,6 +546,21 @@ class RandomTests {
                 }
 
         data.play()
+    }
+
+    @DisplayName("Test Sample Instrument")
+    @Test
+    fun testSampleInstrument() {
+        SAMPLE_INSTRUMENT.play(Key.fromNumber(49))
+    }
+
+    @DisplayName("Test Keys")
+    @Test
+    fun testKeys() {
+        val key = Key(Note.A, Octave.FOUR)
+
+        println(Key.fromNumber(49).frequency)
+        println(key)
     }
 
 }

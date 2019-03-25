@@ -163,3 +163,23 @@ inline fun ByteArray.play() {
         close()
     }
 }
+
+inline fun Instrument.play(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Int = 2) {
+    addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds).play()
+}
+
+inline fun Instrument.play(key: Key, amplitude: Double = 1.0, seconds: Int = 1) {
+    play(key.frequency, amplitude, seconds)
+}
+
+inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Double, fundamentalAmplitude: Double = 1.0): List<SineWave> {
+    require(this.isNotEmpty())
+    return map { SineWave(fundamentalFrequency * it.frequencyRatio, fundamentalAmplitude * it.amplitudeRatio, it.phase) }
+}
+
+inline fun List<SineWave>.sortedByFrequency() = sortedBy { it.frequency }
+
+inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
+    require(this.isNotEmpty()) { "List cannot be empty" }
+    return sortedByFrequency().map { it.frequency / this[0].frequency }
+}
