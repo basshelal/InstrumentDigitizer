@@ -168,6 +168,22 @@ inline fun Instrument.play(key: Key, amplitude: Double = 1.0, seconds: Double = 
     play(key.frequency, amplitude, seconds)
 }
 
+inline fun Instrument.play(keys: Map<Key, Double>) {
+    val format = EASY_FORMAT
+    val list = ArrayList<Byte>()
+    keys.forEach {
+        list.addAll(addSineWaves(overtoneRatios.toSineWaves(it.key.frequency), it.value).asList())
+    }
+    val buffer = list.toByteArray()
+    println(buffer.size / SAMPLE_RATE)
+    AudioSystem.getSourceDataLine(format)
+            .apply {
+                open(format)
+                start()
+                write(buffer, 0, buffer.size)
+            }.close()
+}
+
 inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Double, fundamentalAmplitude: Double = 1.0): List<SineWave> {
     require(this.isNotEmpty())
     return map { SineWave(fundamentalFrequency * it.frequencyRatio, fundamentalAmplitude * it.amplitudeRatio, it.phase) }

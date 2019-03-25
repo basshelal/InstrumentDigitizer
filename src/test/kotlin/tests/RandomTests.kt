@@ -538,14 +538,23 @@ class RandomTests {
     @Test
     fun testSampleInstrument() {
         BASIC_INSTRUMENT.apply {
-            play(Key(Note.A, Octave.FOUR), 1.0, 0.65)
-            play(Key(Note.As, Octave.FOUR), 1.0, 0.65)
-            play(Key(Note.C, Octave.FIVE), 1.0, 0.65)
-            play(Key(Note.D, Octave.FIVE), 1.0, 0.65)
-            play(Key(Note.C, Octave.FIVE), 1.0, 0.65)
-            play(Key(Note.As, Octave.FOUR), 1.0, 0.65)
-            play(Key(Note.A, Octave.FOUR), 1.0, 0.65)
+            play(mapOf(
+                    Key(Note.A, Octave.FOUR) to 0.75,
+                    Key(Note.As, Octave.FOUR) to 0.75,
+                    Key(Note.C, Octave.FIVE) to 0.75,
+                    Key(Note.D, Octave.FIVE) to 0.75,
+                    Key(Note.C, Octave.FIVE) to 0.75,
+                    Key(Note.As, Octave.FOUR) to 0.75,
+                    Key(Note.A, Octave.FOUR) to 0.75
+            ))
         }
+    }
+
+    @DisplayName("Test")
+    @Test
+    fun test() {
+        // We probably need to convert formats from WAV to EASY_FORMAT
+        readFromWaveFile("violin_a3").getFrequenciesReduced().printEach()
     }
 
 }
