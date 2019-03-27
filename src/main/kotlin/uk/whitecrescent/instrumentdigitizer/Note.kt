@@ -15,11 +15,12 @@ enum class Note {
     Gs,
     A,
     As,
-    B
+    B,
+    X
 }
 
 enum class Octave {
-    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT
+    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NONE
 }
 
 data class Key(val note: Note, val octave: Octave) {
@@ -33,6 +34,9 @@ data class Key(val note: Note, val octave: Octave) {
             return 2.0.pow(exp) * 440.0
         }
 
+    infix fun centsDifferenceFrom(other: Key) = Key.centsDifference(this, other)
+
+    infix fun addCents(cents: Int) = Key.addCents(this, cents)
 
     companion object {
         fun fromNumber(number: Int): Key {
@@ -42,6 +46,14 @@ data class Key(val note: Note, val octave: Octave) {
         fun fromFrequency(frequency: Double): Key {
             val number = (12 * log2(frequency / 440.0)) + 69
             return fromNumber(number.toInt())
+        }
+
+        fun centsDifference(from: Key, to: Key): Int {
+            return (1200 * log2(to.frequency / from.frequency)).toInt()
+        }
+
+        fun addCents(from: Key, cents: Int): Key {
+            return Key.fromFrequency(from.frequency * (2.0.pow(cents.toDouble() / 1200.toDouble())))
         }
     }
 }

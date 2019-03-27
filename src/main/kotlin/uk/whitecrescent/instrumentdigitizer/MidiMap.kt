@@ -147,7 +147,7 @@ val MIDI_TO_KEY_MAP = mapOf(
 )
 
 inline fun getKey(number: Int): Key {
-    require(number in (1..108))
+    require(number in (12..119))
     return MIDI_TO_KEY_MAP[number]!!
 }
 

@@ -550,11 +550,19 @@ class RandomTests {
         }
     }
 
-    @DisplayName("Test")
+    @DisplayName("Test Violin A3")
     @Test
-    fun test() {
-        // We probably need to convert formats from WAV to EASY_FORMAT
+    fun testViolinA3() {
+        // Takes 1 minute
         readFromWaveFile("violin_a3").getFrequenciesDistinct().printEach()
+    }
+
+    @DisplayName("Test Loudness")
+    @Test
+    fun testLoudness() {
+        // Remember we use decibels not amplitude to change and understand loudness
+        generateSineWave(220.0, 0.5, 0.0, 2.0).play()
+        generateSineWave(220.0, 0.1, 0.0, 2.0).play()
     }
 
 }
