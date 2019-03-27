@@ -137,7 +137,14 @@ class UseMidiKeyboard {
 
                 override fun send(message: MidiMessage, timeStamp: Long) {
                     val bytes = message.message
+                    val sm = message as ShortMessage
+                    val key = Key.fromNumber(sm.data1)
                     midiSynthesizer.onReceive(bytes, 0, bytes.size)
+                    if (sm.command == ShortMessage.NOTE_ON) {
+                        BASIC_INSTRUMENT.play(key, seconds = 0.75)
+                        println(sm.data1)
+                        println("$key  ${key.frequency}")
+                    }
                 }
             }
         } else {
@@ -148,7 +155,7 @@ class UseMidiKeyboard {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            UseMidiKeyboard()
+            Synth().create()
         }
     }
 }

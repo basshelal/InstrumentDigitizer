@@ -29,7 +29,7 @@ import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getFrequencies
-import uk.whitecrescent.instrumentdigitizer.getFrequenciesReduced
+import uk.whitecrescent.instrumentdigitizer.getFrequenciesDistinct
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
 import uk.whitecrescent.instrumentdigitizer.maxReal
@@ -529,7 +529,7 @@ class RandomTests {
 
         val data = addSineWavesEvenly(sineWaves, 2.0)
 
-        data.getFrequenciesReduced().printEach()
+        data.getFrequenciesDistinct().printEach()
 
         data.play()
     }
@@ -554,7 +554,7 @@ class RandomTests {
     @Test
     fun test() {
         // We probably need to convert formats from WAV to EASY_FORMAT
-        readFromWaveFile("violin_a3").getFrequenciesReduced().printEach()
+        readFromWaveFile("violin_a3").getFrequenciesDistinct().printEach()
     }
 
 }

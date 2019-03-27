@@ -19,7 +19,7 @@ inline fun ByteArray.getFrequencies() = fullExecution()
         .map { (it.key.toDouble() / Functions.previousPowerOfTwo(size).toDouble()) * SAMPLE_RATE.toDouble() }
         .sorted()
 
-inline fun ByteArray.getFrequenciesReduced() = getFrequencies().map { it.toInt() }.distinct()
+inline fun ByteArray.getFrequenciesDistinct() = getFrequencies().map { it.toInt() }.distinct()
 
 inline fun ByteArray.padded() = Functions.pad(this)
 

@@ -24,6 +24,8 @@ import uk.whitecrescent.instrumentdigitizer.Octave.THREE
 import uk.whitecrescent.instrumentdigitizer.Octave.TWO
 import uk.whitecrescent.instrumentdigitizer.Octave.ZERO
 
+// TODO: 27-Mar-19 These numbers are wrong
+
 val MIDI_TO_KEY_MAP = mapOf(
         // Octave ZERO
         89 to Key(C, ZERO),
