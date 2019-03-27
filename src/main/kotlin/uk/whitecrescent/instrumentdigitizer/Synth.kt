@@ -136,26 +136,37 @@ class UseMidiKeyboard {
                 }
 
                 override fun send(message: MidiMessage, timeStamp: Long) {
-                    val bytes = message.message
-                    val sm = message as ShortMessage
-                    val key = Key.fromNumber(sm.data1)
-                    midiSynthesizer.onReceive(bytes, 0, bytes.size)
-                    if (sm.command == ShortMessage.NOTE_ON) {
-                        BASIC_INSTRUMENT.play(key, seconds = 0.75)
-                        println(sm.data1)
-                        println("$key  ${key.frequency}")
+                    require(message is ShortMessage)
+                    when (message.command) {
+                        ShortMessage.NOTE_ON -> {
+                            val key = Key.fromNumber(message.data1)
+                            BASIC_INSTRUMENT.play(key, seconds = 0.75)
+                            println("TimeStamp: $timeStamp")
+                            println("Channel: ${message.channel}")
+                            println("Command: ${message.command}")
+                            println("Data1 (Note): ${message.data1}") // Note value
+                            println("Data2 (Vel) : ${message.data2}") // Velocity
+                            println("$key  ${key.frequency}")
+                        }
+                        ShortMessage.NOTE_OFF -> {
+
+                        }
+                        ShortMessage.PITCH_BEND -> {
+                            println("Pitch Bend")
+                            println("Command: ${message.command}")
+                            println("Data1: ${message.data1}") // Note value
+                            println("Data2: ${message.data2}") // Velocity
+                        }
                     }
+
                 }
             }
         } else {
             println("Could not find a keyboard.")
         }
     }
+}
 
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            Synth().create()
-        }
-    }
+fun main() {
+    UseMidiKeyboard()
 }

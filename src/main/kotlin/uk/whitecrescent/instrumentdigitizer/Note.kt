@@ -29,7 +29,7 @@ data class Key(val note: Note, val octave: Octave) {
 
     val frequency: Double
         get() {
-            val exp = (number.toDouble() - 49.0) / 12.0
+            val exp = (number.toDouble() - 69.0) / 12.0
             return 2.0.pow(exp) * 440.0
         }
 
@@ -40,7 +40,7 @@ data class Key(val note: Note, val octave: Octave) {
         }
 
         fun fromFrequency(frequency: Double): Key {
-            val number = (12 * log2(frequency / 440.0)) + 49
+            val number = (12 * log2(frequency / 440.0)) + 69
             return fromNumber(number.toInt())
         }
     }
