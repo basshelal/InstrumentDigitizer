@@ -74,7 +74,12 @@ inline fun ComplexArray.toIntMap() = map { it.real.roundToInt() to it.imaginary.
 /**
  * Returns this [ComplexArray] with the parts of each Complex value in it rounded to the nearest Int
  */
-inline fun ComplexArray.rounded() = map { Complex(it.real.roundToInt().toDouble(), it.imaginary.roundToInt().toDouble()) }.toTypedArray()
+inline fun ComplexArray.rounded(): ComplexArray {
+    forEachIndexed { i, it ->
+        this[i] = Complex(it.real.roundToInt().toDouble(), it.imaginary.roundToInt().toDouble())
+    }
+    return this
+}
 
 /**
  * Maps each index in this [ComplexArray] to its corresponding Complex number
@@ -85,8 +90,13 @@ inline fun ComplexArray.mapIndexed() = mapIndexed { index, complex -> index to c
  * Reduces the elements in this [ComplexMap] such that any Complex number with both real and imaginary parts
  * equalling to 0.0 after being [rounded], is removed
  */
-inline fun ComplexArray.reduced() = rounded()
-        .mapIndexed().filterValues { it.real != 0.0 || it.imaginary != 0.0 }
+inline fun ComplexArray.reduced(): ComplexMap {
+    val result = HashMap<Int, Complex>()
+    forEachIndexed { index, it ->
+        if (it.real != 0.0 || it.imaginary != 0.0) result.put(index, it)
+    }
+    return result
+}
 
 
 /**
