@@ -9,7 +9,6 @@ import kotlin.math.floor
 import kotlin.math.log2
 import kotlin.math.pow
 
-// TODO: 24-Mar-19 Create In-Place copies of the functions for speed
 object Functions {
 
     /*

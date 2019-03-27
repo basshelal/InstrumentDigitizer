@@ -170,6 +170,9 @@ inline fun ByteArray.play() {
             }.close()
 }
 
+inline fun Instrument.getByteArray(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Double = 2.0) =
+        addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds)
+
 inline fun Instrument.play(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Double = 2.0) {
     addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds).play()
 }

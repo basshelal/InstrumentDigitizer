@@ -14,6 +14,7 @@ const val OUTPUT_PATH_OUT = RESOURCES_DIR + "out.out"
 const val TRANSFORMED_OUTPUT_PATH_OUT = RESOURCES_DIR + "transformed.out"
 
 const val SAMPLE_RATE = 44100
+const val SAMPLE_RATE_POWER_OF_TWO = 65536
 
 const val MAX_AMPLITUDE = 127.0
 
@@ -24,7 +25,7 @@ val WAVE_DEFAULT_FORMAT = AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100F, 1
 val EASY_FORMAT = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
 
 val SAMPLE_INSTRUMENT = Instrument(listOf(
-        OvertoneRatio(1.0, 0.50),
+        OvertoneRatio(1.0, 0.40),
         OvertoneRatio(2.0, 0.10),
         OvertoneRatio(3.0, 0.05),
         OvertoneRatio(4.0, 0.05),

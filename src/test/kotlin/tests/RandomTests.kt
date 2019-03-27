@@ -22,13 +22,13 @@ import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
+import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE_POWER_OF_TWO
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
-import uk.whitecrescent.instrumentdigitizer.getFrequencies
 import uk.whitecrescent.instrumentdigitizer.getFrequenciesDistinct
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
@@ -52,8 +52,10 @@ import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import uk.whitecrescent.instrumentdigitizer.writeToWaveFile
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.absoluteValue
+import kotlin.math.atan2
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -414,7 +416,6 @@ class RandomTests {
     fun testLargeFullExecution() {
         val sineWave = sineWave(440, 1.0, 0.5)
         val buffer = generateSineWave(sineWave, 1.0, 65536)
-        // ^ doesnt work properly when sample rate is not power of 2 and when seconds is not 1
 
         buffer.fullExecution().forEach { println(it) }
 
@@ -447,7 +448,7 @@ class RandomTests {
     fun testBasicSineWaveFullExecution() {
         val freq = 440
 
-        val sineWave = sineWave(freq, 0.5, 0.5)
+        val sineWave = sineWave(freq, 0.5, 1.0)
 
         val data = generateSineWave(sineWave, 1.0, SAMPLE_RATE, 1)
 
@@ -485,9 +486,12 @@ class RandomTests {
 
                     println()
 
-                }
+                    val atan = atan2(it.value.imaginary, it.value.real)
+                    val phase = (atan + (PI / 2.0)) / PI
+                    println("Atan: $atan")
+                    println("Phase: $phase")
 
-        data.getFrequencies().forEach { println(it) }
+                }
 
         sineWave.play()
     }
@@ -563,6 +567,86 @@ class RandomTests {
         // Remember we use decibels not amplitude to change and understand loudness
         generateSineWave(220.0, 0.5, 0.0, 2.0).play()
         generateSineWave(220.0, 0.1, 0.0, 2.0).play()
+    }
+
+    @DisplayName("Test Phase Calculation")
+    @Test
+    fun testPhaseCalculation() {
+        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
+
+        val freq = 440
+
+        val sineWave = sineWave(freq, 0.5, 0.5)
+
+        val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
+
+        val ratio = sampleRate.toDouble() / freq.toDouble()
+
+        val inverseRatio = freq.toDouble() / sampleRate.toDouble()
+
+        val size = Functions.previousPowerOfTwo(data.size)
+
+        val result = LinkedHashMap<Double, Double>() //freq to phase
+
+        data.truncated()                // Truncate to allow FFT
+                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .splitInHalf()          // Get first half since data is identical in both
+                .reducePartials()       // Remove unnecessary partials
+                .forEach {
+                    val calculatedRatio = size.toDouble() / it.key.toDouble()
+                    val calculatedFreq = (it.key.toDouble() / size.toDouble()) * sampleRate.toDouble()
+
+                    println(it)
+
+                    println()
+
+                    println("Calculated ratio:\t $calculatedRatio")
+                    println("Actual ratio:\t\t $ratio")
+
+                    println("Ratio Error:\t\t ${abs(ratio - calculatedRatio)}")
+
+                    println()
+
+                    println("Calculated frequency :\t $calculatedFreq")
+                    println("Actual frequency :\t\t ${inverseRatio * sampleRate.toDouble()} ")
+
+                    println("Frequency Error:\t\t ${abs((inverseRatio * sampleRate.toDouble()) - calculatedFreq)}")
+
+                    println()
+
+                    val atan = atan2(it.value.imaginary, it.value.real)
+                    val phase = (atan + (PI / 2.0)) / PI
+                    println("Atan: $atan")
+                    println("Phase: $phase")
+                    // TODO: 27-Mar-19 Phase is PERFECT when we use SAMPLE_RATE_POWER_OF_TWO, using anything else changes it
+                    // the change is not because of seconds, but only because of sample rate, implying that the size
+                    // of the array matters since only a power of two gets a preserved size, it'll probably end up
+                    // being something to with ratios like the frequency thing again
+
+
+                    result.put(calculatedFreq, phase)
+
+                }
+
+        val original = generateSineWave(sineWave, 1.0)
+
+        original.play()
+
+        val it = result.toList().first()
+
+        val calcSineWave = sineWave(it.first, 0.5, it.second)
+
+        val calcBuffer = generateSineWave(calcSineWave, 1.0)
+
+        calcBuffer.play()
+
+
+        /*original.forEachIndexed { index, byte ->
+            println("${original[index]} \t\t ${calcBuffer[index]}")
+        }*/
+
     }
 
 }
