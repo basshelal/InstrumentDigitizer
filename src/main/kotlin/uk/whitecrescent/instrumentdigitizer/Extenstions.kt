@@ -16,18 +16,18 @@ typealias ComplexMap = Map<Int, Complex>
 inline fun ByteArray.fullExecution() = Functions.fullExecution(this)
 
 inline fun ByteArray.getFrequencies() = fullExecution()
-        .map { (it.key.toDouble() / Functions.previousPowerOfTwo(size).toDouble()) * SAMPLE_RATE.toDouble() }
+        .map { (it.key.d / Functions.previousPowerOfTwo(size).d) * SAMPLE_RATE.d }
         .sorted()
 
-inline fun ByteArray.getFrequenciesDistinct() = getFrequencies().map { it.toInt() }.distinct()
+inline fun ByteArray.getFrequenciesDistinct() = getFrequencies().map { it.i }.distinct()
 
 inline fun ByteArray.padded() = Functions.pad(this)
 
 inline fun ByteArray.truncated() = Functions.truncate(this)
 
-inline fun ByteArray.toComplexArray() = ComplexArray(this.size) { Complex(this[it].toDouble(), 0.0) }
+inline fun ByteArray.toComplexArray() = ComplexArray(this.size) { Complex(this[it].d, 0.0) }
 
-inline fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].toDouble() }
+inline fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].d }
 
 inline fun ByteArray.fourierTransformed() = Functions.fourierTransform(this)
 
@@ -76,7 +76,7 @@ inline fun ComplexArray.toIntMap() = map { it.real.roundToInt() to it.imaginary.
  */
 inline fun ComplexArray.rounded(): ComplexArray {
     forEachIndexed { i, it ->
-        this[i] = Complex(it.real.roundToInt().toDouble(), it.imaginary.roundToInt().toDouble())
+        this[i] = Complex(it.real.roundToInt().d, it.imaginary.roundToInt().d)
     }
     return this
 }
@@ -213,3 +213,9 @@ inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
 }
 
 inline fun Iterable<Any?>.printEach() = this.forEach { println(it) }
+
+inline val Number.d: Double
+    get() = this.toDouble()
+
+inline val Number.i: Int
+    get() = this.toInt()

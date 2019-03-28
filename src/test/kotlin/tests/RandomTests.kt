@@ -22,9 +22,9 @@ import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
-import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE_POWER_OF_TWO
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
+import uk.whitecrescent.instrumentdigitizer.d
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
@@ -56,6 +56,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
+import kotlin.math.hypot
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -452,9 +453,9 @@ class RandomTests {
 
         val data = generateSineWave(sineWave, 1.0, SAMPLE_RATE, 1)
 
-        val ratio = SAMPLE_RATE.toDouble() / freq.toDouble()
+        val ratio = SAMPLE_RATE.d / freq.d
 
-        val inverseRatio = freq.toDouble() / SAMPLE_RATE.toDouble()
+        val inverseRatio = freq.d / SAMPLE_RATE.d
 
         val size = Functions.previousPowerOfTwo(data.size)
 
@@ -465,8 +466,8 @@ class RandomTests {
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
-                    val calculatedRatio = size.toDouble() / it.key.toDouble()
-                    val calculatedFreq = (it.key.toDouble() / size.toDouble()) * SAMPLE_RATE.toDouble()
+                    val calculatedRatio = size.d / it.key.d
+                    val calculatedFreq = (it.key.d / size.d) * SAMPLE_RATE.d
 
                     println(it)
 
@@ -480,9 +481,9 @@ class RandomTests {
                     println()
 
                     println("Calculated frequency :\t $calculatedFreq")
-                    println("Actual frequency :\t\t ${inverseRatio * SAMPLE_RATE.toDouble()} ")
+                    println("Actual frequency :\t\t ${inverseRatio * SAMPLE_RATE.d} ")
 
-                    println("Frequency Error:\t\t ${abs((inverseRatio * SAMPLE_RATE.toDouble()) - calculatedFreq)}")
+                    println("Frequency Error:\t\t ${abs((inverseRatio * SAMPLE_RATE.d) - calculatedFreq)}")
 
                     println()
 
@@ -504,7 +505,7 @@ class RandomTests {
         val sineWave = sineWave(freq, 0.5, 0.0)
 
         (0 until 100).forEach {
-            val phase = it.toDouble() / 1000.0
+            val phase = it.d / 1000.0
             sineWave.phase = phase
 
             generateSineWave(sineWave, 1.0)
@@ -572,7 +573,7 @@ class RandomTests {
     @DisplayName("Test Phase Calculation")
     @Test
     fun testPhaseCalculation() {
-        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
+        val sampleRate = SAMPLE_RATE
 
         val freq = 440
 
@@ -580,13 +581,13 @@ class RandomTests {
 
         val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
 
-        val ratio = sampleRate.toDouble() / freq.toDouble()
+        val ratio = sampleRate.d / freq.d
 
-        val inverseRatio = freq.toDouble() / sampleRate.toDouble()
+        val inverseRatio = freq.d / sampleRate.d
 
         val size = Functions.previousPowerOfTwo(data.size)
 
-        val result = LinkedHashMap<Double, Double>() //freq to phase
+        val result = mutableMapOf<Double, Double>() //freq to phase
 
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
@@ -595,12 +596,23 @@ class RandomTests {
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
-                    val calculatedRatio = size.toDouble() / it.key.toDouble()
-                    val calculatedFreq = (it.key.toDouble() / size.toDouble()) * sampleRate.toDouble()
+                    val keyRatio = it.key.d / size.d
+
+                    val x = size.d / sampleRate.d
+                    val y = it.key.d / sampleRate.d
+
+                    val calculatedRatio = size.d / it.key.d
+                    val calculatedFreq = (it.key.d / size.d) * sampleRate.d
+
+
 
                     println(it)
 
                     println()
+
+                    println("Key ratio:\t $keyRatio")
+                    println("X:\t $x")
+                    println("Y:\t $y")
 
                     println("Calculated ratio:\t $calculatedRatio")
                     println("Actual ratio:\t\t $ratio")
@@ -610,9 +622,14 @@ class RandomTests {
                     println()
 
                     println("Calculated frequency :\t $calculatedFreq")
-                    println("Actual frequency :\t\t ${inverseRatio * sampleRate.toDouble()} ")
+                    println("Actual frequency :\t\t ${inverseRatio * sampleRate.d} ")
 
-                    println("Frequency Error:\t\t ${abs((inverseRatio * sampleRate.toDouble()) - calculatedFreq)}")
+                    println("Frequency Error:\t\t ${abs((inverseRatio * sampleRate.d) - calculatedFreq)}")
+
+                    println()
+
+                    val amplitude = hypot(it.value.imaginary, it.value.real)
+                    println("Amplitude: $amplitude")
 
                     println()
 
@@ -631,8 +648,6 @@ class RandomTests {
                 }
 
         val original = generateSineWave(sineWave, 1.0)
-
-        original.play()
 
         val it = result.toList().first()
 

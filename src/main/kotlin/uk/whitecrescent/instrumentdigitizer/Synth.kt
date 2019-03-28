@@ -15,6 +15,7 @@ import javax.sound.midi.Receiver
 import javax.sound.midi.ShortMessage
 import javax.sound.midi.Synthesizer
 import javax.sound.sampled.AudioSystem
+import kotlin.concurrent.thread
 
 class Synth : Liveable {
 
@@ -149,9 +150,11 @@ class UseMidiKeyboard {
                     when (message.command) {
                         ShortMessage.NOTE_ON -> {
                             val key = Key.fromNumber(message.data1)
-                            val buffer = BASIC_INSTRUMENT.getByteArray(key.frequency, 1.0, 0.5)
-                            line.write(buffer, 0, buffer.size)
-                            //BASIC_INSTRUMENT.play(key, seconds = 0.75)
+                            val buffer = BASIC_INSTRUMENT.getByteArray(key.frequency, 1.0, 1.0)
+                            thread {
+                                line.write(buffer, 0, buffer.size)
+                            }
+
                             println("TimeStamp: $timeStamp")
                             println("Channel: ${message.channel}")
                             println("Command: ${message.command}")

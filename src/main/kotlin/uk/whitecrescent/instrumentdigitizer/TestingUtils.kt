@@ -71,8 +71,8 @@ inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: D
                             seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
 
     val maxAmplitude = amplitude * MAX_AMPLITUDE
-    val totalSamples = (seconds * sampleRate.toDouble() * channels.toDouble()).toInt()
-    val period = sampleRate.toDouble() / frequency
+    val totalSamples = (seconds * sampleRate.d * channels.d).i
+    val period = sampleRate.d / frequency
     val phaseShift = phase * PI
 
     return ByteArray(totalSamples) {
@@ -93,10 +93,10 @@ inline fun generateTwoSineWaves(frequency1: Int, frequency2: Int,
     // TODO: 24-Mar-19 This isn't very right but it's ok, missing amplitude, how much Amp in each wave
 
     val maxAmplitude = 127.0 / 2
-    val totalSamples = (seconds * sampleRate.toDouble() * channels.toDouble()).toInt()
+    val totalSamples = (seconds * sampleRate.d * channels.d).i
 
-    val period1 = sampleRate.toDouble() / frequency1
-    val period2 = sampleRate.toDouble() / frequency2
+    val period1 = sampleRate.d / frequency1
+    val period2 = sampleRate.d / frequency2
 
     val phaseShift1 = phase1 * PI
     val phaseShift2 = phase2 * PI
@@ -149,7 +149,7 @@ inline fun writeToWaveFile(data: ByteArray, fileName: String) {
 inline fun readFromWaveFile(fileName: String): ByteArray {
     val file = newFile("$fileName.wav")
     val stream = AudioSystem.getAudioInputStream(EASY_FORMAT, AudioSystem.getAudioInputStream(file))
-    val buffer = ByteArray(stream.frameLength.toInt())
+    val buffer = ByteArray(stream.frameLength.i)
 
     stream.read(buffer)
 
@@ -187,7 +187,7 @@ inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Double, sampleRate: 
 }
 
 inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Double, sampleRate: Int = SAMPLE_RATE): ByteArray {
-    val amplitude = 1.0 / sineWaves.size.toDouble()
+    val amplitude = 1.0 / sineWaves.size.d
     val arrays = sineWaves.map {
         it.amplitude = amplitude
         generateSineWave(it, seconds, sampleRate)
