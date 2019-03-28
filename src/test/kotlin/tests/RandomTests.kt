@@ -55,6 +55,7 @@ import javax.sound.sampled.AudioSystem
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.absoluteValue
+import kotlin.math.atan
 import kotlin.math.atan2
 import kotlin.math.hypot
 
@@ -596,13 +597,18 @@ class RandomTests {
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
-                    val keyRatio = it.key.d / size.d
+                    val index = it.key.d
+                    val real = it.value.real
+                    val imaginary = it.value.imaginary
+
+
+                    val keyRatio = index.d / size.d
 
                     val x = size.d / sampleRate.d
-                    val y = it.key.d / sampleRate.d
+                    val y = index.d / sampleRate.d
 
-                    val calculatedRatio = size.d / it.key.d
-                    val calculatedFreq = (it.key.d / size.d) * sampleRate.d
+                    val calculatedRatio = size.d / index.d
+                    val calculatedFreq = (index.d / size.d) * sampleRate.d
 
 
 
@@ -628,13 +634,21 @@ class RandomTests {
 
                     println()
 
-                    val amplitude = hypot(it.value.imaginary, it.value.real)
+                    val amplitude = abs(hypot(imaginary, real))
                     println("Amplitude: $amplitude")
 
-                    println()
 
-                    val atan = atan2(it.value.imaginary, it.value.real)
-                    val phase = (atan + (PI / 2.0)) / PI
+                    val ass = imaginary / (hypot(real, imaginary) + real)
+                    val ass2 = atan(ass)
+
+                    println(ass)
+                    println(atan(ass))
+                    println(atan2(imaginary, (hypot(real, imaginary) + real)))
+
+                    // TODO: 28-Mar-19 Find a way to make the imaginary be 0.0!!!! and then do the same to the real
+
+                    val atan = atan2(imaginary, real)
+                    val phase = (ass2 + (PI / 2.0)) / PI
                     println("Atan: $atan")
                     println("Phase: $phase")
                     // TODO: 27-Mar-19 Phase is PERFECT when we use SAMPLE_RATE_POWER_OF_TWO, using anything else changes it
