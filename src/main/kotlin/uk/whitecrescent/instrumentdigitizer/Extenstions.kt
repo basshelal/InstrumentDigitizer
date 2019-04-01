@@ -14,25 +14,25 @@ typealias ComplexArray = Array<Complex>
 typealias ComplexMap = Map<Int, Complex>
 
 
-inline fun ByteArray.fullExecution() = Functions.fullExecution(this)
+inline fun ByteArray.fullExecution() = fullExecution(this)
 
 inline fun ByteArray.getFrequencies() = fullExecution()
-        .map { (it.key.d / Functions.previousPowerOfTwo(size).d) * SAMPLE_RATE.d }
+        .map { (it.key.d / previousPowerOfTwo(size).d) * SAMPLE_RATE.d }
         .sorted()
 
 inline fun ByteArray.getFrequenciesDistinct() = getFrequencies().map { it.i }.distinct()
 
-inline fun ByteArray.padded() = Functions.pad(this)
+inline fun ByteArray.padded() = pad(this)
 
-inline fun ByteArray.truncated() = Functions.truncate(this)
+inline fun ByteArray.truncated() = truncate(this)
 
 inline fun ByteArray.toComplexArray() = ComplexArray(this.size) { Complex(this[it].d, 0.0) }
 
 inline fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].d }
 
-inline fun ByteArray.fourierTransformed() = Functions.fourierTransform(this)
+inline fun ByteArray.fourierTransformed() = fourierTransform(this)
 
-inline fun ByteArray.ttrr() = Functions.ttrr(this)
+inline fun ByteArray.ttrr() = ttrr(this)
 
 inline infix fun ByteArray.add(other: ByteArray): ByteArray {
     val largerSize = max(this.size, other.size)

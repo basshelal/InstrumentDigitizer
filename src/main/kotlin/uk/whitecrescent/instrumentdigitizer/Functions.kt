@@ -15,108 +15,105 @@ import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.ln
 import kotlin.math.log2
 import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.random.Random
 
-object Functions {
+fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplexArray())
 
-    fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplexArray())
+/*
+ * Just the basic Fourier Transform to transform from Time Domain to Frequency domain
+ * should probably return a list of SineWaves
+ */
+fun fourierTransform(data: ComplexArray): ComplexArray {
+    return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.FORWARD)
+}
 
-    /*
-     * Just the basic Fourier Transform to transform from Time Domain to Frequency domain
-     * should probably return a list of SineWaves
-     */
-    fun fourierTransform(data: ComplexArray): ComplexArray {
-        return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.FORWARD)
+fun inverseFourierTransform(data: ComplexArray): ComplexArray {
+    return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.INVERSE)
+}
+
+/*
+ * This will be a transform on the Fourier transformed data,
+ * We use this to find any modulation in pitch over time, like LFOs
+ */
+fun modulationTransform(data: ByteArray): ByteArray {
+    return data
+}
+
+/*
+ * Cuts off any silence from the beginning and end of the data,
+ * this is anything that is 0 after noise reduction
+ */
+fun trim(data: ByteArray): ByteArray {
+    return data
+}
+
+/*
+ * Pads the passed in ByteArray with zeros so that it can be used in Fast Fourier Transform functions
+ * that require the transform be on collections of a size that is a power of 2
+ */
+fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
+    val list = ArrayList(data.asList())
+    val nextPowerOfTwo = nextPowerOfTwo(list.size)
+
+    if (list.size != nextPowerOfTwo) {
+        list.ensureCapacity(nextPowerOfTwo)
+        list.addAll(ByteArray(nextPowerOfTwo - list.size) { padWith }.asList())
     }
 
-    fun inverseFourierTransform(data: ComplexArray): ComplexArray {
-        return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.INVERSE)
-    }
+    require(list.size == nextPowerOfTwo) { "Required size $nextPowerOfTwo, actual size ${list.size}" }
 
-    /*
-     * This will be a transform on the Fourier transformed data,
-     * We use this to find any modulation in pitch over time, like LFOs
-     */
-    fun modulationTransform(data: ByteArray): ByteArray {
-        return data
-    }
+    return list.toByteArray()
+}
 
-    /*
-     * Cuts off any silence from the beginning and end of the data,
-     * this is anything that is 0 after noise reduction
-     */
-    fun trim(data: ByteArray): ByteArray {
-        return data
-    }
+/*
+ * Truncates the passed in ByteArray so that it can be used in Fast Fourier Transform functions
+ * that require the transform be on collections of a size that is a power of 2
+ */
+fun truncate(data: ByteArray) =
+        ByteArray(previousPowerOfTwo(data.size)) { data[it] }
 
-    /*
-     * Pads the passed in ByteArray with zeros so that it can be used in Fast Fourier Transform functions
-     * that require the transform be on collections of a size that is a power of 2
-     */
-    fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
-        val list = ArrayList(data.asList())
-        val nextPowerOfTwo = nextPowerOfTwo(list.size)
+/*
+ * Truncated, Transformed, Rounded, Reduced
+ */
+fun ttrr(data: ByteArray): ComplexMap {
+    return data.truncated().fourierTransformed().rounded().reduced()
+}
 
-        if (list.size != nextPowerOfTwo) {
-            list.ensureCapacity(nextPowerOfTwo)
-            list.addAll(ByteArray(nextPowerOfTwo - list.size) { padWith }.asList())
-        }
+// The full execution that will return the minimum required data to grab the frequency of a sine Wave
+fun fullExecution(data: ByteArray): ComplexMap {
+    return data
+            .truncated()            // Truncate to allow FFT
+            .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+            .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+            .reduced()              // Remove entries equal to (0.0, 0.0)
+            .splitInHalf()          // Get first half since data is identical in both
+            .reducePartials()       // Remove unnecessary partials
+}
 
-        require(list.size == nextPowerOfTwo) { "Required size $nextPowerOfTwo, actual size ${list.size}" }
+inline fun nextPowerOfTwo(number: Int): Int {
+    val lg = log2(number.d)
 
-        return list.toByteArray()
-    }
+    val ceiled = ceil(lg).i
 
-    /*
-     * Truncates the passed in ByteArray so that it can be used in Fast Fourier Transform functions
-     * that require the transform be on collections of a size that is a power of 2
-     */
-    fun truncate(data: ByteArray) =
-            ByteArray(previousPowerOfTwo(data.size)) { data[it] }
+    val result = 2.0.pow(ceiled)
 
-    /*
-     * Truncated, Transformed, Rounded, Reduced
-     */
-    fun ttrr(data: ByteArray): ComplexMap {
-        return data.truncated().fourierTransformed().rounded().reduced()
-    }
+    assert(ArithmeticUtils.isPowerOfTwo(result.l))
+    return result.i
+}
 
-    // The full execution that will return the minimum required data to grab the frequency of a sine Wave
-    fun fullExecution(data: ByteArray): ComplexMap {
-        return data
-                .truncated()            // Truncate to allow FFT
-                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
-                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
-                .reduced()              // Remove entries equal to (0.0, 0.0)
-                .splitInHalf()          // Get first half since data is identical in both
-                .reducePartials()       // Remove unnecessary partials
-    }
+inline fun previousPowerOfTwo(number: Int): Int {
+    val lg = log2(number.d)
 
-    inline fun nextPowerOfTwo(number: Int): Int {
-        val lg = log2(number.d)
+    val floored = floor(lg).i
 
-        val ceiled = ceil(lg).i
+    val result = 2.0.pow(floored)
 
-        val result = 2.0.pow(ceiled)
-
-        assert(ArithmeticUtils.isPowerOfTwo(result.l))
-        return result.i
-    }
-
-    inline fun previousPowerOfTwo(number: Int): Int {
-        val lg = log2(number.d)
-
-        val floored = floor(lg).i
-
-        val result = 2.0.pow(floored)
-
-        assert(ArithmeticUtils.isPowerOfTwo(result.l))
-        return result.i
-    }
-
+    assert(ArithmeticUtils.isPowerOfTwo(result.l))
+    return result.i
 }
 
 inline fun writeRandomAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
@@ -286,7 +283,7 @@ inline fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd:
 inline fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewFile() }
 
 inline fun easyFormatAudioInputStream(buffer: ByteArray) =
-        AudioInputStream(ByteArrayInputStream(buffer), EASY_FORMAT, buffer.size.toLong())
+        AudioInputStream(ByteArrayInputStream(buffer), EASY_FORMAT, buffer.size.l)
 
 inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Double, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val arrays = sineWaves.map { generateSineWave(it, seconds, sampleRate) }
@@ -306,10 +303,24 @@ inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Double, sample
     }
 }
 
-inline fun <reified T : Throwable> ignoreException(exception: Class<T>, func: () -> Any) {
+inline fun <reified T : Throwable> ignoreException(func: () -> Any) {
     try {
         func()
     } catch (e: Throwable) {
         if (e !is T) throw e
     }
+}
+
+/**
+ * Convert amplitude to decibels. 1.0 is zero dB. 0.5 is -6.02 dB.
+ */
+fun amplitudeToDecibels(amplitude: Double): Double {
+    return (ln(amplitude) * 20) / ln(10.0)
+}
+
+/**
+ * Convert decibels to amplitude. Zero dB is 1.0 and -6.02 dB is 0.5.
+ */
+fun decibelsToAmplitude(decibels: Double): Double {
+    return 10.0.pow(decibels / 20.0)
 }

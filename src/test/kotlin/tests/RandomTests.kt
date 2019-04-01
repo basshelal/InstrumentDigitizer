@@ -16,7 +16,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
-import uk.whitecrescent.instrumentdigitizer.Functions
 import uk.whitecrescent.instrumentdigitizer.HALF_PI
 import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.Note
@@ -25,18 +24,21 @@ import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.d
+import uk.whitecrescent.instrumentdigitizer.fourierTransform
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getFrequenciesDistinct
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
+import uk.whitecrescent.instrumentdigitizer.inverseFourierTransform
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
 import uk.whitecrescent.instrumentdigitizer.maxReal
 import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.play
+import uk.whitecrescent.instrumentdigitizer.previousPowerOfTwo
 import uk.whitecrescent.instrumentdigitizer.printEach
 import uk.whitecrescent.instrumentdigitizer.readFromWaveFile
 import uk.whitecrescent.instrumentdigitizer.reducePartials
@@ -283,8 +285,8 @@ class RandomTests {
 
         val original = buffer.padded()
         val originalComplex = original.toComplexArray()
-        val transformed = Functions.fourierTransform(original)
-        val inversed = Functions.inverseFourierTransform(transformed)
+        val transformed = fourierTransform(original)
+        val inversed = inverseFourierTransform(transformed)
 
         assertTrue(originalComplex.size == transformed.size)
         assertTrue(transformed.size == inversed.size)
@@ -313,8 +315,8 @@ class RandomTests {
 
         val original = buffer.padded()
         val originalComplex = original.toComplexArray()
-        val transformed = Functions.fourierTransform(original)
-        val inversed = Functions.inverseFourierTransform(transformed)
+        val transformed = fourierTransform(original)
+        val inversed = inverseFourierTransform(transformed)
 
         /*writeTextToFile(buffer, outPath = RESOURCES_DIR + "SineWave.out")
         writeTextToFile(transformed, outPath = RESOURCES_DIR + "Transformed.out")*/
@@ -447,7 +449,7 @@ class RandomTests {
 
         val inverseRatio = freq.d / SAMPLE_RATE.d
 
-        val size = Functions.previousPowerOfTwo(data.size)
+        val size = previousPowerOfTwo(data.size)
 
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
@@ -577,7 +579,7 @@ class RandomTests {
 
         val frequencyToSampleRateKNOWN = freq.d / sampleRate
 
-        val size = Functions.previousPowerOfTwo(data.size)
+        val size = previousPowerOfTwo(data.size)
 
         val result = mutableMapOf<Double, Double>() //freq to phase
 
