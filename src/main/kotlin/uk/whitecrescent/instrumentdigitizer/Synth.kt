@@ -6,8 +6,8 @@ import com.jsyn.instruments.DualOscillatorSynthVoice
 import com.jsyn.midi.MidiSynthesizer
 import com.jsyn.unitgen.LineOut
 import com.jsyn.util.MultiChannelSynthesizer
+import sun.audio.AudioDevice.device
 import javax.sound.midi.MidiChannel
-import javax.sound.midi.MidiDevice
 import javax.sound.midi.MidiMessage
 import javax.sound.midi.MidiSystem
 import javax.sound.midi.MidiUnavailableException
@@ -38,8 +38,7 @@ class Synth {
         synthesizer = MidiSystem.getSynthesizer()
         synthesizer.open()
         channel = synthesizer.channels.first()
-        val instruments = synthesizer.defaultSoundbank.instruments
-        synthesizer.loadInstrument(instruments.first())
+        synthesizer.loadInstrument(synthesizer.defaultSoundbank.instruments.first())
         println("Latency: ${synthesizer.latency / 1000} milliseconds")
     }
 
@@ -47,57 +46,24 @@ class Synth {
         synthesizer.close()
     }
 
-    // TODO: 20-Jan-19 Latency is high when playing! These might be fixed by using ASIO
-    // To use and understand ASIO a little better go see the ExampleHost class better
-    // basically we're going to be dealing with very low level stuff
     private fun startMidi() {
-        var device: MidiDevice
-        val infos = MidiSystem.getMidiDeviceInfo()
-
-        infos.forEach {
-            device = MidiSystem.getMidiDevice(it)
-
-            try {
-                device.transmitter.receiver = object : Receiver {
-                    override fun send(msg: MidiMessage, timeStamp: Long) {
-                        require(msg is ShortMessage)
-                        when (msg.command) {
-                            ShortMessage.NOTE_ON -> {
-                                channel.noteOn(msg.data1, msg.data2)
-                            }
-                            ShortMessage.NOTE_OFF -> {
-                                channel.noteOff(msg.data1)
-                            }
-                            ShortMessage.PITCH_BEND -> {
-                                println("Pitch Bend")
-                            }
-                        }
-                        println("TimeStamp: $timeStamp")
-                        println("Channel: ${msg.channel}")
-                        println("Command: ${msg.command}")
-                        println("Data1: ${msg.data1}") // Note value
-                        println("Data2: ${msg.data2}") // Velocity
-                    }
-
-                    override fun close() {}
+        MidiSystem.getMidiDeviceInfo().forEach {
+            ignoreException(MidiUnavailableException::class.java) {
+                MidiSystem.getMidiDevice(it).apply {
+                    transmitter.receiver = CustomReceiver(channel)
+                    open()
+                    println("$deviceInfo was opened")
                 }
-
-                device.open()
-            } catch (e: MidiUnavailableException) {
             }
-
-            println(device.deviceInfo.toString() + " was opened")
         }
     }
 
     private fun stopMidi() {
-        var device: MidiDevice
-        val infos = MidiSystem.getMidiDeviceInfo()
-
-        infos.forEach {
-            device = MidiSystem.getMidiDevice(it)
-            if (device.isOpen) device.close()
-            println(device.deviceInfo.toString() + " is closed")
+        MidiSystem.getMidiDeviceInfo().forEach {
+            MidiSystem.getMidiDevice(it).apply {
+                if (isOpen) device.close()
+                println("$device is closed")
+            }
         }
     }
 }
@@ -138,7 +104,7 @@ class UseMidiKeyboard {
             keyboard.open()
             // Put the receiver in the transmitter.
             // This gives fairly low latency playing.
-            println("Play MIDI keyboard: " + keyboard.deviceInfo.description)
+            println("Play MIDI keyboard: ${keyboard.deviceInfo.description}")
 
             keyboard.transmitter.receiver = object : Receiver {
                 override fun close() {
@@ -181,6 +147,38 @@ class UseMidiKeyboard {
     }
 }
 
+class CustomReceiver(val channel: MidiChannel) : Receiver {
+
+    override fun send(message: MidiMessage, timeStamp: Long) {
+        require(message is ShortMessage)
+        when (message.command) {
+            ShortMessage.NOTE_ON -> {
+                println("Note on")
+                channel.noteOn(message.data1, message.data2)
+            }
+            ShortMessage.NOTE_OFF -> {
+                println("Note off")
+                channel.noteOff(message.data1)
+            }
+            ShortMessage.PITCH_BEND -> {
+                println("Pitch bend")
+                // from 0 to 16383, 8192 is middle
+                channel.pitchBend = 8192
+            }
+        }
+        println("TimeStamp: $timeStamp")
+        println("Channel: ${message.channel}")
+        println("Command: ${message.command}")
+        println("Data1: ${message.data1}") // Note value
+        println("Data2: ${message.data2}") // Velocity
+    }
+
+    override fun close() {
+        println("Closing Receiver")
+    }
+
+}
+
 fun main() {
-    UseMidiKeyboard()
+    Synth().create()
 }

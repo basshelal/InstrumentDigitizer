@@ -306,3 +306,10 @@ inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Double, sample
     }
 }
 
+inline fun <reified T : Throwable> ignoreException(exception: Class<T>, func: () -> Any) {
+    try {
+        func()
+    } catch (e: Throwable) {
+        if (e !is T) throw e
+    }
+}
