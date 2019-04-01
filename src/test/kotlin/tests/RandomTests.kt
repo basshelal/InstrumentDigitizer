@@ -578,13 +578,15 @@ class RandomTests {
 
         val freq = 440
 
-        val sineWave = sineWave(freq, 0.5, 0.1)
+        val phase = PI / 3.0
+
+        val sineWave = sineWave(freq, 0.5, phase)
 
         val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
 
         val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
 
-        val frequencyToSampleRateKNOWN = freq.d / sampleRate.d
+        val frequencyToSampleRateKNOWN = freq.d / sampleRate
 
         val size = Functions.previousPowerOfTwo(data.size)
 
@@ -639,9 +641,10 @@ class RandomTests {
                     println()
 
                     val atan2 = atan2(imaginary, real)
-                    val phase = (atan2 + HALF_PI) / PI
+                    val phaseCalc = (atan2 + HALF_PI) / PI
                     println("Atan: $atan2")
-                    println("Phase: $phase")
+                    println("Phase: $phaseCalc")
+                    println("Actual Phase: $phase")
 
                     val truncationAmount = data.size.d / size.d
                     println("Truncation Amount: $truncationAmount")
@@ -654,7 +657,9 @@ class RandomTests {
                     // being something to with ratios like the frequency thing again
 
 
-                    result.put(indexToSizeTimesSampleRate, phase)
+                    result.put(indexToSizeTimesSampleRate, phaseCalc)
+
+                    println()
 
                 }
 
