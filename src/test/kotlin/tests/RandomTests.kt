@@ -21,7 +21,6 @@ import uk.whitecrescent.instrumentdigitizer.HALF_PI
 import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
-import uk.whitecrescent.instrumentdigitizer.ReaderWriter
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
@@ -275,16 +274,6 @@ class RandomTests {
             drain()
             close()
         }
-    }
-
-    @DisplayName("Test Old Fourier")
-    @Test
-    fun testOldFourier() {
-        val reader = ReaderWriter()
-        val buffer = reader.read()
-        val complexArray = Functions.fourierTransform(buffer.padded())
-        complexArray.forEach { print(it) }
-        reader.close()
     }
 
     @DisplayName("Test Fourier Forward and Inverse")
@@ -578,7 +567,7 @@ class RandomTests {
 
         val freq = 440
 
-        val phase = PI / 3.0
+        val phase = 0.5
 
         val sineWave = sineWave(freq, 0.5, phase)
 

@@ -24,11 +24,8 @@ class App : Application() {
         synth.destroy()
         System.exit(0)
     }
+}
 
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            launch(App::class.java, *args)
-        }
-    }
+fun main() {
+    Application.launch(App::class.java)
 }

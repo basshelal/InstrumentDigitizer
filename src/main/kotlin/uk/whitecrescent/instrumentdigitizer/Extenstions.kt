@@ -3,6 +3,7 @@
 package uk.whitecrescent.instrumentdigitizer
 
 import org.apache.commons.math3.complex.Complex
+import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import kotlin.math.max
 import kotlin.math.min
@@ -43,6 +44,7 @@ inline infix fun ByteArray.add(other: ByteArray): ByteArray {
         else (0 + biggerArray[it]).toByte()
     }
 }
+
 
 inline fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
 
@@ -220,5 +222,30 @@ inline val Number.d: Double
 inline val Number.i: Int
     get() = this.toInt()
 
+inline val Number.l: Long
+    get() = this.toLong()
+
+inline val Number.f: Float
+    get() = this.toFloat()
+
 inline val Number.inverse: Double
     get() = 1 / this.d
+
+inline fun AudioInputStream.printStreamInfo() {
+    val frames = this.frameLength
+    val frameSize = this.format.frameSize
+    val frameRate = this.format.frameRate
+    val sampleRate = this.format.sampleRate
+    val sampleSize = this.format.sampleSizeInBits
+    println("""
+            Frames: $frames
+            FrameSize: $frameSize
+            FrameRate: $frameRate
+            SampleRate: $sampleRate
+            SampleSize: $sampleSize
+            Format: $format
+        """.trimIndent())
+
+    val duration = frames / frameRate
+    println("Duration: $duration")
+}

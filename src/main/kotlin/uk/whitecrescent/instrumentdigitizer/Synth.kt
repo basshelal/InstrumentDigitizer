@@ -17,18 +17,18 @@ import javax.sound.midi.Synthesizer
 import javax.sound.sampled.AudioSystem
 import kotlin.concurrent.thread
 
-class Synth : Liveable {
+class Synth {
 
     lateinit var synthesizer: Synthesizer
     lateinit var channel: MidiChannel
 
-    override fun create(): Synth {
+    fun create(): Synth {
         startSynthesizer()
         startMidi()
         return this
     }
 
-    override fun destroy(): Synth {
+    fun destroy(): Synth {
         stopSynthesizer()
         stopMidi()
         return this
