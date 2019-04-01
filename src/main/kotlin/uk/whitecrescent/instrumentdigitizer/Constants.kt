@@ -1,6 +1,9 @@
 package uk.whitecrescent.instrumentdigitizer
 
 import javax.sound.sampled.AudioFormat
+import kotlin.math.PI
+
+const val HALF_PI = PI / 2.0
 
 const val RESOURCES_DIR = "src/main/resources/"
 

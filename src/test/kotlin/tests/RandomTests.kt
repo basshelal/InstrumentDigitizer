@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Functions
+import uk.whitecrescent.instrumentdigitizer.HALF_PI
 import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
@@ -55,7 +56,6 @@ import javax.sound.sampled.AudioSystem
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.absoluteValue
-import kotlin.math.atan
 import kotlin.math.atan2
 import kotlin.math.hypot
 
@@ -578,7 +578,7 @@ class RandomTests {
 
         val freq = 440
 
-        val sineWave = sineWave(freq, 0.5, 0.5)
+        val sineWave = sineWave(freq, 0.5, 0.1)
 
         val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
 
@@ -619,38 +619,35 @@ class RandomTests {
                     println("Index / Size :\t $indexToSize")
                     println("Size / SampleRate :\t $sizeToSampleRate")
                     println("Index / SampleRate :\t $indexToSampleRate")
-
                     println("Size / Index :\t $sizeToIndex")
-                    println("SampleRate / Frequency :\t\t $sampleRateToFrequencyKNOWN")
+                    println("SampleRate / Frequency :\t $sampleRateToFrequencyKNOWN")
 
-                    println("Ratio Error:\t\t ${abs(sampleRateToFrequencyKNOWN - sizeToIndex)}")
+                    println("Ratio Error:\t ${abs(sampleRateToFrequencyKNOWN - sizeToIndex)}")
 
                     println()
 
                     println("Calculated frequency :\t $indexToSizeTimesSampleRate")
-                    println("Actual frequency :\t\t ${frequencyToSampleRateKNOWN * sampleRate.d} ")
+                    println("Actual frequency :\t ${freq.d}")
 
-                    println("Frequency Error:\t\t ${abs((frequencyToSampleRateKNOWN * sampleRate.d) - indexToSizeTimesSampleRate)}")
+                    println("Frequency Error:\t ${abs(freq.d - indexToSizeTimesSampleRate)}")
 
                     println()
 
                     val amplitude = abs(hypot(imaginary, real))
                     println("Amplitude: $amplitude")
 
+                    println()
 
-                    val ass = imaginary / (hypot(real, imaginary) + real)
-                    val ass2 = atan(ass)
+                    val atan2 = atan2(imaginary, real)
+                    val phase = (atan2 + HALF_PI) / PI
+                    println("Atan: $atan2")
+                    println("Phase: $phase")
 
-                    println(ass)
-                    println(atan(ass))
-                    println(atan2(imaginary, (hypot(real, imaginary) + real)))
+                    val truncationAmount = data.size.d / size.d
+                    println("Truncation Amount: $truncationAmount")
 
                     // TODO: 28-Mar-19 Find a way to make the imaginary be 0.0!!!! and then do the same to the real
 
-                    val atan = atan2(imaginary, real)
-                    val phase = (ass2 + (PI / 2.0)) / PI
-                    println("Atan: $atan")
-                    println("Phase: $phase")
                     // TODO: 27-Mar-19 Phase is PERFECT when we use SAMPLE_RATE_POWER_OF_TWO, using anything else changes it
                     // the change is not because of seconds, but only because of sample rate, implying that the size
                     // of the array matters since only a power of two gets a preserved size, it'll probably end up
