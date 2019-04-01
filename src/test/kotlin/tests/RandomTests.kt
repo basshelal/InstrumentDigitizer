@@ -21,6 +21,7 @@ import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
+import uk.whitecrescent.instrumentdigitizer.addAllSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.d
@@ -634,8 +635,12 @@ class RandomTests {
                     val atan2 = atan2(imaginary, real)
                     val phaseCalc = (atan2 + HALF_PI) / PI
                     println("Atan: $atan2")
-                    println("Phase: $phaseCalc")
+                    println("Calculated Phase: $phaseCalc")
                     println("Actual Phase: $phase")
+
+                    println("Phase Error:\t ${abs(phaseCalc - phase)}")
+
+                    println()
 
                     val truncationAmount = data.size.d / size.d
                     println("Truncation Amount: $truncationAmount")
@@ -656,18 +661,9 @@ class RandomTests {
 
         val original = generateSineWave(sineWave, 1.0)
 
-        val it = result.toList().first()
-
-        val calcSineWave = sineWave(it.first, 0.5, it.second)
-
-        val calcBuffer = generateSineWave(calcSineWave, 1.0)
-
-        calcBuffer.play()
-
-
-        /*original.forEachIndexed { index, byte ->
-            println("${original[index]} \t\t ${calcBuffer[index]}")
-        }*/
+        result.map {
+            sineWave(it.key, 0.5, it.value)
+        }.addAllSineWavesEvenly(2.0).play()
 
     }
 

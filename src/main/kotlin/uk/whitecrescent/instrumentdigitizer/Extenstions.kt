@@ -209,6 +209,9 @@ inline fun List<SineWave>.sortedByFrequency() = sortedBy { it.frequency }
 inline fun List<SineWave>.addAllSineWaves(seconds: Double = 1.0, sampleRate: Int = SAMPLE_RATE) =
         addSineWaves(this, seconds, sampleRate)
 
+inline fun List<SineWave>.addAllSineWavesEvenly(seconds: Double = 1.0, sampleRate: Int = SAMPLE_RATE) =
+        addSineWavesEvenly(this, seconds, sampleRate)
+
 inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
     require(this.isNotEmpty()) { "List cannot be empty" }
     return sortedByFrequency().map { it.frequency / this[0].frequency }

@@ -28,14 +28,14 @@ val WAVE_DEFAULT_FORMAT = AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100F, 1
 val EASY_FORMAT = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
 
 val SAMPLE_INSTRUMENT = Instrument(listOf(
-        OvertoneRatio(1.0, 0.40),
-        OvertoneRatio(2.0, 0.10),
-        OvertoneRatio(3.0, 0.05),
-        OvertoneRatio(4.0, 0.05),
-        OvertoneRatio(5.0, 0.05),
-        OvertoneRatio(6.0, 0.05),
-        OvertoneRatio(7.0, 0.025),
-        OvertoneRatio(8.0, 0.025)
+        OvertoneRatio(1.0, 0.40, 0.5),
+        OvertoneRatio(2.0, 0.10, 0.1),
+        OvertoneRatio(3.0, 0.05, 0.2),
+        OvertoneRatio(4.0, 0.05, 0.3),
+        OvertoneRatio(5.0, 0.05, 0.4),
+        OvertoneRatio(6.0, 0.05, 0.6),
+        OvertoneRatio(7.0, 0.025, 0.8),
+        OvertoneRatio(8.0, 0.025, 0.9)
 ))
 
-val BASIC_INSTRUMENT = Instrument(listOf(OvertoneRatio(1.0, 1.0)))
+val BASIC_INSTRUMENT = Instrument(listOf(OvertoneRatio(1.0, 1.0, 0.5)))
