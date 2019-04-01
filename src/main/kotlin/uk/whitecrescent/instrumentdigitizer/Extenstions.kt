@@ -219,3 +219,6 @@ inline val Number.d: Double
 
 inline val Number.i: Int
     get() = this.toInt()
+
+inline val Number.inverse: Double
+    get() = 1 / this.d

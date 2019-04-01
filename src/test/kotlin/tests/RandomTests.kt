@@ -582,9 +582,9 @@ class RandomTests {
 
         val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
 
-        val ratio = sampleRate.d / freq.d
+        val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
 
-        val inverseRatio = freq.d / sampleRate.d
+        val frequencyToSampleRateKNOWN = freq.d / sampleRate.d
 
         val size = Functions.previousPowerOfTwo(data.size)
 
@@ -601,36 +601,36 @@ class RandomTests {
                     val real = it.value.real
                     val imaginary = it.value.imaginary
 
+                    val indexToSize = index.d / size.d
 
-                    val keyRatio = index.d / size.d
+                    val sizeToSampleRate = size.d / sampleRate.d
 
-                    val x = size.d / sampleRate.d
-                    val y = index.d / sampleRate.d
+                    val indexToSampleRate = index.d / sampleRate.d
 
-                    val calculatedRatio = size.d / index.d
-                    val calculatedFreq = (index.d / size.d) * sampleRate.d
+                    val sizeToIndex = size.d / index.d
 
+                    val indexToSizeTimesSampleRate = indexToSize * sampleRate.d
 
 
                     println(it)
 
                     println()
 
-                    println("Key ratio:\t $keyRatio")
-                    println("X:\t $x")
-                    println("Y:\t $y")
+                    println("Index / Size :\t $indexToSize")
+                    println("Size / SampleRate :\t $sizeToSampleRate")
+                    println("Index / SampleRate :\t $indexToSampleRate")
 
-                    println("Calculated ratio:\t $calculatedRatio")
-                    println("Actual ratio:\t\t $ratio")
+                    println("Size / Index :\t $sizeToIndex")
+                    println("SampleRate / Frequency :\t\t $sampleRateToFrequencyKNOWN")
 
-                    println("Ratio Error:\t\t ${abs(ratio - calculatedRatio)}")
+                    println("Ratio Error:\t\t ${abs(sampleRateToFrequencyKNOWN - sizeToIndex)}")
 
                     println()
 
-                    println("Calculated frequency :\t $calculatedFreq")
-                    println("Actual frequency :\t\t ${inverseRatio * sampleRate.d} ")
+                    println("Calculated frequency :\t $indexToSizeTimesSampleRate")
+                    println("Actual frequency :\t\t ${frequencyToSampleRateKNOWN * sampleRate.d} ")
 
-                    println("Frequency Error:\t\t ${abs((inverseRatio * sampleRate.d) - calculatedFreq)}")
+                    println("Frequency Error:\t\t ${abs((frequencyToSampleRateKNOWN * sampleRate.d) - indexToSizeTimesSampleRate)}")
 
                     println()
 
@@ -657,7 +657,7 @@ class RandomTests {
                     // being something to with ratios like the frequency thing again
 
 
-                    result.put(calculatedFreq, phase)
+                    result.put(indexToSizeTimesSampleRate, phase)
 
                 }
 
