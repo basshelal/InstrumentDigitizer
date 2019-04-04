@@ -21,6 +21,7 @@ import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
+import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE_POWER_OF_TWO
 import uk.whitecrescent.instrumentdigitizer.addAllSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
@@ -566,7 +567,7 @@ class RandomTests {
     @DisplayName("Test Phase Calculation")
     @Test
     fun testPhaseCalculation() {
-        val sampleRate = SAMPLE_RATE
+        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
 
         val freq = 440
 
@@ -580,7 +581,9 @@ class RandomTests {
 
         val frequencyToSampleRateKNOWN = freq.d / sampleRate
 
-        val size = previousPowerOfTwo(data.size)
+        val originalSize = data.size
+
+        val newSize = previousPowerOfTwo(data.size)
 
         val result = mutableMapOf<Double, Double>() //freq to phase
 
@@ -595,13 +598,13 @@ class RandomTests {
                     val real = it.value.real
                     val imaginary = it.value.imaginary
 
-                    val indexToSize = index.d / size.d
+                    val indexToSize = index.d / newSize.d
 
-                    val sizeToSampleRate = size.d / sampleRate.d
+                    val sizeToSampleRate = newSize.d / sampleRate.d
 
                     val indexToSampleRate = index.d / sampleRate.d
 
-                    val sizeToIndex = size.d / index.d
+                    val sizeToIndex = newSize.d / index.d
 
                     val indexToSizeTimesSampleRate = indexToSize * sampleRate.d
 
@@ -642,7 +645,7 @@ class RandomTests {
 
                     println()
 
-                    val truncationAmount = data.size.d / size.d
+                    val truncationAmount = originalSize.d / newSize.d
                     println("Truncation Amount: $truncationAmount")
 
                     // TODO: 28-Mar-19 Find a way to make the imaginary be 0.0!!!! and then do the same to the real
@@ -667,4 +670,161 @@ class RandomTests {
 
     }
 
+    @DisplayName("Test Perfect Phase Calculation")
+    @Test
+    fun testPerfectPhaseCalculation() {
+        val sampleRate = SAMPLE_RATE
+
+        val freq = 440
+
+        val phase = 0.25
+
+        val sineWave = sineWave(freq, 0.5, phase)
+
+        val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
+
+        val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
+
+        val frequencyToSampleRateKNOWN = freq.d / sampleRate
+
+        val originalSize = data.size
+
+        val newSize = previousPowerOfTwo(data.size)
+
+        val result = mutableMapOf<Double, Double>() //freq to phase
+
+        data.truncated()                // Truncate to allow FFT
+                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .splitInHalf()          // Get first half since data is identical in both
+                .reducePartials()       // Remove unnecessary partials
+                .forEach {
+                    val index = it.key.d
+                    val real = it.value.real
+                    val imaginary = it.value.imaginary
+
+                    val indexToSize = index.d / newSize.d
+
+                    val sizeToSampleRate = newSize.d / sampleRate.d
+
+                    val indexToSampleRate = index.d / sampleRate.d
+
+                    val sizeToIndex = newSize.d / index.d
+
+                    val indexToSizeTimesSampleRate = indexToSize * sampleRate.d
+
+
+                    println(it)
+
+                    println()
+
+                    println("Index / Size :\t $indexToSize")
+                    println("Size / SampleRate :\t $sizeToSampleRate")
+                    println("Index / SampleRate :\t $indexToSampleRate")
+                    println("Size / Index :\t $sizeToIndex")
+                    println("SampleRate / Frequency :\t $sampleRateToFrequencyKNOWN")
+
+                    println("Ratio Error:\t ${abs(sampleRateToFrequencyKNOWN - sizeToIndex)}")
+
+                    println()
+
+                    println("Calculated frequency :\t $indexToSizeTimesSampleRate")
+                    println("Actual frequency :\t ${freq.d}")
+
+                    println("Frequency Error:\t ${abs(freq.d - indexToSizeTimesSampleRate)}")
+
+                    println()
+
+                    val amplitude = abs(hypot(imaginary, real))
+                    println("Amplitude: $amplitude")
+
+                    println()
+
+                    val atan2 = atan2(imaginary, real)
+                    val phaseCalc = (atan2 + HALF_PI) / PI
+                    println("Atan: $atan2")
+                    println("Calculated Phase: $phaseCalc")
+                    println("Actual Phase: $phase")
+
+                    println("Phase Error:\t ${abs(phaseCalc - phase)}")
+
+                    println()
+
+                    val truncationAmount = originalSize.d / newSize.d
+                    println("Truncation Amount: $truncationAmount")
+
+                    result.put(indexToSizeTimesSampleRate, phaseCalc)
+
+                    println()
+
+                }
+
+        (0 until 1000).forEach { i ->
+            val newPhase = i.d / 1000.0
+            sineWave.phase = newPhase
+
+            generateSineWave(sineWave, 1.0)
+                    .fullExecution().forEach {
+                        val real = it.value.real
+                        val imaginary = it.value.imaginary
+
+                        val atan2 = atan2(imaginary, real)
+                        val phaseCalc = (atan2 + HALF_PI) / PI
+
+                        if (phaseCalc == phase) {
+                            println("Atan: $atan2")
+                            println("Calculated Phase: $phaseCalc")
+                            println("Actual Phase: $phase")
+                            println("New Phase: $newPhase at $i")
+
+                            // TODO: 04-Apr-19 63 seems to be the magic i index where everything works with frequency 440
+                            // with many different sample rates
+                            // 63 for 440
+                            // 126 for 880
+
+
+                            /*
+                            * amplitude, magnitude = hypot function, use this to get the peaks
+                            *
+                            *
+                            * frequency is the index(es) with the highest magnitude (hypot func)
+                            *
+                            *
+                            * get the indexes with the highest real part (I believe we've already done this)
+                            * then get the indexes with the highest imag part, remember to normalize this based
+                            * on the originalSize, SampleRate and newSize as we did, so that when the size is different
+                            * we still get the right frequencies, as long as it's a possible frequency in this sample
+                            * rate, remember Nyquist theory
+                            *
+                            *
+                            * FFT is basically, for each index,
+                            * get me the amplitude (of a sine wave of that frequency) from the original input
+                            *
+                            * whenever phase changes, the real and imag change but the max amplitudes never change,
+                            * hence why when we change the phase our current function still detects the frequency
+                            * even tough it disregards imag right now
+                            *
+                            * phase is still the atan2 function
+                            *
+                            * */
+
+
+
+
+
+                            println()
+                        }
+                    }
+            println("Finished $i")
+            println()
+        }
+
+        val original = generateSineWave(sineWave, 1.0)
+
+        /*result.map {
+            sineWave(it.key, 0.5, it.value)
+        }.addAllSineWavesEvenly(2.0).play()*/
+
+    }
 }
