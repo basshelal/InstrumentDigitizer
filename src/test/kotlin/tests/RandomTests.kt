@@ -33,18 +33,24 @@ import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getFrequenciesDistinct
 import uk.whitecrescent.instrumentdigitizer.getSineOscillators
+import uk.whitecrescent.instrumentdigitizer.i
 import uk.whitecrescent.instrumentdigitizer.inverseFourierTransform
+import uk.whitecrescent.instrumentdigitizer.label
+import uk.whitecrescent.instrumentdigitizer.mapIndexed
+import uk.whitecrescent.instrumentdigitizer.maxDouble
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
 import uk.whitecrescent.instrumentdigitizer.maxReal
+import uk.whitecrescent.instrumentdigitizer.minDouble
 import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.play
 import uk.whitecrescent.instrumentdigitizer.previousPowerOfTwo
 import uk.whitecrescent.instrumentdigitizer.printEach
+import uk.whitecrescent.instrumentdigitizer.printLine
 import uk.whitecrescent.instrumentdigitizer.readFromWaveFile
 import uk.whitecrescent.instrumentdigitizer.reducePartials
-import uk.whitecrescent.instrumentdigitizer.reduced
+import uk.whitecrescent.instrumentdigitizer.removeZeros
 import uk.whitecrescent.instrumentdigitizer.rounded
 import uk.whitecrescent.instrumentdigitizer.sineWave
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
@@ -456,7 +462,7 @@ class RandomTests {
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
                 .rounded()              // Round everything to Int to avoid tiny numbers close to 0
-                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .removeZeros()              // Remove entries equal to (0.0, 0.0)
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
@@ -590,7 +596,7 @@ class RandomTests {
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
                 .rounded()              // Round everything to Int to avoid tiny numbers close to 0
-                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .removeZeros()              // Remove entries equal to (0.0, 0.0)
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
@@ -696,7 +702,7 @@ class RandomTests {
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
                 .rounded()              // Round everything to Int to avoid tiny numbers close to 0
-                .reduced()              // Remove entries equal to (0.0, 0.0)
+                .removeZeros()              // Remove entries equal to (0.0, 0.0)
                 .splitInHalf()          // Get first half since data is identical in both
                 .reducePartials()       // Remove unnecessary partials
                 .forEach {
@@ -819,6 +825,159 @@ class RandomTests {
             println("Finished $i")
             println()
         }
+
+        val original = generateSineWave(sineWave, 1.0)
+
+        /*result.map {
+            sineWave(it.key, 0.5, it.value)
+        }.addAllSineWavesEvenly(2.0).play()*/
+
+    }
+
+    @DisplayName("Test Perfect Phase Calculation Test")
+    @Test
+    fun testPerfectPhaseCalculationTest() {
+        val sampleRate = SAMPLE_RATE
+
+        val freq = 440
+
+        val phase = 0.5
+
+        val sineWave = sineWave(freq, 0.5, phase)
+
+        val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
+
+        val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
+
+        val frequencyToSampleRateKNOWN = freq.d / sampleRate
+
+        val originalSize = data.size
+
+        val newSize = previousPowerOfTwo(data.size)
+
+        val result = mutableMapOf<Double, Double>() //freq to phase
+
+        var maxReal = -1 to minDouble
+
+        var minReal = -1 to maxDouble
+
+        var maxImag = -1 to minDouble
+
+        var minImag = -1 to maxDouble
+
+        var maxAmp = -1 to minDouble
+
+        var minAmp = -1 to maxDouble
+
+        data.truncated()                // Truncate to allow FFT
+                .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
+                .rounded()              // Round everything to Int to avoid tiny numbers close to 0
+                .mapIndexed()
+                .splitInHalf()          // Get first half since data is identical in both
+                .forEach {
+                    val index = it.key.d
+                    val real = it.value.real
+                    val imaginary = it.value.imaginary
+
+                    val indexToSize = index.d / newSize.d
+
+                    val sizeToSampleRate = newSize.d / sampleRate.d
+
+                    val indexToSampleRate = index.d / sampleRate.d
+
+                    val sizeToIndex = newSize.d / index.d
+
+                    val indexToSizeTimesSampleRate = indexToSize * sampleRate.d
+
+                    val amplitude = abs(hypot(imaginary, real))
+
+                    val atan2 = atan2(imaginary, real)
+
+                    // val phaseCalc = (atan2 + HALF_PI) / PI
+                    val phaseCalc = abs((atan2) / PI)
+
+                    if (real > maxReal.second) maxReal = index.i to real
+                    if (real < minReal.second) minReal = index.i to real
+
+                    if (imaginary > maxImag.second) maxImag = index.i to imaginary
+                    if (imaginary < minImag.second) minImag = index.i to imaginary
+
+                    if (amplitude > maxAmp.second) maxAmp = index.i to amplitude
+                    if (amplitude < minAmp.second) minAmp = index.i to amplitude
+
+
+                    printLine(it)
+
+                    "Phase" label phaseCalc
+
+                }
+
+        "Max Real" label maxReal
+        "Min Real" label minReal
+        "Max Imag" label maxImag
+        "Min Imag" label minImag
+        "Max Amp " label maxAmp
+        "Min Amp " label minAmp
+
+        // TODO: 05-Apr-19 Idea: Output this to a file and or plot it somewhere so that we can better understand the data
+        // and use the output in the paper
+
+        /*
+         * amplitude, magnitude = hypot function, use this to get the peaks
+         *
+         *
+         * frequency is the index(es) with the highest magnitude (hypot func)
+         *
+         *
+         * get the indexes with the highest real part (I believe we've already done this)
+         * then get the indexes with the highest imag part, remember to normalize this based
+         * on the originalSize, SampleRate and newSize as we did, so that when the size is different
+         * we still get the right frequencies, as long as it's a possible frequency in this sample
+         * rate, remember Nyquist theory
+         *
+         *
+         * FFT is basically, for each index,
+         * get me the amplitude (of a sine wave of that frequency) from the original input
+         *
+         * whenever phase changes, the real and imag change but the max amplitudes never change,
+         * hence why when we change the phase our current function still detects the frequency
+         * even tough it disregards imag right now
+         *
+         * phase is still the atan2 function
+         *
+         * */
+
+
+        /*(0 until 1000).forEach { i ->
+            val newPhase = i.d / 1000.0
+            sineWave.phase = newPhase
+
+            generateSineWave(sineWave, 1.0)
+                    .fullExecution().forEach {
+                        val real = it.value.real
+                        val imaginary = it.value.imaginary
+
+                        val atan2 = atan2(imaginary, real)
+                        val phaseCalc = (atan2 + HALF_PI) / PI
+
+                        if (phaseCalc == phase) {
+                            println("Atan: $atan2")
+                            println("Calculated Phase: $phaseCalc")
+                            println("Actual Phase: $phase")
+                            println("New Phase: $newPhase at $i")
+
+                            // TODO: 04-Apr-19 63 seems to be the magic i index where everything works with frequency 440
+                            // with many different sample rates
+                            // 63 for 440
+                            // 126 for 880
+
+
+                            println()
+                        }
+                    }
+            println("Finished $i")
+            println()
+        }*/
 
         val original = generateSineWave(sineWave, 1.0)
 

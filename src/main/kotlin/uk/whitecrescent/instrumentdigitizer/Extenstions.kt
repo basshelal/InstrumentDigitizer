@@ -92,7 +92,7 @@ inline fun ComplexArray.mapIndexed() = mapIndexed { index, complex -> index to c
  * Reduces the elements in this [ComplexMap] such that any Complex number with both real and imaginary parts
  * equalling to 0.0 after being [rounded], is removed
  */
-inline fun ComplexArray.reduced(): ComplexMap {
+inline fun ComplexArray.removeZeros(): ComplexMap {
     val result = HashMap<Int, Complex>()
     forEachIndexed { index, it ->
         if (it.real != 0.0 || it.imaginary != 0.0) result.put(index, it)

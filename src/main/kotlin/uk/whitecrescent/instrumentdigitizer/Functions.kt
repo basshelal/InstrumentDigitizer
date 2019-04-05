@@ -80,7 +80,7 @@ fun truncate(data: ByteArray) =
  * Truncated, Transformed, Rounded, Reduced
  */
 fun ttrr(data: ByteArray): ComplexMap {
-    return data.truncated().fourierTransformed().rounded().reduced()
+    return data.truncated().fourierTransformed().rounded().removeZeros()
 }
 
 // The full execution that will return the minimum required data to grab the frequency of a sine Wave
@@ -89,7 +89,7 @@ fun fullExecution(data: ByteArray): ComplexMap {
             .truncated()            // Truncate to allow FFT
             .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
             .rounded()              // Round everything to Int to avoid tiny numbers close to 0
-            .reduced()              // Remove entries equal to (0.0, 0.0)
+            .removeZeros()              // Remove entries equal to (0.0, 0.0)
             .splitInHalf()          // Get first half since data is identical in both
             .reducePartials()       // Remove unnecessary partials
 }
@@ -323,4 +323,13 @@ fun amplitudeToDecibels(amplitude: Double): Double {
  */
 fun decibelsToAmplitude(decibels: Double): Double {
     return 10.0.pow(decibels / 20.0)
+}
+
+inline fun printLine(any: Any?) {
+    println(any)
+    println()
+}
+
+inline infix fun String.label(value: Any?) {
+    printLine("$this: $value")
 }

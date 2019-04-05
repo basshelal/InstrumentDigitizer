@@ -27,6 +27,9 @@ const val DESIRED_DIFFERENCE = 1E-7
 val WAVE_DEFAULT_FORMAT = AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100F, 16, 1, 2, 44100F, false)
 val EASY_FORMAT = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
 
+val minDouble = Double.MIN_VALUE
+val maxDouble = Double.MAX_VALUE
+
 val SAMPLE_INSTRUMENT = Instrument(listOf(
         OvertoneRatio(1.0, 0.40, 0.5),
         OvertoneRatio(2.0, 0.10, 0.1),
