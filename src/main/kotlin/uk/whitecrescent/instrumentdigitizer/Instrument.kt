@@ -21,11 +21,12 @@ data class OvertoneRatio(val frequencyRatio: Double, val amplitudeRatio: Double,
  */
 data class SineWave(var frequency: Double, var amplitude: Double, var phase: Double) {
 
-    fun toSineOscillator() = SineOscillator().apply {
-        frequency.set(this@SineWave.frequency)
-        amplitude.set(this@SineWave.amplitude)
-        phase.set(this@SineWave.phase)
-    }
+    inline val toSineOscillator
+        get() = SineOscillator().apply {
+            frequency.set(this@SineWave.frequency)
+            amplitude.set(this@SineWave.amplitude)
+            phase.set(this@SineWave.phase)
+        }
 }
 
 fun sineWave(frequency: Number, amplitude: Double = 1.0, phase: Double = 0.0) =

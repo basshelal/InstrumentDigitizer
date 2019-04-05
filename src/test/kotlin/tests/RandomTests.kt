@@ -18,6 +18,7 @@ import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.HALF_PI
 import uk.whitecrescent.instrumentdigitizer.Key
+import uk.whitecrescent.instrumentdigitizer.MAX_AMPLITUDE
 import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
@@ -47,7 +48,6 @@ import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.play
 import uk.whitecrescent.instrumentdigitizer.previousPowerOfTwo
 import uk.whitecrescent.instrumentdigitizer.printEach
-import uk.whitecrescent.instrumentdigitizer.printLine
 import uk.whitecrescent.instrumentdigitizer.readFromWaveFile
 import uk.whitecrescent.instrumentdigitizer.reducePartials
 import uk.whitecrescent.instrumentdigitizer.removeZeros
@@ -837,13 +837,15 @@ class RandomTests {
     @DisplayName("Test Perfect Phase Calculation Test")
     @Test
     fun testPerfectPhaseCalculationTest() {
-        val sampleRate = SAMPLE_RATE
+        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
 
         val freq = 440
 
         val phase = 0.5
 
-        val sineWave = sineWave(freq, 0.5, phase)
+        val amplitude = 1.0
+
+        val sineWave = sineWave(freq, amplitude, phase)
 
         val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
 
@@ -869,6 +871,12 @@ class RandomTests {
 
         var minAmp = -1 to maxDouble
 
+        val maxPossibleAmplitudeOriginalSize = originalSize * MAX_AMPLITUDE
+
+        val maxPossibleAmplitudeNewSize = newSize * MAX_AMPLITUDE
+
+        var totalAmp = 0.0
+
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
                 .rounded()              // Round everything to Int to avoid tiny numbers close to 0
@@ -889,7 +897,7 @@ class RandomTests {
 
                     val indexToSizeTimesSampleRate = indexToSize * sampleRate.d
 
-                    val amplitude = abs(hypot(imaginary, real))
+                    val amplitudeCalc = abs(hypot(imaginary, real))
 
                     val atan2 = atan2(imaginary, real)
 
@@ -902,11 +910,12 @@ class RandomTests {
                     if (imaginary > maxImag.second) maxImag = index.i to imaginary
                     if (imaginary < minImag.second) minImag = index.i to imaginary
 
-                    if (amplitude > maxAmp.second) maxAmp = index.i to amplitude
-                    if (amplitude < minAmp.second) minAmp = index.i to amplitude
+                    if (amplitudeCalc > maxAmp.second) maxAmp = index.i to amplitudeCalc
+                    if (amplitudeCalc < minAmp.second) minAmp = index.i to amplitudeCalc
 
+                    totalAmp += amplitudeCalc
 
-                    printLine(it)
+                    println(it)
 
                     "Phase" label phaseCalc
 
@@ -919,8 +928,20 @@ class RandomTests {
         "Max Amp " label maxAmp
         "Min Amp " label minAmp
 
+        "Max Possible Amp Orig" label maxPossibleAmplitudeOriginalSize
+        "Max Possible Amp New " label maxPossibleAmplitudeNewSize
+        "Total Amp " label totalAmp
+
+        "A" label maxAmp.second / maxPossibleAmplitudeOriginalSize
+        "B" label maxAmp.second / maxPossibleAmplitudeNewSize
+        "C" label maxAmp.second / totalAmp
+
         // TODO: 05-Apr-19 Idea: Output this to a file and or plot it somewhere so that we can better understand the data
         // and use the output in the paper
+
+        // TODO: 05-Apr-19 Is there data loss that our algorithm can't overcome?? Try all this with Longs
+        // I think so man! Total Amp is not equal the amp of the only frequency here, and there are some frequencies
+        // with tiny amplitudes, these are noise
 
         /*
          * amplitude, magnitude = hypot function, use this to get the peaks
