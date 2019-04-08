@@ -172,6 +172,22 @@ inline fun ByteArray.play() {
             }.close()
 }
 
+inline fun IntArray.toByteArrayScaled(): ByteArray {
+    return ByteArray(this.size) { ((this[it].d / maxInt.d) * maxByte.d).b }
+}
+
+inline fun IntArray.play() {
+    val format = EASY_FORMAT
+    AudioSystem.getSourceDataLine(format)
+            .apply {
+                open(format)
+                start()
+                write(this@play.toByteArrayScaled(), 0, this@play.size)
+                //drain()
+                //flush()
+            }.close()
+}
+
 inline fun Instrument.getByteArray(frequency: Frequency = 440.0, amplitude: Amplitude = 1.0, seconds: Seconds = 2.0) =
         addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds)
 

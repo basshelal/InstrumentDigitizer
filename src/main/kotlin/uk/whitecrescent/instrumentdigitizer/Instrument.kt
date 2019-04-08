@@ -30,7 +30,7 @@ data class SineWave(var frequency: Frequency, var amplitude: Amplitude, var phas
 }
 
 fun sineWave(frequency: Number, amplitude: Amplitude = 1.0, phase: Phase = 0.0) =
-        SineWave(frequency.toDouble(), amplitude, phase)
+        SineWave(frequency.d, amplitude, phase)
 
 fun getSineOscillators(amount: Int): List<SineOscillator> {
     return Array(amount) { SineOscillator(0.0, 0.0) }.asList()

@@ -14,14 +14,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.knowm.xchart.BitmapEncoder
-import org.knowm.xchart.BitmapEncoder.BitmapFormat
-import org.knowm.xchart.QuickChart
-import org.knowm.xchart.SwingWrapper
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Frequency
 import uk.whitecrescent.instrumentdigitizer.HALF_PI
+import uk.whitecrescent.instrumentdigitizer.Index
 import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.MAX_AMPLITUDE
 import uk.whitecrescent.instrumentdigitizer.Note
@@ -56,6 +53,7 @@ import uk.whitecrescent.instrumentdigitizer.padded
 import uk.whitecrescent.instrumentdigitizer.play
 import uk.whitecrescent.instrumentdigitizer.previousPowerOfTwo
 import uk.whitecrescent.instrumentdigitizer.printEach
+import uk.whitecrescent.instrumentdigitizer.printLine
 import uk.whitecrescent.instrumentdigitizer.readFromWaveFile
 import uk.whitecrescent.instrumentdigitizer.reducePartials
 import uk.whitecrescent.instrumentdigitizer.removeZeros
@@ -880,6 +878,10 @@ class RandomTests {
 
         var minAmp = -1 to maxDouble
 
+        var minPhase = -1 to maxDouble
+
+        var maxPhase = -1 to minDouble
+
         val maxPossibleAmplitudeOriginalSize = originalSize * MAX_AMPLITUDE
 
         val maxPossibleAmplitudeNewSize = newSize * MAX_AMPLITUDE
@@ -887,6 +889,8 @@ class RandomTests {
         var totalAmp = 0.0
 
         var maxAmpEntry = -1 to minComplex
+
+        val phases = mutableMapOf<Index, Phase>()
 
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
@@ -913,7 +917,7 @@ class RandomTests {
                     val atan2 = atan2(imaginary, real)
 
                     // val phaseCalc = (atan2 + HALF_PI) / PI
-                    val phaseCalc = abs((atan2 + HALF_PI) / PI)
+                    val phaseCalc = abs((atan2 + HALF_PI) * (1 / PI))
 
                     if (real >= maxReal.second) {
                         maxReal = index.i to real
@@ -937,11 +941,21 @@ class RandomTests {
                         minAmp = index.i to amplitudeCalc
                     }
 
+                    if (phaseCalc <= minPhase.second) {
+                        minPhase = index.i to phaseCalc
+                    }
+
+                    if (phaseCalc >= maxPhase.second) {
+                        maxPhase = index.i to phaseCalc
+                    }
+
                     totalAmp += amplitudeCalc
 
                     println(it)
 
                     "Phase" label phaseCalc
+
+                    phases[index.i] = phaseCalc
 
                 }
 
@@ -952,17 +966,25 @@ class RandomTests {
         "Max Amp " label maxAmp
         "Min Amp " label minAmp
 
+        "Max Phase " label maxPhase
+
         "Max Possible Amp Orig" label maxPossibleAmplitudeOriginalSize
         "Max Possible Amp New " label maxPossibleAmplitudeNewSize
         "Total Amp " label totalAmp
 
-        "A" label maxAmp.second / maxPossibleAmplitudeOriginalSize
-        "B" label maxAmp.second / maxPossibleAmplitudeNewSize
-        "C" label maxAmp.second / totalAmp
+        printLine("Max Amp over")
+        "\tMax Possible Amp Orig" label maxAmp.second / maxPossibleAmplitudeOriginalSize
+        "\tMax Possible Amp New " label maxAmp.second / maxPossibleAmplitudeNewSize
+        "\tTotal Amp " label maxAmp.second / totalAmp
 
         val phaseCalc = abs((atan2(maxAmpEntry.second.imaginary, maxAmpEntry.second.real) + HALF_PI) / PI)
 
+        // TODO: 08-Apr-19 PhaseCalc always returns us either, 0.5, 0.25 or 0.75 with any sample rate
+        // I think this has something to do with the special cases of the atan2 function
+
         "Phase at Max Amp" label phaseCalc
+
+        // TODO: 08-Apr-19 Amp may be wrong because of truncation , maxAmp / Total Amp is perfect when POWER_OF_TWO
 
         // TODO: 05-Apr-19 Idea: Output this to a file and or plot it somewhere so that we can better understand the data
         // and use the output in the paper
@@ -1038,18 +1060,5 @@ class RandomTests {
 }
 
 fun main() {
-    val xData = doubleArrayOf(0.0, 1.0, 2.0)
-    val yData = doubleArrayOf(2.0, 1.0, 0.0)
 
-    // Create Chart
-    val chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData)
-
-    // Show it
-    SwingWrapper(chart).displayChart()
-
-    // Save it
-    BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG)
-
-    // or save it in high-res
-    BitmapEncoder.saveBitmapWithDPI(chart, "./Sample_Chart_300_DPI", BitmapFormat.PNG, 300)
 }

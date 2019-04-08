@@ -31,6 +31,9 @@ inline val Number.l: Long
 inline val Number.f: Float
     get() = this.toFloat()
 
+inline val Number.b: Byte
+    get() = this.toByte()
+
 inline val Number.inverse: Double
     get() = 1 / this.d
 
