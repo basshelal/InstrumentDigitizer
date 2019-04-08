@@ -165,8 +165,8 @@ inline fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     )
 }
 
-inline fun generateIntSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
-                               seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): IntArray {
+inline fun generateIntSineWave(frequency: Frequency, amplitude: Amplitude = 1.0, phase: Phase = 0.0,
+                               seconds: Seconds, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): IntArray {
 
     val maxAmplitude = amplitude * maxInt
     val totalSamples = (seconds * sampleRate.d * channels.d).i
@@ -180,7 +180,7 @@ inline fun generateIntSineWave(frequency: Double, amplitude: Double = 1.0, phase
     }
 }
 
-inline fun generateIntSineWave(sineWave: SineWave, seconds: Double,
+inline fun generateIntSineWave(sineWave: SineWave, seconds: Seconds,
                                sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
         generateIntSineWave(sineWave.frequency, sineWave.amplitude, sineWave.phase, seconds, sampleRate, channels)
 
@@ -195,8 +195,8 @@ inline fun generateIntSineWave(sineWave: SineWave, seconds: Double,
  * @param channels channels of the sine wave
  * @return A [ByteArray] representing a Sine Wave
  */
-inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
-                            seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
+inline fun generateSineWave(frequency: Frequency, amplitude: Amplitude = 1.0, phase: Phase = 0.0,
+                            seconds: Seconds, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): ByteArray {
 
     val maxAmplitude = amplitude * MAX_AMPLITUDE
     val totalSamples = (seconds * sampleRate.d * channels.d).i
@@ -210,7 +210,7 @@ inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: D
     }
 }
 
-inline fun generateSineWave(sineWave: SineWave, seconds: Double,
+inline fun generateSineWave(sineWave: SineWave, seconds: Seconds,
                             sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
         generateSineWave(sineWave.frequency, sineWave.amplitude, sineWave.phase, seconds, sampleRate, channels)
 
@@ -309,14 +309,14 @@ inline fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewF
 inline fun easyFormatAudioInputStream(buffer: ByteArray) =
         AudioInputStream(ByteArrayInputStream(buffer), EASY_FORMAT, buffer.size.l)
 
-inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Double, sampleRate: Int = SAMPLE_RATE): ByteArray {
+inline fun addSineWaves(sineWaves: List<SineWave>, seconds: Seconds, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val arrays = sineWaves.map { generateSineWave(it, seconds, sampleRate) }
     return ByteArray(arrays.first().size) { i ->
         arrays.map { it[i] }.sum().toByte()
     }
 }
 
-inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Double, sampleRate: Int = SAMPLE_RATE): ByteArray {
+inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Seconds, sampleRate: Int = SAMPLE_RATE): ByteArray {
     val amplitude = 1.0 / sineWaves.size.d
     val arrays = sineWaves.map {
         it.amplitude = amplitude
@@ -338,7 +338,7 @@ inline fun <reified T : Throwable> ignoreException(func: () -> Any) {
 /**
  * Convert amplitude to decibels. 1.0 is zero dB. 0.5 is -6.02 dB.
  */
-fun amplitudeToDecibels(amplitude: Double): Double {
+fun amplitudeToDecibels(amplitude: Amplitude): Double {
     return (ln(amplitude) * 20) / ln(10.0)
 }
 

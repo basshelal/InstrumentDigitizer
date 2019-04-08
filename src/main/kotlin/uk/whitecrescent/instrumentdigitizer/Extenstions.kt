@@ -1,24 +1,17 @@
+/**
+ * Functions that perform operations as inline extensions since I prefer to use postfix notation
+ * over prefix with brackets
+ */
 @file:Suppress("NOTHING_TO_INLINE")
 
 package uk.whitecrescent.instrumentdigitizer
 
-import Duration
-import now
 import org.apache.commons.math3.complex.Complex
-import till
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
-
-typealias ComplexArray = Array<Complex>
-typealias ComplexMap = Map<Int, Complex>
-typealias Frequency = Double
-typealias Amplitude = Double
-typealias Phase = Double
-typealias Index = Int
-typealias Seconds = Int
 
 inline fun ByteArray.fullExecution() = fullExecution(this)
 
@@ -58,11 +51,6 @@ inline infix fun ByteArray.add(other: ByteArray): ByteArray {
 }
 
 
-inline fun DoubleArray.toByteArray() = ByteArray(this.size) { this[it].toByte() }
-
-inline fun DoubleArray.toIntArray() = IntArray(this.size) { this[it].roundToInt() }
-
-
 /**
  * Returns the real parts of all the Complex numbers in this [ComplexArray]
  */
@@ -98,7 +86,7 @@ inline fun ComplexArray.rounded(): ComplexArray {
 /**
  * Maps each index in this [ComplexArray] to its corresponding Complex number
  */
-inline fun ComplexArray.mapIndexed() = mapIndexed { index, complex -> index to complex }.toMap()
+inline fun ComplexArray.mapIndexed(): ComplexMap = mapIndexed { index, complex -> index to complex }.toMap()
 
 /**
  * Reduces the elements in this [ComplexMap] such that any Complex number with both real and imaginary parts
@@ -168,7 +156,7 @@ inline fun ComplexMap.reducePartials(threshold: Double = 0.1) = getPartials()
 inline fun ComplexMap.splitInHalf() = toList().take(size / 2).toMap()
 
 
-inline fun SineWave.play(seconds: Double = 2.0) {
+inline fun SineWave.play(seconds: Seconds = 2.0) {
     generateSineWave(this, seconds).play()
 }
 
@@ -184,18 +172,18 @@ inline fun ByteArray.play() {
             }.close()
 }
 
-inline fun Instrument.getByteArray(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Double = 2.0) =
+inline fun Instrument.getByteArray(frequency: Frequency = 440.0, amplitude: Amplitude = 1.0, seconds: Seconds = 2.0) =
         addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds)
 
-inline fun Instrument.play(frequency: Double = 440.0, amplitude: Double = 1.0, seconds: Double = 2.0) {
+inline fun Instrument.play(frequency: Frequency = 440.0, amplitude: Amplitude = 1.0, seconds: Seconds = 2.0) {
     addSineWaves(overtoneRatios.toSineWaves(frequency, amplitude), seconds).play()
 }
 
-inline fun Instrument.play(key: Key, amplitude: Double = 1.0, seconds: Double = 1.0) {
+inline fun Instrument.play(key: Key, amplitude: Amplitude = 1.0, seconds: Seconds = 1.0) {
     play(key.frequency, amplitude, seconds)
 }
 
-inline fun Instrument.play(keys: Map<Key, Double>) {
+inline fun Instrument.play(keys: Map<Key, Seconds>) {
     val format = EASY_FORMAT
     val list = ArrayList<Byte>()
     keys.forEach {
@@ -211,40 +199,24 @@ inline fun Instrument.play(keys: Map<Key, Double>) {
             }.close()
 }
 
-inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Double, fundamentalAmplitude: Double = 1.0): List<SineWave> {
+inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Frequency, fundamentalAmplitude: Amplitude = 1.0):
+        List<SineWave> {
     require(this.isNotEmpty())
     return map { SineWave(fundamentalFrequency * it.frequencyRatio, fundamentalAmplitude * it.amplitude, it.phase) }
 }
 
 inline fun List<SineWave>.sortedByFrequency() = sortedBy { it.frequency }
 
-inline fun List<SineWave>.addAllSineWaves(seconds: Double = 1.0, sampleRate: Int = SAMPLE_RATE) =
+inline fun List<SineWave>.addAllSineWaves(seconds: Seconds = 1.0, sampleRate: Int = SAMPLE_RATE) =
         addSineWaves(this, seconds, sampleRate)
 
-inline fun List<SineWave>.addAllSineWavesEvenly(seconds: Double = 1.0, sampleRate: Int = SAMPLE_RATE) =
+inline fun List<SineWave>.addAllSineWavesEvenly(seconds: Seconds = 1.0, sampleRate: Int = SAMPLE_RATE) =
         addSineWavesEvenly(this, seconds, sampleRate)
 
-inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
+inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Frequency> {
     require(this.isNotEmpty()) { "List cannot be empty" }
     return sortedByFrequency().map { it.frequency / this[0].frequency }
 }
-
-inline fun <T> Iterable<T>.printEach() = this.forEach { println(it) }
-
-inline val Number.d: Double
-    get() = this.toDouble()
-
-inline val Number.i: Int
-    get() = this.toInt()
-
-inline val Number.l: Long
-    get() = this.toLong()
-
-inline val Number.f: Float
-    get() = this.toFloat()
-
-inline val Number.inverse: Double
-    get() = 1 / this.d
 
 inline fun AudioInputStream.printStreamInfo() {
     val frames = this.frameLength
@@ -263,15 +235,4 @@ inline fun AudioInputStream.printStreamInfo() {
 
     val duration = frames / frameRate
     println("Duration: $duration")
-}
-
-inline fun measureTime(operationName: String = "", func: () -> Any): Duration {
-    val start = now
-    println("Starting operation $operationName at $start")
-    func()
-    val end = now
-    println("Finishing operation $operationName at $end")
-    val duration = start till end
-    println("Operation $operationName took $duration")
-    return duration
 }
