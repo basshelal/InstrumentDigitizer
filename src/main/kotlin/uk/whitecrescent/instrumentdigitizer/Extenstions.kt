@@ -26,11 +26,17 @@ inline fun ByteArray.padded() = pad(this)
 
 inline fun ByteArray.truncated() = truncate(this)
 
+inline fun IntArray.truncated() = truncate(this)
+
 inline fun ByteArray.toComplexArray() = ComplexArray(this.size) { Complex(this[it].d, 0.0) }
+
+inline fun IntArray.toComplexArray() = ComplexArray(this.size) { Complex(this[it].d, 0.0) }
 
 inline fun ByteArray.toDoubleArray() = DoubleArray(this.size) { this[it].d }
 
 inline fun ByteArray.fourierTransformed() = fourierTransform(this)
+
+inline fun IntArray.fourierTransformed() = fourierTransform(this)
 
 inline fun ByteArray.ttrr() = ttrr(this)
 

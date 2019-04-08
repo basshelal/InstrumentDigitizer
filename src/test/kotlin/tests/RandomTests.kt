@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.knowm.xchart.BitmapEncoder
+import org.knowm.xchart.BitmapEncoder.BitmapFormat
+import org.knowm.xchart.QuickChart
+import org.knowm.xchart.SwingWrapper
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.HALF_PI
@@ -30,6 +34,7 @@ import uk.whitecrescent.instrumentdigitizer.d
 import uk.whitecrescent.instrumentdigitizer.fourierTransform
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
+import uk.whitecrescent.instrumentdigitizer.generateIntSineWave
 import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getFrequenciesDistinct
@@ -41,6 +46,7 @@ import uk.whitecrescent.instrumentdigitizer.mapIndexed
 import uk.whitecrescent.instrumentdigitizer.maxDouble
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
 import uk.whitecrescent.instrumentdigitizer.maxReal
+import uk.whitecrescent.instrumentdigitizer.minComplex
 import uk.whitecrescent.instrumentdigitizer.minDouble
 import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
@@ -67,6 +73,7 @@ import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
 import kotlin.math.hypot
+
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -847,7 +854,7 @@ class RandomTests {
 
         val sineWave = sineWave(freq, amplitude, phase)
 
-        val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
+        val data = generateIntSineWave(sineWave, 1.0, sampleRate, 1)
 
         val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
 
@@ -877,6 +884,8 @@ class RandomTests {
 
         var totalAmp = 0.0
 
+        var maxAmpEntry = -1 to minComplex
+
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
                 .rounded()              // Round everything to Int to avoid tiny numbers close to 0
@@ -902,16 +911,29 @@ class RandomTests {
                     val atan2 = atan2(imaginary, real)
 
                     // val phaseCalc = (atan2 + HALF_PI) / PI
-                    val phaseCalc = abs((atan2) / PI)
+                    val phaseCalc = abs((atan2 + HALF_PI) / PI)
 
-                    if (real > maxReal.second) maxReal = index.i to real
-                    if (real < minReal.second) minReal = index.i to real
+                    if (real > maxReal.second) {
+                        maxReal = index.i to real
+                    }
+                    if (real < minReal.second) {
+                        minReal = index.i to real
+                    }
 
-                    if (imaginary > maxImag.second) maxImag = index.i to imaginary
-                    if (imaginary < minImag.second) minImag = index.i to imaginary
+                    if (imaginary > maxImag.second) {
+                        maxImag = index.i to imaginary
+                    }
+                    if (imaginary < minImag.second) {
+                        minImag = index.i to imaginary
+                    }
 
-                    if (amplitudeCalc > maxAmp.second) maxAmp = index.i to amplitudeCalc
-                    if (amplitudeCalc < minAmp.second) minAmp = index.i to amplitudeCalc
+                    if (amplitudeCalc > maxAmp.second) {
+                        maxAmp = index.i to amplitudeCalc
+                        maxAmpEntry = it.toPair()
+                    }
+                    if (amplitudeCalc < minAmp.second) {
+                        minAmp = index.i to amplitudeCalc
+                    }
 
                     totalAmp += amplitudeCalc
 
@@ -936,12 +958,16 @@ class RandomTests {
         "B" label maxAmp.second / maxPossibleAmplitudeNewSize
         "C" label maxAmp.second / totalAmp
 
+        val phaseCalc = abs((atan2(maxAmpEntry.second.imaginary, maxAmpEntry.second.real) + HALF_PI) / PI)
+
+        "Phase at Max Amp" label phaseCalc
+
         // TODO: 05-Apr-19 Idea: Output this to a file and or plot it somewhere so that we can better understand the data
         // and use the output in the paper
 
         // TODO: 05-Apr-19 Is there data loss that our algorithm can't overcome?? Try all this with Longs
         // I think so man! Total Amp is not equal the amp of the only frequency here, and there are some frequencies
-        // with tiny amplitudes, these are noise
+        // with tiny amplitudes, these are noise, YES THERE IS!
 
         /*
          * amplitude, magnitude = hypot function, use this to get the peaks
@@ -1007,4 +1033,21 @@ class RandomTests {
         }.addAllSineWavesEvenly(2.0).play()*/
 
     }
+}
+
+fun main() {
+    val xData = doubleArrayOf(0.0, 1.0, 2.0)
+    val yData = doubleArrayOf(2.0, 1.0, 0.0)
+
+    // Create Chart
+    val chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData)
+
+    // Show it
+    SwingWrapper(chart).displayChart()
+
+    // Save it
+    BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG)
+
+    // or save it in high-res
+    BitmapEncoder.saveBitmapWithDPI(chart, "./Sample_Chart_300_DPI", BitmapFormat.PNG, 300)
 }

@@ -23,6 +23,8 @@ import kotlin.random.Random
 
 fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplexArray())
 
+fun fourierTransform(data: IntArray) = fourierTransform(data.toComplexArray())
+
 /*
  * Just the basic Fourier Transform to transform from Time Domain to Frequency domain
  * should probably return a list of SineWaves
@@ -75,6 +77,9 @@ fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
  */
 fun truncate(data: ByteArray) =
         ByteArray(previousPowerOfTwo(data.size)) { data[it] }
+
+fun truncate(data: IntArray) =
+        IntArray(previousPowerOfTwo(data.size)) { data[it] }
 
 /*
  * Truncated, Transformed, Rounded, Reduced
@@ -160,20 +165,24 @@ inline fun writeSineWaveAudio(filePath: String = A3_VIOLIN_FILE_PATH) {
     )
 }
 
-inline fun generateLongSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
-                                seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): LongArray {
+inline fun generateIntSineWave(frequency: Double, amplitude: Double = 1.0, phase: Double = 0.0,
+                               seconds: Double, sampleRate: Int = SAMPLE_RATE, channels: Int = 1): IntArray {
 
-    val maxAmplitude = amplitude * MAX_AMPLITUDE
+    val maxAmplitude = amplitude * maxInt
     val totalSamples = (seconds * sampleRate.d * channels.d).i
     val period = sampleRate.d / frequency
-    val phaseShift = (phase * PI) - HALF_PI
+    val phaseShift = phase * PI
 
-    return LongArray(totalSamples) {
+    return IntArray(totalSamples) {
         val angle = (2.0 * PI * it) / period
         /*Amp * sin(2 * PI * f * t + phase)*/
-        return@LongArray (maxAmplitude * sin(angle + phaseShift)).l
+        return@IntArray (maxAmplitude * sin(angle + phaseShift)).i
     }
 }
+
+inline fun generateIntSineWave(sineWave: SineWave, seconds: Double,
+                               sampleRate: Int = SAMPLE_RATE, channels: Int = 1) =
+        generateIntSineWave(sineWave.frequency, sineWave.amplitude, sineWave.phase, seconds, sampleRate, channels)
 
 /**
  * Generates a Sine wave, the general algorithm is taken from [Rosetta Stone](https://rosettacode.org/wiki/Sine_wave#Kotlin)
@@ -192,7 +201,7 @@ inline fun generateSineWave(frequency: Double, amplitude: Double = 1.0, phase: D
     val maxAmplitude = amplitude * MAX_AMPLITUDE
     val totalSamples = (seconds * sampleRate.d * channels.d).i
     val period = sampleRate.d / frequency
-    val phaseShift = (phase * PI) - HALF_PI
+    val phaseShift = phase * PI
 
     return ByteArray(totalSamples) {
         val angle = (2.0 * PI * it) / period

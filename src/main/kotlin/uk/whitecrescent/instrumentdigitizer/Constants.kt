@@ -1,5 +1,6 @@
 package uk.whitecrescent.instrumentdigitizer
 
+import org.apache.commons.math3.complex.Complex
 import javax.sound.sampled.AudioFormat
 import kotlin.math.PI
 
@@ -29,6 +30,13 @@ val EASY_FORMAT = AudioFormat(SAMPLE_RATE.toFloat(), 8, 1, true, true)
 
 val minDouble = Double.MIN_VALUE
 val maxDouble = Double.MAX_VALUE
+val maxLong = Long.MAX_VALUE
+val minLong = Long.MIN_VALUE
+val maxInt = Int.MAX_VALUE
+val minInt = Int.MIN_VALUE
+
+val minComplex = Complex(minDouble, minDouble)
+val maxComplex = Complex(maxDouble, maxDouble)
 
 val SAMPLE_INSTRUMENT = Instrument(listOf(
         OvertoneRatio(1.0, 0.40, 0.5),
