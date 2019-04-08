@@ -9,17 +9,17 @@ class Instrument(val overtoneRatios: List<OvertoneRatio>)
 
 /*
  * frequencyRatio gives us what to multiply by the fundamental frequency to get this frequency
- * amplitudeRatio gives us what to multiply by the fundamental amplitude to get this amplitude
- * phase is just phase, no relations/ratios yet
+ * amplitude is absolute Amplitude
+ * phase is absolute phase
  */
-data class OvertoneRatio(val frequencyRatio: Double, val amplitudeRatio: Double, val phase: Double = 0.0)
+data class OvertoneRatio(val frequencyRatio: Double, val amplitude: Amplitude, val phase: Phase = 0.0)
 
 
 /**
  * Use this to create multiple oscillating sine waves using [com.jsyn.unitgen.SineOscillator]
  * which require a frequency and amplitude for the sine wave, we may also have phase on the wave
  */
-data class SineWave(var frequency: Double, var amplitude: Double, var phase: Double) {
+data class SineWave(var frequency: Frequency, var amplitude: Amplitude, var phase: Phase) {
 
     inline val toSineOscillator
         get() = SineOscillator().apply {
@@ -29,7 +29,7 @@ data class SineWave(var frequency: Double, var amplitude: Double, var phase: Dou
         }
 }
 
-fun sineWave(frequency: Number, amplitude: Double = 1.0, phase: Double = 0.0) =
+fun sineWave(frequency: Number, amplitude: Amplitude = 1.0, phase: Phase = 0.0) =
         SineWave(frequency.toDouble(), amplitude, phase)
 
 fun getSineOscillators(amount: Int): List<SineOscillator> {

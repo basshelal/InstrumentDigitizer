@@ -2,7 +2,10 @@
 
 package uk.whitecrescent.instrumentdigitizer
 
+import Duration
+import now
 import org.apache.commons.math3.complex.Complex
+import till
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import kotlin.math.max
@@ -10,9 +13,12 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 
 typealias ComplexArray = Array<Complex>
-
 typealias ComplexMap = Map<Int, Complex>
-
+typealias Frequency = Double
+typealias Amplitude = Double
+typealias Phase = Double
+typealias Index = Int
+typealias Seconds = Int
 
 inline fun ByteArray.fullExecution() = fullExecution(this)
 
@@ -207,7 +213,7 @@ inline fun Instrument.play(keys: Map<Key, Double>) {
 
 inline fun List<OvertoneRatio>.toSineWaves(fundamentalFrequency: Double, fundamentalAmplitude: Double = 1.0): List<SineWave> {
     require(this.isNotEmpty())
-    return map { SineWave(fundamentalFrequency * it.frequencyRatio, fundamentalAmplitude * it.amplitudeRatio, it.phase) }
+    return map { SineWave(fundamentalFrequency * it.frequencyRatio, fundamentalAmplitude * it.amplitude, it.phase) }
 }
 
 inline fun List<SineWave>.sortedByFrequency() = sortedBy { it.frequency }
@@ -223,7 +229,7 @@ inline fun List<SineWave>.getFrequencyRatiosToFundamental(): List<Double> {
     return sortedByFrequency().map { it.frequency / this[0].frequency }
 }
 
-inline fun Iterable<Any?>.printEach() = this.forEach { println(it) }
+inline fun <T> Iterable<T>.printEach() = this.forEach { println(it) }
 
 inline val Number.d: Double
     get() = this.toDouble()
@@ -257,4 +263,15 @@ inline fun AudioInputStream.printStreamInfo() {
 
     val duration = frames / frameRate
     println("Duration: $duration")
+}
+
+inline fun measureTime(operationName: String = "", func: () -> Any): Duration {
+    val start = now
+    println("Starting operation $operationName at $start")
+    func()
+    val end = now
+    println("Finishing operation $operationName at $end")
+    val duration = start till end
+    println("Operation $operationName took $duration")
+    return duration
 }

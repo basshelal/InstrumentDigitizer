@@ -20,11 +20,13 @@ import org.knowm.xchart.QuickChart
 import org.knowm.xchart.SwingWrapper
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
+import uk.whitecrescent.instrumentdigitizer.Frequency
 import uk.whitecrescent.instrumentdigitizer.HALF_PI
 import uk.whitecrescent.instrumentdigitizer.Key
 import uk.whitecrescent.instrumentdigitizer.MAX_AMPLITUDE
 import uk.whitecrescent.instrumentdigitizer.Note
 import uk.whitecrescent.instrumentdigitizer.Octave
+import uk.whitecrescent.instrumentdigitizer.Phase
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE
 import uk.whitecrescent.instrumentdigitizer.SAMPLE_RATE_POWER_OF_TWO
 import uk.whitecrescent.instrumentdigitizer.addAllSineWavesEvenly
@@ -864,7 +866,7 @@ class RandomTests {
 
         val newSize = previousPowerOfTwo(data.size)
 
-        val result = mutableMapOf<Double, Double>() //freq to phase
+        val result = mutableMapOf<Frequency, Phase>() //freq to phase
 
         var maxReal = -1 to minDouble
 
@@ -913,25 +915,25 @@ class RandomTests {
                     // val phaseCalc = (atan2 + HALF_PI) / PI
                     val phaseCalc = abs((atan2 + HALF_PI) / PI)
 
-                    if (real > maxReal.second) {
+                    if (real >= maxReal.second) {
                         maxReal = index.i to real
                     }
-                    if (real < minReal.second) {
+                    if (real <= minReal.second) {
                         minReal = index.i to real
                     }
 
-                    if (imaginary > maxImag.second) {
+                    if (imaginary >= maxImag.second) {
                         maxImag = index.i to imaginary
                     }
-                    if (imaginary < minImag.second) {
+                    if (imaginary <= minImag.second) {
                         minImag = index.i to imaginary
                     }
 
-                    if (amplitudeCalc > maxAmp.second) {
+                    if (amplitudeCalc >= maxAmp.second) {
                         maxAmp = index.i to amplitudeCalc
                         maxAmpEntry = it.toPair()
                     }
-                    if (amplitudeCalc < minAmp.second) {
+                    if (amplitudeCalc <= minAmp.second) {
                         minAmp = index.i to amplitudeCalc
                     }
 
