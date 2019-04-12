@@ -7,10 +7,269 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jportaudio.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jportaudio.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/JSyn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/Synthesizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/apps/AboutJSyn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/apps/InstrumentTester.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/AudioSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/DoubleTable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/FloatSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/Function.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/HammingWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/HannWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/SampleMarker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/SegmentedEnvelope.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/SequentialData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/SequentialDataCommon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/ShortSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/SpectralWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/SpectralWindowFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/data/Spectrum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/AudioDeviceFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/AudioDeviceInputStream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/AudioDeviceManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/AudioDeviceOutputStream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/javasound/JavaSoundAudioDevice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/javasound/MidiDeviceTools.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/devices/jportaudio/JPortAudioDevice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/engine/LoadAnalyzer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/engine/MultiTable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/engine/SynthesisEngine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/exceptions/ChannelMismatchException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/instruments/DrumWoodFM.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/instruments/DualOscillatorSynthVoice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/instruments/JSynInstrumentLibrary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/instruments/NoiseHit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/instruments/SubtractiveSynthVoice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/instruments/WaveShapingVoice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/io/AudioFifo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/io/AudioInputStream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/io/AudioOutputStream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/midi/MessageParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/midi/MidiConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/midi/MidiSynthesizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/package.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/ConnectableInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/ConnectableOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/GettablePort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/InputMixingBlockPart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/PortBlockPart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/QueueDataCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/QueueDataEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/SequentialDataCrossfade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/SettablePort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitBlockPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitDataQueueCallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitDataQueuePort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitFunctionPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitGatePort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitInputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitSpectralInputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitSpectralOutputPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/UnitVariablePort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/ports/package.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/AudioScope.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/AudioScopeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/AudioScopeProbe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/DefaultWaveTraceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/MultiChannelScopeProbeUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/TriggerModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/WaveTraceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/AudioScopeProbeView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/AudioScopeView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/MultipleWaveDisplay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/ScopeControlPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/ScopeProbePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/ScopeTriggerPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/scope/swing/WaveTraceView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/ASCIIMusicKeyboard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/DoubleBoundedRangeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/DoubleBoundedRangeSlider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/DoubleBoundedTextField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/EnvelopeEditorBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/EnvelopeEditorPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/EnvelopePoints.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/ExponentialRangeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/InstrumentBrowser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/JAppletFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/PortBoundedRangeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/PortControllerFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/PortModelFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/PresetSelectionListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/RotaryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/RotaryTextController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/SoundTweaker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/swing/XYController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Add.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/AsymptoticRamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/BrownNoise.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ChannelIn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ChannelOut.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Circuit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Compare.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ContinuousRamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/CrossFade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Delay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Divide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/DualInTwoOut.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/EdgeDetector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/EnvelopeAttackDecay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/EnvelopeDAHDSR.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ExponentialRamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FFT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FFTBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterAllPass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterBandPass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterBandStop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterBiquad.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterBiquadCommon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterBiquadShelf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterFourPoles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterHighPass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterHighShelf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterLowPass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterLowShelf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterOnePole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterOnePoleOneZero.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterOneZero.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterPeakingEQ.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterStateVariable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterTwoPoles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FilterTwoPolesTwoZeros.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FixedRateMonoReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FixedRateMonoWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FixedRateStereoReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FixedRateStereoWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FourWayFade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FunctionEvaluator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FunctionOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Grain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/GrainCommon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/GrainEnvelope.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/GrainFarm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/GrainScheduler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/GrainSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/GrainSourceSine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/IFFT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ImpulseOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ImpulseOscillatorBL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Integrate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/InterpolatingDelay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Latch.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/LatchZeroCrossing.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/LineIn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/LineOut.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/LinearRamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Maximum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Minimum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MixerMono.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MixerMonoRamped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MixerStereo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MixerStereoRamped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MonoStreamWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MorphingOscillatorBL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MultiPassThrough.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Multiply.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/MultiplyAdd.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Pan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PanControl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ParabolicEnvelope.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PassThrough.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PeakFollower.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PhaseShifter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PinkNoise.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PitchDetector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PitchToFrequency.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PowerOfTwo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PulseOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PulseOscillatorBL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/RaisedCosineEnvelope.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/RangeConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/RectangularWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/RedNoise.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SampleGrainFarm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SampleGrainSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SawtoothOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SawtoothOscillatorBL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SawtoothOscillatorDPW.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SchmidtTrigger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Select.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SequentialDataReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SequentialDataWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SineOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SineOscillatorPhaseModulated.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SpectralFFT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SpectralFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SpectralIFFT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SpectralProcessor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SquareOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/SquareOscillatorBL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/StereoStreamWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/StochasticGrainScheduler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Subtract.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/TriangleOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/TunableFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/TwoInDualOut.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitBinaryOperator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitGate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitOscillator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitSink.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitStreamWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/UnitVoice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/Unzipper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/VariableRateDataReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/VariableRateMonoReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/VariableRateStereoReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/WhiteNoise.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/ZeroCrossingCounter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/AudioSampleLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/AudioStreamReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/AutoCorrelator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/Instrument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/InstrumentLibrary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/JavaSoundSampleLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/JavaTools.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/MultiChannelSynthesizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/NumericOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/PolyphonicInstrument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/PseudoRandom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/RecursiveSequenceGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/SampleLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/SignalCorrelator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/StreamingThread.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/TransportListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/TransportModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/VoiceAllocator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/VoiceDescription.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/VoiceOperation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/WaveFileWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/WaveRecorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/AIFFFileParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/AudioFileParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/ChunkHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/CustomSampleLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/IFFParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/WAVEFileParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/AudioMath.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/ChebyshevPolynomial.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/FourierMath.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/JustRatio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/Polynomial.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/PolynomialTableData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/math/PrimeFactors.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/shared/time/ScheduledCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/shared/time/ScheduledQueue.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/softsynth/shared/time/TimeStamp.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -30,16 +289,24 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="786" column="27" selection-start-line="786" selection-start-column="27" selection-end-line="786" selection-end-column="27" />
+            <state relative-caret-position="224">
+              <caret line="665" column="36" lean-forward="true" selection-start-line="665" selection-start-column="36" selection-end-line="665" selection-end-column="36" />
               <folding>
-                <element signature="n#!!block;n#testJSynSynth#0;n#!!block;n#RandomTests#0" />
-                <element signature="n#!!block;n#testJSynSynth2#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testWriteData#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testGenerateSineWave#0;n#!!block;n#RandomTests#0" />
                 <element signature="n#!!block;n#testPlaySineWave#0;n#!!block;n#RandomTests#0" />
@@ -66,8 +333,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/App.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+            <state relative-caret-position="-1334">
+              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -75,8 +342,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="21" column="78" selection-start-line="21" selection-start-column="78" selection-end-line="21" selection-end-column="78" />
+            <state relative-caret-position="266">
+              <caret line="19" column="89" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
               <folding>
                 <element signature="n#!!doc;n#Instrument#0" />
                 <element signature="n#!!doc;n#SineWave#0" />
@@ -88,8 +355,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="832">
-              <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+            <state relative-caret-position="494">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="n#!!block;n#add#0" />
                 <element signature="n#!!doc;n#real#0" />
@@ -185,18 +452,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
-              <folding>
-                <element signature="e#294#954#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -265,11 +520,11 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/UtilExtensions.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt" />
-        <option value="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" />
         <option value="$PROJECT_DIR$/src/main/java/com/jsyn/devices/jportaudio/JPortAudioDevice.java" />
         <option value="$PROJECT_DIR$/TODO.md" />
         <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/App.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt" />
+        <option value="$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt" />
       </list>
     </option>
   </component>
@@ -439,77 +694,72 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.InstrumentDigitizer">
-    <configuration name="InstrumentDigitizer [compileKotlin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileKotlin" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="InstrumentDigitizer [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="InstrumentDigitizer" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="RandomTests.testPerfectPhaseCalculationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="InstrumentDigitizer_test" />
+  <component name="RunManager" selected="Gradle.RandomTests.testPerfectPhaseCalculationTest">
+    <configuration name="AboutJSyn" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jsyn.apps.AboutJSyn" />
+      <module name="InstrumentDigitizer_main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.*" />
+          <option name="PATTERN" value="com.jsyn.apps.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.RandomTests" />
-      <option name="METHOD_NAME" value="testPerfectPhaseCalculationTest" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="InstrumentTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jsyn.apps.InstrumentTester" />
+      <module name="InstrumentDigitizer_main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jsyn.apps.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RandomTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;tests.RandomTests&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RandomTests.testPerfectPhaseCalculationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;tests.RandomTests.testPerfectPhaseCalculationTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
     </configuration>
     <configuration name="uk.whitecrescent.instrumentdigitizer.AppKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="InstrumentDigitizer_main" />
@@ -525,19 +775,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.RandomTests.testPerfectPhaseCalculationTest" />
+      <item itemvalue="Application.AboutJSyn" />
+      <item itemvalue="Application.InstrumentTester" />
+      <item itemvalue="Gradle.RandomTests.testPerfectPhaseCalculationTest" />
       <item itemvalue="Kotlin.uk.whitecrescent.instrumentdigitizer.AppKt" />
-      <item itemvalue="Gradle.InstrumentDigitizer [dependencies]" />
-      <item itemvalue="Gradle.InstrumentDigitizer [compileKotlin]" />
-      <item itemvalue="Gradle.InstrumentDigitizer" />
+      <item itemvalue="Gradle.RandomTests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.InstrumentDigitizer" />
-        <item itemvalue="Gradle.InstrumentDigitizer [compileKotlin]" />
-        <item itemvalue="Gradle.InstrumentDigitizer [dependencies]" />
-        <item itemvalue="JUnit.RandomTests.testPerfectPhaseCalculationTest" />
+        <item itemvalue="Gradle.RandomTests.testPerfectPhaseCalculationTest" />
+        <item itemvalue="Gradle.RandomTests" />
         <item itemvalue="Kotlin.uk.whitecrescent.instrumentdigitizer.AppKt" />
+        <item itemvalue="Application.InstrumentTester" />
+        <item itemvalue="Application.AboutJSyn" />
       </list>
     </recent_temporary>
   </component>
@@ -595,14 +845,7 @@
       <workItem from="1554731898882" duration="5918000" />
       <workItem from="1554743635947" duration="3622000" />
       <workItem from="1554997987492" duration="713000" />
-      <workItem from="1555108033720" duration="960000" />
-    </task>
-    <task id="LOCAL-00031" summary="Saving Progress">
-      <created>1553392950901</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1553392950901</updated>
+      <workItem from="1555108033720" duration="1587000" />
     </task>
     <task id="LOCAL-00032" summary="Saving Progress">
       <created>1553400847112</created>
@@ -940,13 +1183,17 @@
       <option name="project" value="LOCAL" />
       <updated>1555108667988</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Deleted more unnecessary files and fixed gradle">
+      <created>1555109034348</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1555109034348</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RandomTests_testPerfectPhaseCalculationTest - 2019.04.08 at 19h 05m 15s.xml">
-      <configuration name="RandomTests.testPerfectPhaseCalculationTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="RandomTests_testPerfectPhaseCalculationTest - 2019.04.08 at 19h 07m 32s.xml">
       <configuration name="RandomTests.testPerfectPhaseCalculationTest" configurationId="JUnit" />
     </history-entry>
@@ -974,13 +1221,15 @@
     <history-entry file="RandomTests_testPerfectPhaseCalculationTest - 2019.04.12 at 23h 36m 28s.xml">
       <configuration name="RandomTests.testPerfectPhaseCalculationTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="RandomTests_testPerfectPhaseCalculationTest - 2019.04.12 at 23h 53m 28s.xml">
+      <configuration name="RandomTests.testPerfectPhaseCalculationTest" configurationId="GradleRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="334038000" />
+    <option name="totallyTimeSpent" value="334665000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="421" y="0" width="2146" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Designer" order="1" />
@@ -1022,7 +1271,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Started with Instrument and Keys, still incorrect and untested code" />
     <MESSAGE value="Saving Progress, still bugs and problems" />
     <MESSAGE value="MidiMap done" />
     <MESSAGE value="MidiMap and Keys done" />
@@ -1047,223 +1295,13 @@
     <MESSAGE value="Added TypeAliases where necessary" />
     <MESSAGE value="Saving progress" />
     <MESSAGE value="Updated IDE and deleted unnecessary files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated IDE and deleted unnecessary files" />
+    <MESSAGE value="Deleted more unnecessary files and fixed gradle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted more unnecessary files and fixed gradle" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/com/sun/javafx/application/LauncherImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="122" column="23" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/javafx/application/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="190" column="31" lean-forward="true" selection-start-line="190" selection-start-column="31" selection-end-line="190" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/TestingUtils.kt" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/sound/midi/Receiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="40" column="49" lean-forward="true" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar!/com/sun/media/sound/SoftChannelProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-          <folding>
-            <element signature="method#SoftChannelProxy#0;class#SoftChannelProxy#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/sound/midi/ShortMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-432">
-          <caret line="162" column="28" selection-start-line="162" selection-start-column="28" selection-end-line="162" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.11/e49742d3259938ea3539346c8ca3babb54a5140f/kotlin-stdlib-common-1.3.11-sources.jar!/kotlin/Result.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2037">
-          <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/sound/midi/MidiChannel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="336" column="16" selection-start-line="336" selection-start-column="16" selection-end-line="336" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/LineOut.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="28" column="11" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
-          <folding>
-            <element signature="e#906#907#0" expanded="true" />
-            <element signature="e#968#969#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Synth.kt" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/util/JavaTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/util/PolyphonicInstrument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/util/PseudoRandom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/FourierMath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/AudioMath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="25" column="66" lean-forward="true" selection-start-line="25" selection-start-column="66" selection-end-line="25" selection-end-column="66" />
-          <folding>
-            <element signature="method#amplitudeToDecibels#0;class#AudioMath#0" expanded="true" />
-            <element signature="method#decibelsToAmplitude#0;class#AudioMath#0" expanded="true" />
-            <element signature="method#frequencyToPitch#0;class#AudioMath#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/io/ObjectInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2280">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
-          <folding>
-            <element signature="docComment;class#ObjectInputStream#0" expanded="true" />
-            <element signature="e#43845#44131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar!/sun/misc/SharedSecrets.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1216">
-          <caret line="129" column="32" lean-forward="true" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/PriorityQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="787" column="32" selection-start-line="787" selection-start-column="32" selection-end-line="787" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.11/d46e00faac79f8ec6bb956154ecde4282871a6bf/kotlin-stdlib-1.3.11-sources.jar!/kotlin/Primitives.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.11/d46e00faac79f8ec6bb956154ecde4282871a6bf/kotlin-stdlib-1.3.11-sources.jar!/kotlin/Arrays.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/xchart-3.5.4.jar!/org/knowm/xchart/PieSeries.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sample_Chart.png" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.11/e49742d3259938ea3539346c8ca3babb54a5140f/kotlin-stdlib-common-1.3.11-sources.jar!/kotlin/UInt.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2845">
-          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/ThreeTenKTX.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-508">
-          <caret line="52" column="11" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.11/e49742d3259938ea3539346c8ca3babb54a5140f/kotlin-stdlib-common-1.3.11-sources.jar!/generated/_Collections.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="1147" column="27" selection-start-line="1147" selection-start-column="27" selection-end-line="1147" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/xchart-3.5.4.jar!/org/knowm/xchart/internal/chartpart/Chart.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/xchart-3.5.4.jar!/org/knowm/xchart/QuickChart.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/xchart-3.5.4.jar!/org/knowm/xchart/XYChart.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
-          <folding>
-            <element signature="method#XYChart#0;class#XYChart#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.11/e49742d3259938ea3539346c8ca3babb54a5140f/kotlin-stdlib-common-1.3.11-sources.jar!/kotlin/collections/MutableCollections.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="121" column="39" selection-start-line="121" selection-start-column="39" selection-end-line="121" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.11/e49742d3259938ea3539346c8ca3babb54a5140f/kotlin-stdlib-common-1.3.11-sources.jar!/generated/_Arrays.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="8066" column="23" lean-forward="true" selection-start-line="8066" selection-start-column="23" selection-end-line="8066" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/sound/sampled/SourceDataLine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -1337,39 +1375,276 @@
     <entry file="file://$PROJECT_DIR$/test.wav">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.2.5/6919e0b013caae81292b1b96642efb0a965be5df/rxjava-2.2.5-sources.jar!/io/reactivex/Observable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="786" column="27" selection-start-line="786" selection-start-column="27" selection-end-line="786" selection-end-column="27" />
+        <state relative-caret-position="75">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.5/c5b4c491aecb72e7c32a78da0b5c6b9cda8dee0f/gson-2.8.5-sources.jar!/com/google/gson/Gson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/Synthesizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/apps/AboutJSyn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
           <folding>
-            <element signature="n#!!block;n#testJSynSynth#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testJSynSynth2#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testWriteData#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testGenerateSineWave#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testPlaySineWave#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testPlay2SineWaves#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testFourierForwardAndInverse#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testWriteSineToCSV#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testWriteToWaveFile#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testFullExecution#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testLargeFullExecution#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testAddSineWaves#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testBasicSineWaveFullExecution#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testFindPerfectPhaseShift#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testMultipleSineWavesFullExecution#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testSampleInstrument#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testViolinA3#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testLoudness#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testPhaseCalculation#0;n#!!block;n#RandomTests#0" />
-            <element signature="n#!!block;n#testPerfectPhaseCalculation#0;n#!!block;n#RandomTests#0" />
+            <element signature="method#start#0;class#AboutJSyn#0" expanded="true" />
+            <element signature="method#main#0;class#AboutJSyn#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/apps/InstrumentTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="55" column="46" lean-forward="true" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/ChebyshevPolynomial.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="28" column="56" lean-forward="true" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/SpectralWindowFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/SpectralWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/ShortSample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/FloatSample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/AudioSample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/data/Spectrum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-42">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="docComment;class#Spectrum#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/io/AudioInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/io/AudioOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/devices/javasound/JavaSoundAudioDevice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="166" column="18" selection-start-line="166" selection-start-column="18" selection-end-line="166" selection-end-column="18" />
+          <folding>
+            <element signature="class#JavaSoundOutputStream#0;class#JavaSoundAudioDevice#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/io/AudioFifo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FFT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/FFTBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PitchToFrequency.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/WhiteNoise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/util/PseudoRandom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+          <folding>
+            <element signature="e#1186#1187#0" expanded="true" />
+            <element signature="e#1230#1231#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/PowerOfTwo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/unitgen/IFFT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/util/WaveRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jsyn/util/soundfile/WAVEFileParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="25" column="70" lean-forward="true" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/FourierMath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/AudioMath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/JustRatio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/softsynth/math/PrimeFactors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+          <folding>
+            <element signature="e#294#954#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Note.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!block;n#Note#0" />
+            <element signature="n#!!block;n#Octave#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="19" column="89" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
+          <folding>
+            <element signature="n#!!doc;n#Instrument#0" />
+            <element signature="n#!!doc;n#SineWave#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/MidiMap.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Extenstions.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="832">
-          <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+        <state relative-caret-position="494">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="n#!!block;n#add#0" />
             <element signature="n#!!doc;n#real#0" />
@@ -1380,6 +1655,9 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/ThreeTenKTX.kt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Functions.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -1438,63 +1716,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Constants.kt">
+    <entry file="file://$PROJECT_DIR$/src/test/kotlin/tests/RandomTests.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Note.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        <state relative-caret-position="224">
+          <caret line="665" column="36" lean-forward="true" selection-start-line="665" selection-start-column="36" selection-end-line="665" selection-end-column="36" />
           <folding>
-            <element signature="n#!!block;n#Note#0" />
-            <element signature="n#!!block;n#Octave#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
-          <folding>
-            <element signature="e#294#954#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.2.5/6919e0b013caae81292b1b96642efb0a965be5df/rxjava-2.2.5-sources.jar!/io/reactivex/Observable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.5/c5b4c491aecb72e7c32a78da0b5c6b9cda8dee0f/gson-2.8.5-sources.jar!/com/google/gson/Gson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/Instrument.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="21" column="78" selection-start-line="21" selection-start-column="78" selection-end-line="21" selection-end-column="78" />
-          <folding>
-            <element signature="n#!!doc;n#Instrument#0" />
-            <element signature="n#!!doc;n#SineWave#0" />
+            <element signature="n#!!block;n#testWriteData#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testGenerateSineWave#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testPlaySineWave#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testPlay2SineWaves#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testFourierForwardAndInverse#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testWriteSineToCSV#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testWriteToWaveFile#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testFullExecution#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testLargeFullExecution#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testAddSineWaves#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testBasicSineWaveFullExecution#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testFindPerfectPhaseShift#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testMultipleSineWavesFullExecution#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testSampleInstrument#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testViolinA3#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testLoudness#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testPhaseCalculation#0;n#!!block;n#RandomTests#0" />
+            <element signature="n#!!block;n#testPerfectPhaseCalculation#0;n#!!block;n#RandomTests#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/uk/whitecrescent/instrumentdigitizer/App.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+        <state relative-caret-position="-1334">
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
         </state>
       </provider>
     </entry>
