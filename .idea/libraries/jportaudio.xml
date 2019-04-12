@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="jportaudio">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/jportaudio.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
