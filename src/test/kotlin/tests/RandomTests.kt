@@ -7,9 +7,6 @@ import com.jsyn.unitgen.SineOscillator
 import com.jsyn.unitgen.UnitGenerator
 import com.jsyn.unitgen.UnitVoice
 import com.softsynth.shared.time.TimeStamp
-import com.synthbot.jasiohost.AsioChannel
-import com.synthbot.jasiohost.AsioDriver
-import com.synthbot.jasiohost.AsioDriverListener
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
@@ -73,7 +70,6 @@ import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
 import kotlin.math.hypot
-
 
 @DisplayName("Random Tests")
 class RandomTests {
@@ -184,68 +180,6 @@ class RandomTests {
         Thread.sleep(2000)
 
         synth.stop()
-    }
-
-    @DisplayName("Test ASIO")
-    @Test
-    fun testASIO() {
-        val driver = AsioDriver.getDriver(AsioDriver.getDriverNames().first())
-        val channel0 = driver.getChannelOutput(0)
-        val channel1 = driver.getChannelOutput(1)
-
-        val listener = object : AsioDriverListener {
-            override fun resetRequest() {
-                println("Reset Request")
-            }
-
-            override fun latenciesChanged(inputLatency: Int, outputLatency: Int) {
-                println("Latencies Changes")
-            }
-
-            override fun resyncRequest() {
-                println("Resync Request")
-            }
-
-            override fun bufferSwitch(sampleTime: Long, samplePosition: Long, activeChannels: MutableSet<AsioChannel>?) {
-                println("Buffer Switched")
-
-                var i = 0
-                var sampleIndex = 0
-                val sampleRate = driver.sampleRate
-                val output = FloatArray(driver.bufferPreferredSize)
-                while (i < driver.bufferPreferredSize) {
-                    output[i] = Math.sin((2.0 * Math.PI * sampleIndex * 440.0) / sampleRate).toFloat()
-                    i++
-                    sampleIndex++
-                }
-
-                activeChannels?.forEach {
-                    it.write(output)
-                }
-            }
-
-            override fun sampleRateDidChange(sampleRate: Double) {
-                println("Sample Rate Did Change")
-            }
-
-            override fun bufferSizeChanged(bufferSize: Int) {
-                println("Buffer Size Changed")
-            }
-
-        }
-
-        driver.addAsioDriverListener(listener)
-        driver.createBuffers(setOf(channel0, channel1))
-        driver.start()
-
-
-        Thread.sleep(5000)
-
-
-        driver.stop()
-        driver.disposeBuffers()
-        driver.exit()
-        driver.shutdownAndUnloadDriver()
     }
 
     @DisplayName("Test Write Data")
@@ -844,7 +778,7 @@ class RandomTests {
     @DisplayName("Test Perfect Phase Calculation Test")
     @Test
     fun testPerfectPhaseCalculationTest() {
-        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
+        val sampleRate = SAMPLE_RATE
 
         val freq = 440
 
