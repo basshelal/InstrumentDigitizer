@@ -63,7 +63,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.atan2
 import kotlin.math.hypot
 
-
 @DisplayName("Random Tests")
 class RandomTests {
 
@@ -663,7 +662,7 @@ class RandomTests {
     @DisplayName("Test Perfect Phase Calculation Test")
     @Test
     fun testPerfectPhaseCalculationTest() {
-        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
+        val sampleRate = SAMPLE_RATE
 
         val freq = 440
 
