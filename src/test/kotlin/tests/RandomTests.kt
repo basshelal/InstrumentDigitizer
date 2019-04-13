@@ -875,8 +875,10 @@ class RandomTests {
         }.addAllSineWavesEvenly(2.0).play()*/
 
     }
-}
 
-fun main() {
+    @DisplayName("Test Save Instrument")
+    @Test
+    fun testSaveInstrument() {
 
+    }
 }

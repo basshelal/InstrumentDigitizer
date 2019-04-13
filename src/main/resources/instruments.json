@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Sample",
+    "overtoneRatios": [
+      {
+        "frequencyRatio": 1.0,
+        "amplitude": 0.4,
+        "phase": 0.5
+      },
+      {
+        "frequencyRatio": 2.0,
+        "amplitude": 0.05,
+        "phase": 0.1
+      },
+      {
+        "frequencyRatio": 3.0,
+        "amplitude": 0.05,
+        "phase": 0.2
+      },
+      {
+        "frequencyRatio": 3.5,
+        "amplitude": 0.05,
+        "phase": 0.3
+      },
+      {
+        "frequencyRatio": 4.0,
+        "amplitude": 0.05,
+        "phase": 0.4
+      },
+      {
+        "frequencyRatio": 4.5,
+        "amplitude": 0.05,
+        "phase": 0.6
+      },
+      {
+        "frequencyRatio": 5.0,
+        "amplitude": 0.025,
+        "phase": 0.8
+      },
+      {
+        "frequencyRatio": 5.5,
+        "amplitude": 0.025,
+        "phase": 0.1
+      },
+      {
+        "frequencyRatio": 6.0,
+        "amplitude": 0.025,
+        "phase": 0.4
+      },
+      {
+        "frequencyRatio": 7.0,
+        "amplitude": 0.025,
+        "phase": 0.2
+      },
+      {
+        "frequencyRatio": 7.5,
+        "amplitude": 0.025,
+        "phase": 0.8
+      },
+      {
+        "frequencyRatio": 8.0,
+        "amplitude": 0.025,
+        "phase": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Sample",
+    "overtoneRatios": [
+      {
+        "frequencyRatio": 1.0,
+        "amplitude": 0.4,
+        "phase": 0.5
+      },
+      {
+        "frequencyRatio": 2.0,
+        "amplitude": 0.05,
+        "phase": 0.1
+      },
+      {
+        "frequencyRatio": 3.0,
+        "amplitude": 0.05,
+        "phase": 0.2
+      },
+      {
+        "frequencyRatio": 3.5,
+        "amplitude": 0.05,
+        "phase": 0.3
+      },
+      {
+        "frequencyRatio": 4.0,
+        "amplitude": 0.05,
+        "phase": 0.4
+      },
+      {
+        "frequencyRatio": 4.5,
+        "amplitude": 0.05,
+        "phase": 0.6
+      },
+      {
+        "frequencyRatio": 5.0,
+        "amplitude": 0.025,
+        "phase": 0.8
+      },
+      {
+        "frequencyRatio": 5.5,
+        "amplitude": 0.025,
+        "phase": 0.1
+      },
+      {
+        "frequencyRatio": 6.0,
+        "amplitude": 0.025,
+        "phase": 0.4
+      },
+      {
+        "frequencyRatio": 7.0,
+        "amplitude": 0.025,
+        "phase": 0.2
+      },
+      {
+        "frequencyRatio": 7.5,
+        "amplitude": 0.025,
+        "phase": 0.8
+      },
+      {
+        "frequencyRatio": 8.0,
+        "amplitude": 0.025,
+        "phase": 0.1
+      }
+    ]
+  }
+]

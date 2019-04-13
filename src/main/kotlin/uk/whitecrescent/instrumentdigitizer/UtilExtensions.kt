@@ -53,3 +53,7 @@ inline fun measureTime(operationName: String = "", func: () -> Any): Duration {
     println("Operation $operationName took $duration")
     return duration
 }
+
+inline infix fun String.label(value: Any?) {
+    printLine("$this: $value")
+}

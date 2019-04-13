@@ -8,6 +8,7 @@ import org.apache.commons.math3.transform.TransformType
 import org.apache.commons.math3.util.ArithmeticUtils
 import java.io.ByteArrayInputStream
 import java.io.File
+import java.io.FileReader
 import javax.sound.sampled.AudioFileFormat
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
@@ -354,6 +355,15 @@ inline fun printLine(any: Any?) {
     println()
 }
 
-inline infix fun String.label(value: Any?) {
-    printLine("$this: $value")
+fun readAllInstruments(): List<Instrument> {
+    return gson.fromJson<List<Instrument>>(FileReader(File(INSTRUMENTS_FILE)), List::class.java)
+            ?: emptyList()
+}
+
+fun saveInstrument(instrument: Instrument) {
+    val instruments = readAllInstruments().toMutableList().apply { add(instrument) }.distinct()
+    val json = gson.toJson(instruments)
+    File(INSTRUMENTS_FILE).apply {
+        writeText(json)
+    }
 }

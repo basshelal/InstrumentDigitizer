@@ -1,5 +1,6 @@
 package uk.whitecrescent.instrumentdigitizer
 
+import com.google.gson.Gson
 import org.apache.commons.math3.complex.Complex
 import javax.sound.sampled.AudioFormat
 import kotlin.math.PI
@@ -14,6 +15,8 @@ const val OUTPUT_PATH_WAV = RESOURCES_DIR + "out.wav"
 const val OUTPUT_PATH_TEXT = RESOURCES_DIR + "out.txt"
 const val OUTPUT_PATH_CSV = RESOURCES_DIR + "out.csv"
 const val OUTPUT_PATH_OUT = RESOURCES_DIR + "out.out"
+
+const val INSTRUMENTS_FILE = RESOURCES_DIR + "instruments.json"
 
 const val TRANSFORMED_OUTPUT_PATH_OUT = RESOURCES_DIR + "transformed.out"
 
@@ -40,7 +43,9 @@ val maxByte = Byte.MAX_VALUE
 val minComplex = Complex(minDouble, minDouble)
 val maxComplex = Complex(maxDouble, maxDouble)
 
-val SAMPLE_INSTRUMENT = Instrument(listOf(
+val gson = Gson()
+
+val SAMPLE_INSTRUMENT = Instrument("Sample", listOf(
         OvertoneRatio(1.0, 0.40, 0.5),
         OvertoneRatio(2.0, 0.05, 0.1),//0.45
         OvertoneRatio(3.0, 0.05, 0.2),//0.5
@@ -55,4 +60,4 @@ val SAMPLE_INSTRUMENT = Instrument(listOf(
         OvertoneRatio(8.0, 0.025, 0.1)// 0.8
 ))
 
-val BASIC_INSTRUMENT = Instrument(listOf(OvertoneRatio(1.0, 1.0, 0.5)))
+val BASIC_INSTRUMENT = Instrument("Basic", listOf(OvertoneRatio(1.0, 1.0, 0.5)))
