@@ -34,7 +34,6 @@ class Synth {
         synthesizer = MidiSystem.getSynthesizer()
         synthesizer.open()
         channel = synthesizer.channels.first()
-        //synthesizer.loadInstrument(synthesizer.defaultSoundbank.instruments.first())
         println("Latency: ${synthesizer.latency / 1000} milliseconds")
     }
 
@@ -46,9 +45,10 @@ class Synth {
         MidiSystem.getMidiDeviceInfo().forEach {
             ignoreException<MidiUnavailableException> {
                 MidiSystem.getMidiDevice(it).apply {
-                    transmitter.receiver = SimpleReceiver()
+                    transmitter.receiver = InstrumentReceiver(SAMPLE_INSTRUMENT)
                     open()
                     println("$deviceInfo was opened")
+                    println("$SAMPLE_INSTRUMENT was loaded")
                 }
             }
         }
@@ -65,44 +65,45 @@ class Synth {
 }
 
 
-class SimpleReceiver : Receiver {
+class InstrumentReceiver(val instrument: Instrument = BASIC_INSTRUMENT) : Receiver {
 
     val format = EASY_FORMAT
-    val line = AudioSystem.getSourceDataLine(format)
-
-    init {
-        line.apply {
-            open(format)
-            start()
-        }
+    val line = AudioSystem.getSourceDataLine(format).apply {
+        open(format)
+        start()
     }
 
     override fun send(message: MidiMessage, timeStamp: Long) {
         require(message is ShortMessage)
         when (message.command) {
             ShortMessage.NOTE_ON -> {
-                println("Note on")
                 val key = Key.fromNumber(message.data1)
-                val buffer = SAMPLE_INSTRUMENT.getByteArray(key.frequency, 1.0, 1.0)
                 thread {
+                    val buffer = instrument.getByteArray(key.frequency, 1.0, 1.0)
                     line.write(buffer, 0, buffer.size)
                 }
+                println("Note on")
                 println("TimeStamp: $timeStamp")
                 println("Channel: ${message.channel}")
                 println("Command: ${message.command}")
                 println("Data1 (Note): ${message.data1}") // Note value
                 println("Data2 (Vel) : ${message.data2}") // Velocity
                 println("$key  ${key.frequency}")
+                println()
             }
             ShortMessage.NOTE_OFF -> {
+                thread {
+                    line.flush()
+                }
                 println("Note off")
-                line.flush()
+                println()
             }
             ShortMessage.PITCH_BEND -> {
                 println("Pitch Bend")
                 println("Command: ${message.command}")
                 println("Data1: ${message.data1}") // Note value
                 println("Data2: ${message.data2}") // Velocity
+                println()
             }
         }
         println("TimeStamp: $timeStamp")
@@ -110,6 +111,7 @@ class SimpleReceiver : Receiver {
         println("Command: ${message.command}")
         println("Data1: ${message.data1}") // Note value
         println("Data2: ${message.data2}") // Velocity
+        println()
     }
 
     override fun close() {

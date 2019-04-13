@@ -3,7 +3,10 @@ package uk.whitecrescent.instrumentdigitizer
 /**
  * Represents an instrument made purely out of multiple sine waves
  */
-data class Instrument(val name: String, val overtoneRatios: List<OvertoneRatio>)
+data class Instrument(val name: String, val overtoneRatios: List<OvertoneRatio>) {
+
+    override fun toString() = name
+}
 
 /*
  * frequencyRatio gives us what to multiply by the fundamental frequency to get this frequency
