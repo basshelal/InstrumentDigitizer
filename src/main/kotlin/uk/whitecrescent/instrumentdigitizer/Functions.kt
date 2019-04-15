@@ -361,7 +361,15 @@ fun readAllInstruments(): List<Instrument> {
 }
 
 fun saveInstrument(instrument: Instrument) {
-    val instruments = readAllInstruments().toMutableList().apply { add(instrument) }.distinct()
+    val instruments = readAllInstruments().toMutableList().apply { add(instrument) }.distinctBy { it.name }
+    val json = gson.toJson(instruments)
+    File(INSTRUMENTS_FILE).apply {
+        writeText(json)
+    }
+}
+
+fun deleteInstrument(instrument: Instrument) {
+    val instruments = readAllInstruments().toMutableList().apply { remove(instrument) }.distinctBy { it.name }
     val json = gson.toJson(instruments)
     File(INSTRUMENTS_FILE).apply {
         writeText(json)
