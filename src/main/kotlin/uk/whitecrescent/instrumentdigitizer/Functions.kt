@@ -339,14 +339,14 @@ inline fun <reified T : Throwable> ignoreException(func: () -> Any) {
 /**
  * Convert amplitude to decibels. 1.0 is zero dB. 0.5 is -6.02 dB.
  */
-fun amplitudeToDecibels(amplitude: Amplitude): Double {
+inline fun amplitudeToDecibels(amplitude: Amplitude): Double {
     return (ln(amplitude) * 20) / ln(10.0)
 }
 
 /**
  * Convert decibels to amplitude. Zero dB is 1.0 and -6.02 dB is 0.5.
  */
-fun decibelsToAmplitude(decibels: Double): Double {
+inline fun decibelsToAmplitude(decibels: Double): Double {
     return 10.0.pow(decibels / 20.0)
 }
 
@@ -355,23 +355,25 @@ inline fun printLine(any: Any?) {
     println()
 }
 
-fun readAllInstruments(): List<Instrument> {
+inline fun readAllInstruments(): List<Instrument> {
     return gson.fromJson<List<Instrument>>(FileReader(File(INSTRUMENTS_FILE)), List::class.java)
             ?: emptyList()
 }
 
-fun saveInstrument(instrument: Instrument) {
-    val instruments = readAllInstruments().toMutableList().apply { add(instrument) }.distinctBy { it.name }
-    val json = gson.toJson(instruments)
-    File(INSTRUMENTS_FILE).apply {
-        writeText(json)
-    }
+inline fun saveInstrument(instrument: Instrument) {
+    writeInstruments(
+            readAllInstruments().toMutableList().apply { add(instrument) }.distinctBy { it.name }
+    )
 }
 
-fun deleteInstrument(instrument: Instrument) {
-    val instruments = readAllInstruments().toMutableList().apply { remove(instrument) }.distinctBy { it.name }
-    val json = gson.toJson(instruments)
+inline fun deleteInstrument(instrument: Instrument) {
+    writeInstruments(
+            readAllInstruments().toMutableList().apply { remove(instrument) }.distinctBy { it.name }
+    )
+}
+
+inline fun writeInstruments(instruments: List<Instrument>) {
     File(INSTRUMENTS_FILE).apply {
-        writeText(json)
+        writeText(gson.toJson(instruments))
     }
 }
