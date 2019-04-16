@@ -22,19 +22,19 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.random.Random
 
-fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplexArray())
+inline fun fourierTransform(data: ByteArray) = fourierTransform(data.toComplexArray())
 
-fun fourierTransform(data: IntArray) = fourierTransform(data.toComplexArray())
+inline fun fourierTransform(data: IntArray) = fourierTransform(data.toComplexArray())
 
 /*
  * Just the basic Fourier Transform to transform from Time Domain to Frequency domain
  * should probably return a list of SineWaves
  */
-fun fourierTransform(data: ComplexArray): ComplexArray {
+inline fun fourierTransform(data: ComplexArray): ComplexArray {
     return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.FORWARD)
 }
 
-fun inverseFourierTransform(data: ComplexArray): ComplexArray {
+inline fun inverseFourierTransform(data: ComplexArray): ComplexArray {
     return FastFourierTransformer(DftNormalization.STANDARD).transform(data, TransformType.INVERSE)
 }
 
@@ -42,7 +42,7 @@ fun inverseFourierTransform(data: ComplexArray): ComplexArray {
  * This will be a transform on the Fourier transformed data,
  * We use this to find any modulation in pitch over time, like LFOs
  */
-fun modulationTransform(data: ByteArray): ByteArray {
+inline fun modulationTransform(data: ByteArray): ByteArray {
     return data
 }
 
@@ -50,7 +50,7 @@ fun modulationTransform(data: ByteArray): ByteArray {
  * Cuts off any silence from the beginning and end of the data,
  * this is anything that is 0 after noise reduction
  */
-fun trim(data: ByteArray): ByteArray {
+inline fun trim(data: ByteArray): ByteArray {
     return data
 }
 
@@ -58,7 +58,7 @@ fun trim(data: ByteArray): ByteArray {
  * Pads the passed in ByteArray with zeros so that it can be used in Fast Fourier Transform functions
  * that require the transform be on collections of a size that is a power of 2
  */
-fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
+inline fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
     val list = ArrayList(data.asList())
     val nextPowerOfTwo = nextPowerOfTwo(list.size)
 
@@ -76,21 +76,21 @@ fun pad(data: ByteArray, padWith: Byte = 0): ByteArray {
  * Truncates the passed in ByteArray so that it can be used in Fast Fourier Transform functions
  * that require the transform be on collections of a size that is a power of 2
  */
-fun truncate(data: ByteArray) =
+inline fun truncate(data: ByteArray) =
         ByteArray(previousPowerOfTwo(data.size)) { data[it] }
 
-fun truncate(data: IntArray) =
+inline fun truncate(data: IntArray) =
         IntArray(previousPowerOfTwo(data.size)) { data[it] }
 
 /*
  * Truncated, Transformed, Rounded, Reduced
  */
-fun ttrr(data: ByteArray): ComplexMap {
+inline fun ttrr(data: ByteArray): ComplexMap {
     return data.truncated().fourierTransformed().rounded().removeZeros()
 }
 
 // The full execution that will return the minimum required data to grab the frequency of a sine Wave
-fun fullExecution(data: ByteArray): ComplexMap {
+inline fun fullExecution(data: ByteArray): ComplexMap {
     return data
             .truncated()            // Truncate to allow FFT
             .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
@@ -328,14 +328,6 @@ inline fun addSineWavesEvenly(sineWaves: List<SineWave>, seconds: Seconds, sampl
     }
 }
 
-inline fun <reified T : Throwable> ignoreException(func: () -> Any) {
-    try {
-        func()
-    } catch (e: Throwable) {
-        if (e !is T) throw e
-    }
-}
-
 /**
  * Convert amplitude to decibels. 1.0 is zero dB. 0.5 is -6.02 dB.
  */
@@ -348,11 +340,6 @@ inline fun amplitudeToDecibels(amplitude: Amplitude): Double {
  */
 inline fun decibelsToAmplitude(decibels: Double): Double {
     return 10.0.pow(decibels / 20.0)
-}
-
-inline fun printLine(any: Any?) {
-    println(any)
-    println()
 }
 
 inline fun readAllInstruments(): List<Instrument> {
@@ -377,3 +364,5 @@ inline fun writeInstruments(instruments: List<Instrument>) {
         writeText(gson.toJson(instruments))
     }
 }
+
+class FourierOutput

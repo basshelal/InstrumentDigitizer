@@ -54,6 +54,19 @@ inline fun measureTime(operationName: String = "", func: () -> Any): Duration {
     return duration
 }
 
+inline fun printLine(any: Any?) {
+    println(any)
+    println()
+}
+
 inline infix fun String.label(value: Any?) {
     printLine("$this: $value")
+}
+
+inline fun <reified T : Throwable> ignoreException(func: () -> Any) {
+    try {
+        func()
+    } catch (e: Throwable) {
+        if (e !is T) throw e
+    }
 }

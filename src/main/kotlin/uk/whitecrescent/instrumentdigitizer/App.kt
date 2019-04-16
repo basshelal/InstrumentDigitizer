@@ -15,8 +15,7 @@ import kotlin.concurrent.thread
 
 class Synth {
 
-    lateinit var synthesizer: Synthesizer
-    lateinit var channel: MidiChannel
+    private lateinit var synthesizer: Synthesizer
 
     fun create(): Synth {
         startSynthesizer()
@@ -33,7 +32,6 @@ class Synth {
     private fun startSynthesizer() {
         synthesizer = MidiSystem.getSynthesizer()
         synthesizer.open()
-        channel = synthesizer.channels.first()
         println("Latency: ${synthesizer.latency / 1000} milliseconds")
     }
 
@@ -63,7 +61,6 @@ class Synth {
         }
     }
 }
-
 
 class InstrumentReceiver(val instrument: Instrument = BASIC_INSTRUMENT) : Receiver {
 
@@ -157,6 +154,7 @@ class App : Application() {
     lateinit var synth: Synth
 
     override fun start(primaryStage: Stage) {
+        primaryStage.title = "Instrument Digitizer App"
         primaryStage.width = 100.0
         primaryStage.height = 100.0
         primaryStage.show()

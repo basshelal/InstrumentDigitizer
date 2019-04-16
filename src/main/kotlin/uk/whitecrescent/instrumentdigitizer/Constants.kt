@@ -46,18 +46,16 @@ val maxComplex = Complex(maxDouble, maxDouble)
 val gson = Gson()
 
 val SAMPLE_INSTRUMENT = Instrument("Sample", listOf(
-        OvertoneRatio(1.0, 0.40, 0.5),
-        OvertoneRatio(2.0, 0.05, 0.1),//0.45
-        OvertoneRatio(3.0, 0.05, 0.2),//0.5
-        OvertoneRatio(3.5, 0.05, 0.3),//0.55
-        OvertoneRatio(4.0, 0.05, 0.4),//0.6
-        OvertoneRatio(4.5, 0.05, 0.6),//0.65
+        OvertoneRatio(1.0, 0.50, 0.5),
+        OvertoneRatio(2.0, 0.05, 0.1),//0.55
+        OvertoneRatio(3.0, 0.05, 0.2),//0.6
+        OvertoneRatio(3.5, 0.05, 0.3),//0.65
+        OvertoneRatio(4.0, 0.05, 0.4),//0.7
+        OvertoneRatio(4.5, 0.05, 0.6),//0.75
         OvertoneRatio(5.0, 0.025, 0.8),
-        OvertoneRatio(5.5, 0.025, 0.1),// 0.7
+        OvertoneRatio(5.5, 0.025, 0.1),// 0.8
         OvertoneRatio(6.0, 0.025, 0.4),
-        OvertoneRatio(7.0, 0.025, 0.2),// 0.75
-        OvertoneRatio(7.5, 0.025, 0.8),
-        OvertoneRatio(8.0, 0.025, 0.1)// 0.8
+        OvertoneRatio(7.0, 0.025, 0.2)// 0.85
 ))
 
 val BASIC_INSTRUMENT = Instrument("Basic", listOf(OvertoneRatio(1.0, 1.0, 0.5)))

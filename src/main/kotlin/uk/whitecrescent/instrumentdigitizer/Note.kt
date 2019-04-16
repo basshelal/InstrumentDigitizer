@@ -34,9 +34,9 @@ data class Key(val note: Note, val octave: Octave) {
             return 2.0.pow(exp) * 440.0
         }
 
-    infix fun centsDifferenceFrom(other: Key) = Key.centsDifference(this, other)
+    infix fun centsDifferenceFrom(other: Key) = centsDifference(this, other)
 
-    infix fun addCents(cents: Int) = Key.addCents(this, cents)
+    infix fun addCents(cents: Int) = addCents(this, cents)
 
     companion object {
         fun fromNumber(number: Int): Key {

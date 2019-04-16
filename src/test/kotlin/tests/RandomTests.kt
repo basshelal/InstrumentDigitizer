@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import uk.whitecrescent.instrumentdigitizer.Amplitude
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
 import uk.whitecrescent.instrumentdigitizer.Frequency
@@ -31,11 +32,8 @@ import uk.whitecrescent.instrumentdigitizer.i
 import uk.whitecrescent.instrumentdigitizer.inverseFourierTransform
 import uk.whitecrescent.instrumentdigitizer.label
 import uk.whitecrescent.instrumentdigitizer.mapIndexed
-import uk.whitecrescent.instrumentdigitizer.maxDouble
 import uk.whitecrescent.instrumentdigitizer.maxImaginary
 import uk.whitecrescent.instrumentdigitizer.maxReal
-import uk.whitecrescent.instrumentdigitizer.minComplex
-import uk.whitecrescent.instrumentdigitizer.minDouble
 import uk.whitecrescent.instrumentdigitizer.minImaginary
 import uk.whitecrescent.instrumentdigitizer.minReal
 import uk.whitecrescent.instrumentdigitizer.padded
@@ -662,7 +660,7 @@ class RandomTests {
     @DisplayName("Test Perfect Phase Calculation Test")
     @Test
     fun testPerfectPhaseCalculationTest() {
-        val sampleRate = SAMPLE_RATE
+        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
 
         val freq = 440
 
@@ -682,31 +680,19 @@ class RandomTests {
 
         val newSize = previousPowerOfTwo(data.size)
 
-        val result = mutableMapOf<Frequency, Phase>() //freq to phase
-
-        var maxReal = -1 to minDouble
-
-        var minReal = -1 to maxDouble
-
-        var maxImag = -1 to minDouble
-
-        var minImag = -1 to maxDouble
-
-        var maxAmp = -1 to minDouble
-
-        var minAmp = -1 to maxDouble
-
-        var minPhase = -1 to maxDouble
-
-        var maxPhase = -1 to minDouble
-
         val maxPossibleAmplitudeOriginalSize = originalSize * MAX_AMPLITUDE
 
         val maxPossibleAmplitudeNewSize = newSize * MAX_AMPLITUDE
 
-        var totalAmp = 0.0
+        // Result Maps
 
-        var maxAmpEntry = -1 to minComplex
+        val reals = mutableMapOf<Index, Double>()
+
+        val imaginaries = mutableMapOf<Index, Double>()
+
+        val frequencies = mutableMapOf<Index, Frequency>()
+
+        val amps = mutableMapOf<Index, Amplitude>()
 
         val phases = mutableMapOf<Index, Phase>()
 
@@ -728,88 +714,46 @@ class RandomTests {
 
                     val sizeToIndex = newSize.d / index.d
 
-                    val indexToSizeTimesSampleRate = indexToSize * sampleRate.d
+                    val indexToSizeTimesSampleRate = indexToSize * sampleRate.d // frequency
 
                     val amplitudeCalc = abs(hypot(imaginary, real))
 
                     val atan2 = atan2(imaginary, real)
 
-                    // val phaseCalc = (atan2 + HALF_PI) / PI
-                    val phaseCalc = abs((atan2 + HALF_PI) * (1 / PI))
+                    val phaseCalc = (atan2 + HALF_PI) / PI
 
-                    if (real >= maxReal.second) {
-                        maxReal = index.i to real
-                    }
-                    if (real <= minReal.second) {
-                        minReal = index.i to real
-                    }
-
-                    if (imaginary >= maxImag.second) {
-                        maxImag = index.i to imaginary
-                    }
-                    if (imaginary <= minImag.second) {
-                        minImag = index.i to imaginary
-                    }
-
-                    if (amplitudeCalc >= maxAmp.second) {
-                        maxAmp = index.i to amplitudeCalc
-                        maxAmpEntry = it.toPair()
-                    }
-                    if (amplitudeCalc <= minAmp.second) {
-                        minAmp = index.i to amplitudeCalc
-                    }
-
-                    if (phaseCalc <= minPhase.second) {
-                        minPhase = index.i to phaseCalc
-                    }
-
-                    if (phaseCalc >= maxPhase.second) {
-                        maxPhase = index.i to phaseCalc
-                    }
-
-                    totalAmp += amplitudeCalc
-
-                    println(it)
-
-                    "Phase" label phaseCalc
-
+                    reals[index.i] = real
+                    imaginaries[index.i] = imaginary
+                    frequencies[index.i] = indexToSizeTimesSampleRate
+                    amps[index.i] = amplitudeCalc
                     phases[index.i] = phaseCalc
 
                 }
 
-        "Max Real" label maxReal
-        "Min Real" label minReal
-        "Max Imag" label maxImag
-        "Min Imag" label minImag
-        "Max Amp " label maxAmp
-        "Min Amp " label minAmp
+        val maxAmp = amps.maxBy { it.value }!!
 
-        "Max Phase " label maxPhase
+        "Loudest Frequency" label frequencies[maxAmp.key]
+        "Max Real" label reals.maxBy { it.value }?.toPair()
+        "Min Real" label reals.minBy { it.value }?.toPair()
+        "Max Imag" label imaginaries.maxBy { it.value }?.toPair()
+        "Min Imag" label imaginaries.minBy { it.value }?.toPair()
+        "Max Amp " label amps.maxBy { it.value }?.toPair()
+        "Min Amp " label amps.minBy { it.value }?.toPair()
+        "Max Phase " label phases.maxBy { it.value }?.toPair()
+        "Min Phase " label phases.minBy { it.value }?.toPair()
 
         "Max Possible Amp Orig" label maxPossibleAmplitudeOriginalSize
         "Max Possible Amp New " label maxPossibleAmplitudeNewSize
-        "Total Amp " label totalAmp
+        "Total Amp " label amps.values.sum()
 
         printLine("Max Amp over")
-        "\tMax Possible Amp Orig" label maxAmp.second / maxPossibleAmplitudeOriginalSize
-        "\tMax Possible Amp New " label maxAmp.second / maxPossibleAmplitudeNewSize
-        "\tTotal Amp " label maxAmp.second / totalAmp
+        "\tMax Possible Amp Orig" label maxAmp.value / maxPossibleAmplitudeOriginalSize
+        "\tMax Possible Amp New " label maxAmp.value / maxPossibleAmplitudeNewSize
+        "\tTotal Amp " label amps.values.max()!! / amps.values.sum()
 
-        val phaseCalc = abs((atan2(maxAmpEntry.second.imaginary, maxAmpEntry.second.real) + HALF_PI) / PI)
-
-        // TODO: 08-Apr-19 PhaseCalc always returns us either, 0.5, 0.25 or 0.75 with any sample rate
-        // I think this has something to do with the special cases of the atan2 function
-
-        "Phase at Max Amp" label phaseCalc
+        "Phase at Max Amp" label phases[maxAmp.key]
 
         // TODO: 08-Apr-19 Amp may be wrong because of truncation , maxAmp / Total Amp is perfect when POWER_OF_TWO
-
-        // TODO: 05-Apr-19 Idea: Output this to a file and or plot it somewhere so that we can better understand the data
-        // and use the output in the paper
-
-        // TODO: 05-Apr-19 Is there data loss that our algorithm can't overcome?? Try all this with Longs
-        // I think so man! Total Amp is not equal the amp of the only frequency here, and there are some frequencies
-        // with tiny amplitudes, these are noise, YES THERE IS!
 
         /*
          * amplitude, magnitude = hypot function, use this to get the peaks
@@ -867,12 +811,6 @@ class RandomTests {
             println("Finished $i")
             println()
         }*/
-
-        val original = generateSineWave(sineWave, 1.0)
-
-        /*result.map {
-            sineWave(it.key, 0.5, it.value)
-        }.addAllSineWavesEvenly(2.0).play()*/
 
     }
 }
