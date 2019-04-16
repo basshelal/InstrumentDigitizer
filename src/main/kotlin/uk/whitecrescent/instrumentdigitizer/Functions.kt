@@ -95,7 +95,7 @@ inline fun fullExecution(data: ByteArray): ComplexMap {
             .truncated()            // Truncate to allow FFT
             .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
             .rounded()              // Round everything to Int to avoid tiny numbers close to 0
-            .removeZeros()              // Remove entries equal to (0.0, 0.0)
+            .removeZeros()          // Remove entries equal to (0.0, 0.0)
             .splitInHalf()          // Get first half since data is identical in both
             .reducePartials()       // Remove unnecessary partials
 }
@@ -365,4 +365,15 @@ inline fun writeInstruments(instruments: List<Instrument>) {
     }
 }
 
-class FourierOutput
+class FourierOutput {
+
+    val reals = mutableMapOf<Index, Double>()
+
+    val imaginaries = mutableMapOf<Index, Double>()
+
+    val frequencies = mutableMapOf<Index, Frequency>()
+
+    val amps = mutableMapOf<Index, Amplitude>()
+
+    val phases = mutableMapOf<Index, Phase>()
+}

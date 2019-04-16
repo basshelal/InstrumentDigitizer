@@ -664,7 +664,7 @@ class RandomTests {
 
         val freq = 440
 
-        val phase = 0.5
+        val phase = 0.6
 
         val amplitude = 1.0
 
@@ -696,6 +696,8 @@ class RandomTests {
 
         val phases = mutableMapOf<Index, Phase>()
 
+        val atans = mutableMapOf<Index, Phase>()
+
         data.truncated()                // Truncate to allow FFT
                 .fourierTransformed()   // FFT, makes values Complex with 0.0 for imaginary parts
                 .rounded()              // Round everything to Int to avoid tiny numbers close to 0
@@ -720,13 +722,14 @@ class RandomTests {
 
                     val atan2 = atan2(imaginary, real)
 
-                    val phaseCalc = (atan2 + HALF_PI) / PI
+                    val phaseCalc = (atan2) / PI
 
                     reals[index.i] = real
                     imaginaries[index.i] = imaginary
                     frequencies[index.i] = indexToSizeTimesSampleRate
                     amps[index.i] = amplitudeCalc
                     phases[index.i] = phaseCalc
+                    atans[index.i] = atan2
 
                 }
 
@@ -741,6 +744,8 @@ class RandomTests {
         "Min Amp " label amps.minBy { it.value }?.toPair()
         "Max Phase " label phases.maxBy { it.value }?.toPair()
         "Min Phase " label phases.minBy { it.value }?.toPair()
+        "Max Atan " label atans.maxBy { it.value }?.toPair()
+        "Min Atan " label atans.minBy { it.value }?.toPair()
 
         "Max Possible Amp Orig" label maxPossibleAmplitudeOriginalSize
         "Max Possible Amp New " label maxPossibleAmplitudeNewSize
@@ -752,6 +757,7 @@ class RandomTests {
         "\tTotal Amp " label amps.values.max()!! / amps.values.sum()
 
         "Phase at Max Amp" label phases[maxAmp.key]
+        "Atan at Max Amp" label atans[maxAmp.key]
 
         // TODO: 08-Apr-19 Amp may be wrong because of truncation , maxAmp / Total Amp is perfect when POWER_OF_TWO
 
@@ -791,7 +797,7 @@ class RandomTests {
                         val imaginary = it.value.imaginary
 
                         val atan2 = atan2(imaginary, real)
-                        val phaseCalc = (atan2 + HALF_PI) / PI
+                        val phaseCalc = (atan2 ) / PI
 
                         if (phaseCalc == phase) {
                             println("Atan: $atan2")
