@@ -13,9 +13,12 @@ import javax.sound.sampled.AudioFileFormat
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.absoluteValue
+import kotlin.math.atan2
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.hypot
 import kotlin.math.ln
 import kotlin.math.log2
 import kotlin.math.pow
@@ -98,6 +101,31 @@ inline fun fullExecution(data: ByteArray): ComplexMap {
             .removeZeros()          // Remove entries equal to (0.0, 0.0)
             .splitInHalf()          // Get first half since data is identical in both
             .reducePartials()       // Remove unnecessary partials
+}
+
+inline fun execute(data: ByteArray, sampleRate: Int): FourierOutput {
+    return data.truncated()
+            .fourierTransformed()
+            .rounded()
+            .removeZeros()
+            .splitInHalf().map {
+
+                val index = it.key.d
+                val real = it.value.real
+                val imaginary = it.value.imaginary
+                val frequencyCalc = (index.d / data.size.d) * sampleRate.d
+                val amplitudeCalc = abs(hypot(imaginary, real))
+                val phaseCalc = (atan2(imaginary, real)) / PI
+
+                return@map FourierEntry(
+                        index = index.i,
+                        real = real,
+                        imaginary = imaginary,
+                        frequency = frequencyCalc,
+                        amplitude = amplitudeCalc,
+                        phase = phaseCalc
+                )
+            }.toFourierOutput()
 }
 
 inline fun nextPowerOfTwo(number: Int): Int {
@@ -347,7 +375,7 @@ inline fun writeInstruments(instruments: List<Instrument>) {
     }
 }
 
-class FourierOutput {
+class FourierOutput(val fourierEntries: List<FourierEntry>) {
 
     val reals = mutableMapOf<Index, Double>()
 
@@ -358,4 +386,23 @@ class FourierOutput {
     val amps = mutableMapOf<Index, Amplitude>()
 
     val phases = mutableMapOf<Index, Phase>()
+
+    init {
+        fourierEntries.forEach {
+            reals[it.index] = it.real
+            imaginaries[it.index] = it.imaginary
+            frequencies[it.index] = it.frequency
+            amps[it.index] = it.amplitude
+            phases[it.index] = it.phase
+        }
+    }
 }
+
+inline fun List<FourierEntry>.toFourierOutput() = FourierOutput(this)
+
+data class FourierEntry(val index: Index,
+                        val real: Double,
+                        val imaginary: Double,
+                        val frequency: Frequency,
+                        val amplitude: Amplitude,
+                        val phase: Phase)

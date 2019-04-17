@@ -21,6 +21,7 @@ import uk.whitecrescent.instrumentdigitizer.addAllSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.addSineWaves
 import uk.whitecrescent.instrumentdigitizer.addSineWavesEvenly
 import uk.whitecrescent.instrumentdigitizer.d
+import uk.whitecrescent.instrumentdigitizer.execute
 import uk.whitecrescent.instrumentdigitizer.fourierTransform
 import uk.whitecrescent.instrumentdigitizer.fourierTransformed
 import uk.whitecrescent.instrumentdigitizer.fullExecution
@@ -674,7 +675,7 @@ class RandomTests {
 
         val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
 
-        val frequencyToSampleRateKNOWN = freq.d / sampleRate
+        val frequencyToSampleRateKNOWN = freq.d / sampleRate.d
 
         val originalSize = data.size
 
@@ -787,6 +788,68 @@ class RandomTests {
          * phase is still the atan2 function
          *
          * */
+
+    }
+
+    @DisplayName("Test")
+    @Test
+    fun test() {
+        val sampleRate = SAMPLE_RATE_POWER_OF_TWO
+
+        val freq = 440
+
+        val phase = 0.6
+
+        val amplitude = 1.0
+
+        val sineWave = sineWave(freq, amplitude, phase)
+
+        val data = generateSineWave(sineWave, 1.0, sampleRate, 1)
+
+        val sampleRateToFrequencyKNOWN = sampleRate.d / freq.d
+
+        val frequencyToSampleRateKNOWN = freq.d / sampleRate.d
+
+        val originalSize = data.size
+
+        val newSize = previousPowerOfTwo(data.size)
+
+        val maxPossibleAmplitudeOriginalSize = originalSize * MAX_AMPLITUDE
+
+        val maxPossibleAmplitudeNewSize = newSize * MAX_AMPLITUDE
+
+        val output = execute(data, sampleRate)
+
+        val reals = output.reals
+        val imaginaries = output.imaginaries
+        val frequencies = output.frequencies
+        val amps = output.amps
+        val phases = output.phases
+
+        val maxAmp = amps.maxBy { it.value }!!
+
+        "Loudest Frequency" label frequencies[maxAmp.key]
+        "Max Real" label reals.maxBy { it.value }?.toPair()
+        "Min Real" label reals.minBy { it.value }?.toPair()
+        "Max Imag" label imaginaries.maxBy { it.value }?.toPair()
+        "Min Imag" label imaginaries.minBy { it.value }?.toPair()
+        "Max Amp " label amps.maxBy { it.value }?.toPair()
+        "Min Amp " label amps.minBy { it.value }?.toPair()
+        "Max Phase " label phases.maxBy { it.value }?.toPair()
+        "Min Phase " label phases.minBy { it.value }?.toPair()
+
+        "Max Possible Amp Orig" label maxPossibleAmplitudeOriginalSize
+        "Max Possible Amp New " label maxPossibleAmplitudeNewSize
+        "Total Amp " label amps.values.sum()
+
+        printLine("Max Amp over")
+        "\tMax Possible Amp Orig" label maxAmp.value / maxPossibleAmplitudeOriginalSize
+        "\tMax Possible Amp New " label maxAmp.value / maxPossibleAmplitudeNewSize
+        "\tTotal Amp " label amps.values.max()!! / amps.values.sum()
+
+        "Truncation Ratio" label newSize.d / originalSize.d
+
+        "Phase at Max Amp" label phases[maxAmp.key]
 
     }
 }
