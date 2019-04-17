@@ -287,24 +287,6 @@ inline fun readFromWaveFile(fileName: String): ByteArray {
     return buffer
 }
 
-inline fun writeTextToFile(data: ByteArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
-    File(outPath).apply {
-        writeText("")
-        data.forEachIndexed { index, byte ->
-            appendText("$index$delimiter$byte$lineEnd")
-        }
-    }
-}
-
-inline fun writeTextToFile(data: ComplexArray, delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
-    File(outPath).apply {
-        writeText("")
-        data.forEach {
-            appendText("${it.real}$delimiter${it.imaginary}$lineEnd")
-        }
-    }
-}
-
 inline fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewFile() }
 
 inline fun easyFormatAudioInputStream(buffer: ByteArray) =

@@ -7,6 +7,7 @@
 package uk.whitecrescent.instrumentdigitizer
 
 import org.apache.commons.math3.complex.Complex
+import java.io.File
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import kotlin.math.max
@@ -251,4 +252,40 @@ inline fun AudioInputStream.printStreamInfo() {
 
     val duration = frames / frameRate
     println("Duration: $duration")
+}
+
+inline fun <T> Iterable<T>.writeTextToFile(lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+    File(outPath).apply {
+        writeText("")
+        forEach {
+            appendText("$it$lineEnd")
+        }
+    }
+}
+
+inline fun <T> Iterable<T>.writeTextToFileIndexed(delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+    File(outPath).apply {
+        writeText("")
+        forEachIndexed { index, it ->
+            appendText("$index$delimiter$it$lineEnd")
+        }
+    }
+}
+
+inline fun ComplexArray.writeTextToFile(delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+    File(outPath).apply {
+        writeText("")
+        forEach {
+            appendText("${it.real}$delimiter${it.imaginary}$lineEnd")
+        }
+    }
+}
+
+inline fun <K, V> Map<K, V>.writeTextToFile(delimiter: String = ",", lineEnd: String = "\n", outPath: String = OUTPUT_PATH_OUT) {
+    File(outPath).apply {
+        writeText("")
+        forEach {
+            appendText("${it.key}$delimiter${it.value}$lineEnd")
+        }
+    }
 }

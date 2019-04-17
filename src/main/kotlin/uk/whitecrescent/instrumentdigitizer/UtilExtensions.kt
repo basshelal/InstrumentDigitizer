@@ -6,6 +6,8 @@
 package uk.whitecrescent.instrumentdigitizer
 
 import Duration
+import days
+import millis
 import now
 import org.apache.commons.math3.complex.Complex
 import till
@@ -70,3 +72,7 @@ inline fun <reified T : Throwable> ignoreException(func: () -> Any) {
         if (e !is T) throw e
     }
 }
+
+inline fun sleep(duration: Duration) = Thread.sleep(duration.millis)
+
+inline fun await() = sleep(1.days)

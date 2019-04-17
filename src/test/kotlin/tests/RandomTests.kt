@@ -756,6 +756,8 @@ class RandomTests {
         "\tMax Possible Amp New " label maxAmp.value / maxPossibleAmplitudeNewSize
         "\tTotal Amp " label amps.values.max()!! / amps.values.sum()
 
+        "Truncation Ratio" label newSize.d / originalSize.d
+
         "Phase at Max Amp" label phases[maxAmp.key]
         "Atan at Max Amp" label atans[maxAmp.key]
 
@@ -785,38 +787,6 @@ class RandomTests {
          * phase is still the atan2 function
          *
          * */
-
-
-        /*(0 until 1000).forEach { i ->
-            val newPhase = i.d / 1000.0
-            sineWave.phase = newPhase
-
-            generateSineWave(sineWave, 1.0)
-                    .fullExecution().forEach {
-                        val real = it.value.real
-                        val imaginary = it.value.imaginary
-
-                        val atan2 = atan2(imaginary, real)
-                        val phaseCalc = (atan2 ) / PI
-
-                        if (phaseCalc == phase) {
-                            println("Atan: $atan2")
-                            println("Calculated Phase: $phaseCalc")
-                            println("Actual Phase: $phase")
-                            println("New Phase: $newPhase at $i")
-
-                            // TODO: 04-Apr-19 63 seems to be the magic i index where everything works with frequency 440
-                            // with many different sample rates
-                            // 63 for 440
-                            // 126 for 880
-
-
-                            println()
-                        }
-                    }
-            println("Finished $i")
-            println()
-        }*/
 
     }
 }
