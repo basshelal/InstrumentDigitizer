@@ -17,6 +17,7 @@ import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
 import kotlin.math.ceil
+import kotlin.math.cos
 import kotlin.math.floor
 import kotlin.math.hypot
 import kotlin.math.ln
@@ -205,7 +206,7 @@ inline fun generateIntSineWave(frequency: Frequency, amplitude: Amplitude = 1.0,
     return IntArray(totalSamples) {
         val angle = (2.0 * PI * it) / period
         /*Amp * sin(2 * PI * f * t + phase)*/
-        return@IntArray (maxAmplitude * sin(angle + phaseShift)).i
+        return@IntArray (maxAmplitude * cos(angle + phaseShift)).i
     }
 }
 
@@ -234,8 +235,8 @@ inline fun generateSineWave(frequency: Frequency, amplitude: Amplitude = 1.0, ph
 
     return ByteArray(totalSamples) {
         val angle = (2.0 * PI * it) / period
-        /*Amp * sin(2 * PI * f * t + phase)*/
-        return@ByteArray (maxAmplitude * sin(angle + phaseShift)).toByte()
+        /*Amp * cos(2 * PI * f * t + phase)*/
+        return@ByteArray (maxAmplitude * cos(angle + phaseShift)).b
     }
 }
 
