@@ -830,6 +830,7 @@ class RandomTests {
         val maxAmp = amps.maxBy { it.value }!!
 
         "Loudest Frequency" label frequencies[maxAmp.key]
+        "Max Amp Entry" label (reals[maxAmp.key] to imaginaries[maxAmp.key])
         "Max Real" label reals.maxBy { it.value }?.toPair()
         "Min Real" label reals.minBy { it.value }?.toPair()
         "Max Imag" label imaginaries.maxBy { it.value }?.toPair()
