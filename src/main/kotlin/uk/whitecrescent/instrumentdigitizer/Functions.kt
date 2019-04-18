@@ -105,6 +105,7 @@ inline fun fullExecution(data: ByteArray): ComplexMap {
 }
 
 inline fun execute(data: ByteArray, sampleRate: Int): FourierOutput {
+    val size = previousPowerOfTwo(data.size)
     return data.truncated()
             .fourierTransformed()
             .rounded()
@@ -114,7 +115,7 @@ inline fun execute(data: ByteArray, sampleRate: Int): FourierOutput {
                 val index = it.key.d
                 val real = it.value.real
                 val imaginary = it.value.imaginary
-                val frequencyCalc = (index.d / data.size.d) * sampleRate.d
+                val frequencyCalc = (index.d / size.d) * sampleRate.d
                 val amplitudeCalc = abs(hypot(imaginary, real))
                 val phaseCalc = (atan2(imaginary, real)) / PI
 

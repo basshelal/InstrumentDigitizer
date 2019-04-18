@@ -30,6 +30,7 @@ import uk.whitecrescent.instrumentdigitizer.generateSineWave
 import uk.whitecrescent.instrumentdigitizer.generateTwoSineWaves
 import uk.whitecrescent.instrumentdigitizer.getFrequenciesDistinct
 import uk.whitecrescent.instrumentdigitizer.i
+import uk.whitecrescent.instrumentdigitizer.inverse
 import uk.whitecrescent.instrumentdigitizer.inverseFourierTransform
 import uk.whitecrescent.instrumentdigitizer.label
 import uk.whitecrescent.instrumentdigitizer.mapIndexed
@@ -850,6 +851,22 @@ class RandomTests {
         "Truncation Ratio" label newSize.d / originalSize.d
 
         "Phase at Max Amp" label phases[maxAmp.key]
+
+        val sampleRateRatio = sampleRate.d / previousPowerOfTwo(sampleRate).d
+
+        "Sample Rate Ratio" label sampleRateRatio
+
+        "Inverse Sample Rate Ratio" label sampleRateRatio.inverse
+
+        val magicNumber = phase.d / phases[maxAmp.key]!!.d
+
+        "Magic Number" label magicNumber
+
+        // TODO: 18-Apr-19 Phase seems not affected by size! it's affected by sample rate which itself affects size
+
+        val n = (phases[maxAmp.key]!!.d / newSize.d) * sampleRate.d
+
+        "n" label n
 
     }
 }
