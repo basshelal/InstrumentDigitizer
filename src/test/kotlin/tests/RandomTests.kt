@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import seconds
 import uk.whitecrescent.instrumentdigitizer.Amplitude
 import uk.whitecrescent.instrumentdigitizer.BASIC_INSTRUMENT
 import uk.whitecrescent.instrumentdigitizer.DESIRED_DIFFERENCE
@@ -48,6 +49,7 @@ import uk.whitecrescent.instrumentdigitizer.reducePartials
 import uk.whitecrescent.instrumentdigitizer.removeZeros
 import uk.whitecrescent.instrumentdigitizer.rounded
 import uk.whitecrescent.instrumentdigitizer.sineWave
+import uk.whitecrescent.instrumentdigitizer.sleep
 import uk.whitecrescent.instrumentdigitizer.splitInHalf
 import uk.whitecrescent.instrumentdigitizer.toComplexArray
 import uk.whitecrescent.instrumentdigitizer.toIntMap
@@ -57,6 +59,7 @@ import uk.whitecrescent.instrumentdigitizer.writeSineWaveAudio
 import uk.whitecrescent.instrumentdigitizer.writeToWaveFile
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
+import kotlin.concurrent.thread
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.absoluteValue
@@ -164,7 +167,9 @@ class RandomTests {
     fun testWriteToWaveFile() {
         val sineWave = sineWave(440, 1.0, 0.5)
         val buffer = generateSineWave(sineWave, 10.0, SAMPLE_RATE, 1)
+
         writeToWaveFile(buffer, "MyFile")
+
         val readBuffer = readFromWaveFile("MyFile")
 
         assertEquals(buffer.size, readBuffer.size)
@@ -868,6 +873,17 @@ class RandomTests {
         val n = (phases[maxAmp.key]!!.d / newSize.d) * sampleRate.d
 
         "n" label n
+
+
+        thread {
+            sineWave(440, 0.5, 0.0).play(2.0)
+        }
+
+        thread {
+            sineWave(440, 0.5, -1.0).play(2.0)
+        }
+
+        sleep(2.seconds)
 
     }
 }

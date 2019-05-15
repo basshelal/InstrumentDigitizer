@@ -1,8 +1,16 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package uk.whitecrescent.instrumentdigitizer
 
 import javafx.application.Application
+import javafx.scene.Scene
+import javafx.scene.layout.StackPane
+import javafx.stage.FileChooser
 import javafx.stage.Stage
 import sun.audio.AudioDevice
+import tornadofx.add
+import tornadofx.button
+import java.io.File
 import javax.sound.midi.MidiChannel
 import javax.sound.midi.MidiMessage
 import javax.sound.midi.MidiSystem
@@ -43,10 +51,10 @@ class Synth {
         MidiSystem.getMidiDeviceInfo().forEach {
             ignoreException<MidiUnavailableException> {
                 MidiSystem.getMidiDevice(it).apply {
-                    transmitter.receiver = InstrumentReceiver(SAMPLE_INSTRUMENT)
+                    transmitter.receiver = InstrumentReceiver(BASIC_INSTRUMENT)
                     open()
                     println("$deviceInfo was opened")
-                    println("$SAMPLE_INSTRUMENT was loaded")
+                    println("$BASIC_INSTRUMENT was loaded")
                 }
             }
         }
@@ -60,9 +68,22 @@ class Synth {
             }
         }
     }
+
+    fun changeInstrument(instrument: Instrument) {
+        MidiSystem.getMidiDeviceInfo().forEach {
+            ignoreException<MidiUnavailableException> {
+                MidiSystem.getMidiDevice(it).apply {
+                    transmitter.receiver = InstrumentReceiver(instrument)
+                    open()
+                    println("$deviceInfo was opened")
+                    println("$instrument was loaded")
+                }
+            }
+        }
+    }
 }
 
-class InstrumentReceiver(val instrument: Instrument = BASIC_INSTRUMENT) : Receiver {
+class InstrumentReceiver(val instrument: Instrument = SAMPLE_INSTRUMENT) : Receiver {
 
     val format = EASY_FORMAT
     val line = AudioSystem.getSourceDataLine(format).apply {
@@ -152,11 +173,27 @@ class ChannelReceiver(private val channel: MidiChannel) : Receiver {
 class App : Application() {
 
     lateinit var synth: Synth
+    lateinit var sample: File
+    lateinit var instrument: Instrument
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Instrument Digitizer App"
         primaryStage.width = 100.0
         primaryStage.height = 100.0
+        primaryStage.scene = Scene(StackPane().apply {
+            add(
+                    button("Upload Sample") {
+                        FileChooser().apply {
+                            title = "Upload Sample"
+                            initialDirectory = File(RESOURCES_DIR)
+                            setOnAction {
+                                sample = showOpenDialog(primaryStage) ?: File(A3_VIOLIN_FILE_PATH)
+                                instrument = execute(sample)
+                                synth.changeInstrument(SAMPLE_INSTRUMENT)
+                            }
+                        }
+                    })
+        })
         primaryStage.show()
     }
 
@@ -170,6 +207,16 @@ class App : Application() {
         synth.destroy()
         System.exit(0)
     }
+
+
+    private inline fun execute(sample: File): Instrument {
+        println(sample.path)
+        val buffer = readFromWaveFileRawPath(sample.path)
+        val fourierOutput = execute(buffer, SAMPLE_RATE)
+        val overtones = overtoneRatios(fourierOutput)
+        return Instrument(sample.path, overtones)
+    }
+
 }
 
 fun main() {

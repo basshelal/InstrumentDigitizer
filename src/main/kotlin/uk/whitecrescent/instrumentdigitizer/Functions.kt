@@ -115,6 +115,7 @@ inline fun execute(data: ByteArray, sampleRate: Int): FourierOutput {
                 val index = it.key.d
                 val real = it.value.real
                 val imaginary = it.value.imaginary
+
                 val frequencyCalc = (index.d / size.d) * sampleRate.d
                 val amplitudeCalc = abs(hypot(imaginary, real))
                 val phaseCalc = (atan2(imaginary, real)) / PI
@@ -317,6 +318,17 @@ inline fun readFromWaveFile(fileName: String): ByteArray {
     return buffer
 }
 
+inline fun readFromWaveFileRawPath(fileName: String): ByteArray {
+    val file = File(fileName)
+    val stream = AudioSystem.getAudioInputStream(EASY_FORMAT, AudioSystem.getAudioInputStream(file))
+    val buffer = ByteArray(stream.frameLength.i)
+
+    stream.read(buffer)
+
+    stream.close()
+    return buffer
+}
+
 inline fun newFile(name: String) = File(RESOURCES_DIR + name).apply { createNewFile() }
 
 inline fun easyFormatAudioInputStream(buffer: ByteArray) =
@@ -375,6 +387,15 @@ inline fun writeInstruments(instruments: List<Instrument>) {
     File(INSTRUMENTS_FILE).apply {
         writeText(gson.toJson(instruments))
     }
+}
+
+inline fun overtoneRatios(fourierOutput: FourierOutput): List<OvertoneRatio> {
+    val fundamental = fourierOutput.frequencies.values.sorted().first()
+    return fourierOutput.fourierEntries
+            .sortedBy { it.frequency }
+            .map {
+                OvertoneRatio(it.frequency / fundamental, it.amplitude, it.phase)
+            }
 }
 
 class FourierOutput(val fourierEntries: List<FourierEntry>) {
