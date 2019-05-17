@@ -11,7 +11,6 @@ import sun.audio.AudioDevice
 import tornadofx.add
 import tornadofx.button
 import java.io.File
-import javax.sound.midi.MidiChannel
 import javax.sound.midi.MidiMessage
 import javax.sound.midi.MidiSystem
 import javax.sound.midi.MidiUnavailableException
@@ -24,6 +23,8 @@ import kotlin.concurrent.thread
 class Synth {
 
     private lateinit var synthesizer: Synthesizer
+    var instrument = BASIC_INSTRUMENT
+    val instrumentReceiver = InstrumentReceiver(instrument)
 
     fun create(): Synth {
         startSynthesizer()
@@ -51,7 +52,7 @@ class Synth {
         MidiSystem.getMidiDeviceInfo().forEach {
             ignoreException<MidiUnavailableException> {
                 MidiSystem.getMidiDevice(it).apply {
-                    transmitter.receiver = InstrumentReceiver(BASIC_INSTRUMENT)
+                    transmitter.receiver = instrumentReceiver
                     open()
                     println("$deviceInfo was opened")
                     println("$BASIC_INSTRUMENT was loaded")
@@ -69,11 +70,12 @@ class Synth {
         }
     }
 
-    fun changeInstrument(instrument: Instrument) {
+    fun changeInstrument(ins: Instrument) {
+        instrument = ins
         MidiSystem.getMidiDeviceInfo().forEach {
             ignoreException<MidiUnavailableException> {
                 MidiSystem.getMidiDevice(it).apply {
-                    transmitter.receiver = InstrumentReceiver(instrument)
+                    instrumentReceiver.instrument = instrument
                     open()
                     println("$deviceInfo was opened")
                     println("$instrument was loaded")
@@ -83,7 +85,7 @@ class Synth {
     }
 }
 
-class InstrumentReceiver(val instrument: Instrument = SAMPLE_INSTRUMENT) : Receiver {
+class InstrumentReceiver(var instrument: Instrument = SAMPLE_INSTRUMENT) : Receiver {
 
     val format = EASY_FORMAT
     val line = AudioSystem.getSourceDataLine(format).apply {
@@ -130,38 +132,6 @@ class InstrumentReceiver(val instrument: Instrument = SAMPLE_INSTRUMENT) : Recei
         println("Data1: ${message.data1}") // Note value
         println("Data2: ${message.data2}") // Velocity
         println()
-    }
-
-    override fun close() {
-        println("Closing Receiver")
-    }
-
-}
-
-class ChannelReceiver(private val channel: MidiChannel) : Receiver {
-
-    override fun send(message: MidiMessage, timeStamp: Long) {
-        require(message is ShortMessage)
-        when (message.command) {
-            ShortMessage.NOTE_ON -> {
-                println("Note on")
-                channel.noteOn(message.data1, message.data2)
-            }
-            ShortMessage.NOTE_OFF -> {
-                println("Note off")
-                channel.noteOff(message.data1)
-            }
-            ShortMessage.PITCH_BEND -> {
-                println("Pitch bend")
-                // from 0 to 16383, 8192 is middle
-                channel.pitchBend = 8192
-            }
-        }
-        println("TimeStamp: $timeStamp")
-        println("Channel: ${message.channel}")
-        println("Command: ${message.command}")
-        println("Data1: ${message.data1}") // Note value
-        println("Data2: ${message.data2}") // Velocity
     }
 
     override fun close() {
